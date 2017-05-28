@@ -58,3 +58,11 @@ gem "twitter-bootstrap-rails"
 gem 'simple_form'
 gem 'devise'
 gem "font-awesome-rails"
+gem "cancan"
+gem "paperclip", "~> 5.0.0"
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'aws-sdk', '~> 2'
+gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
+gem 'stripe'
+gem 'aasm'
+

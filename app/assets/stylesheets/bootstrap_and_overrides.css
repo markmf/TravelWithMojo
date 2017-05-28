@@ -4,3 +4,10 @@
   Static version of css will use Glyphicons sprites by default
   =require twitter-bootstrap-static/sprites
 */
+body { padding-top: 70px; }
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+}
