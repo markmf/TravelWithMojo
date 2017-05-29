@@ -53,16 +53,12 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem "twitter-bootstrap-rails"
+
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+
 #gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'simple_form'
 gem 'devise'
 gem "font-awesome-rails"
-gem "cancan"
-gem "paperclip", "~> 5.0.0"
-gem 'dotenv-rails', groups: [:development, :test]
-gem 'aws-sdk', '~> 2'
-gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
-gem 'stripe'
-gem 'aasm'
+
 

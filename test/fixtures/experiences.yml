@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  exp_email: MyString
+  exp_id: 1
+  exp_name: MyString
+  exp_desc: MyText
+  exp_provide: MyText
+  exp_notes: MyText
+  exp_location: MyText
+  image_file_name: MyString
+  about_me: MyText
+  guest_reqs: MyText
+  max_guest: 1
+  rsv_guest: 1
+  min_guest: 1
+  can_policy: MyText
+  ratings: 1
+  exp_price: MyString
+  integer: MyString
+  start_time: 2017-05-29 16:45:48
+  duration: 1
+
+two:
+  exp_email: MyString
+  exp_id: 1
+  exp_name: MyString
+  exp_desc: MyText
+  exp_provide: MyText
+  exp_notes: MyText
+  exp_location: MyText
+  image_file_name: MyString
+  about_me: MyText
+  guest_reqs: MyText
+  max_guest: 1
+  rsv_guest: 1
+  min_guest: 1
+  can_policy: MyText
+  ratings: 1
+  exp_price: MyString
+  integer: MyString
+  start_time: 2017-05-29 16:45:48
+  duration: 1

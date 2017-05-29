@@ -1,0 +1,29 @@
+<%= simple_form_for(@experience) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :exp_email %>
+    <%= f.input :exp_id %>
+    <%= f.input :exp_name %>
+    <%= f.input :exp_desc %>
+    <%= f.input :exp_provide %>
+    <%= f.input :exp_notes %>
+    <%= f.input :exp_location %>
+    <%= f.input :image_file_name %>
+    <%= f.input :about_me %>
+    <%= f.input :guest_reqs %>
+    <%= f.input :max_guest %>
+    <%= f.input :rsv_guest %>
+    <%= f.input :min_guest %>
+    <%= f.input :can_policy %>
+    <%= f.input :ratings %>
+    <%= f.input :exp_price %>
+    <%= f.input :integer %>
+    <%= f.input :start_time %>
+    <%= f.input :duration %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

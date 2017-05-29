@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523180357) do
+ActiveRecord::Schema.define(version: 20170529074548) do
+
+  create_table "experiences", force: :cascade do |t|
+    t.string "exp_email"
+    t.integer "exp_id"
+    t.string "exp_name"
+    t.text "exp_desc"
+    t.text "exp_provide"
+    t.text "exp_notes"
+    t.text "exp_location"
+    t.string "image_file_name"
+    t.text "about_me"
+    t.text "guest_reqs"
+    t.integer "max_guest"
+    t.integer "rsv_guest"
+    t.integer "min_guest"
+    t.text "can_policy"
+    t.integer "ratings"
+    t.string "exp_price"
+    t.string "integer"
+    t.datetime "start_time"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
