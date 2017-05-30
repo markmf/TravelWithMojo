@@ -21,6 +21,7 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/1/edit
   def edit
+    authorize! :manage, @experience
   end
 
   # POST /experiences
@@ -42,6 +43,9 @@ class ExperiencesController < ApplicationController
   # PATCH/PUT /experiences/1
   # PATCH/PUT /experiences/1.json
   def update
+    
+    authorize! :manage, @experience
+
     respond_to do |format|
       if @experience.update(experience_params)
         format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
@@ -56,6 +60,9 @@ class ExperiencesController < ApplicationController
   # DELETE /experiences/1
   # DELETE /experiences/1.json
   def destroy
+
+    authorize! :manage, @experience
+    
     @experience.destroy
     respond_to do |format|
       format.html { redirect_to experiences_url, notice: 'Experience was successfully destroyed.' }
