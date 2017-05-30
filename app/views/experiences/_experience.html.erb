@@ -1,0 +1,15 @@
+
+<div class = 'col-md-3'>  
+    <div class = 'thumbnail' >
+       <%= image_tag "surfer.png", class: 'img-responsive' %>
+ 	</div>
+   
+
+    <div class = 'caption' %>
+      $<%= experience.exp_price %>
+      <strong><%= link_to experience.exp_name, experience_path(experience) %></strong> <br />
+      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    </div>
+    <br />
+
+</div>

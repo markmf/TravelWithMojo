@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170529074548) do
+ActiveRecord::Schema.define(version: 20170529101025) do
 
   create_table "experiences", force: :cascade do |t|
     t.string "exp_email"
@@ -28,8 +28,7 @@ ActiveRecord::Schema.define(version: 20170529074548) do
     t.integer "min_guest"
     t.text "can_policy"
     t.integer "ratings"
-    t.string "exp_price"
-    t.string "integer"
+    t.integer "exp_price"
     t.datetime "start_time"
     t.integer "duration"
     t.datetime "created_at", null: false

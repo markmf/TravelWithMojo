@@ -4,10 +4,10 @@
   <div class="form-inputs">
     <%= f.input :exp_email %>
     <%= f.input :exp_id %>
-    <%= f.input :exp_name %>
-    <%= f.input :exp_desc %>
+    <%= f.input :exp_name, required: true, label: false, placeholder: "Name of Experience" %>
+    <%= f.input :exp_desc, required: true, label: false, placeholder: "Description of what you'll do" %>
     <%= f.input :exp_provide %>
-    <%= f.input :exp_notes %>
+    <%= f.input :exp_notes, required: false, label: false, placeholder: "Notes" %>
     <%= f.input :exp_location %>
     <%= f.input :image_file_name %>
     <%= f.input :about_me %>
@@ -17,8 +17,7 @@
     <%= f.input :min_guest %>
     <%= f.input :can_policy %>
     <%= f.input :ratings %>
-    <%= f.input :exp_price %>
-    <%= f.input :integer %>
+    <%= f.input :exp_price, required: true, label: false, placeholder: "Price" %>
     <%= f.input :start_time %>
     <%= f.input :duration %>
   </div>

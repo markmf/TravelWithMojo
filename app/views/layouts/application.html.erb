@@ -4,9 +4,13 @@
     <title>Travel with Mojo</title>
     <%= csrf_meta_tags %>
 
+    <%= favicon_link_tag 'favicon/tvm.ico' %>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+
+
 
   <body>
 
@@ -16,13 +20,9 @@
   	<div class = 'container' >
     	<%= yield %>
 
-         <%= render 'layouts/footer'%>
-        <div class="text-center">
-          <a href="http://www.bootply.com"><i class="icon-facebook icon-3x"></i> </a> &nbsp; 
-          <a href="http://twitter.com/bootply"><i class="icon-twitter icon-3x"></i></a> &nbsp; 
-          <a href="http://pinterest.com/in1"><i class="icon-pinterest icon-3x"></i></a>
-        </div>    
-     
+
+      <%= render 'layouts/footer'%> 
+       
 
     </div>
     

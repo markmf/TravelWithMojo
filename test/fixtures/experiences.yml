@@ -16,9 +16,8 @@ one:
   min_guest: 1
   can_policy: MyText
   ratings: 1
-  exp_price: MyString
-  integer: MyString
-  start_time: 2017-05-29 16:45:48
+  exp_price: 1
+  start_time: 2017-05-29 19:10:25
   duration: 1
 
 two:
@@ -37,7 +36,6 @@ two:
   min_guest: 1
   can_policy: MyText
   ratings: 1
-  exp_price: MyString
-  integer: MyString
-  start_time: 2017-05-29 16:45:48
+  exp_price: 1
+  start_time: 2017-05-29 19:10:25
   duration: 1
