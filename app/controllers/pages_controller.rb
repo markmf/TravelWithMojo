@@ -6,6 +6,6 @@ class PagesController < ApplicationController
 
   	end
 
-  	@experiences = Experience.last(4)
+  	@experiences = Experience.all
   end
 end

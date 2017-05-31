@@ -14,6 +14,9 @@ class Experience < ApplicationRecord
 	content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
 	message: 'Only images (eg, jpeg, gif, png) allowed.'
 
+
+
+	
 	private
 
 		def populate_email
