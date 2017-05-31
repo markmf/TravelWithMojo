@@ -1,4 +1,4 @@
-class TransactionsController < ApplicationsController
+class TransactionsController < ApplicationController
 
 
 	def create
@@ -7,10 +7,11 @@ class TransactionsController < ApplicationsController
 
 		begin
 			charge = Stripe::Charge.create(
-				amount: experience.exp_price,
+				amount: experience.exp_price * 100,
 				currency: "usd",
 				card: token,
 				description: current_user.email)
+		
 
 			@sale = experience.sales.create!(buyer_email: current_user.email)
 				redirect_to pickup_url(uuid: @sale.uuid)
@@ -20,18 +21,11 @@ class TransactionsController < ApplicationsController
   				flash[:notice] = e.message
   				redirect_to experience_path(experience)
   			end
-
-#		sale.process!
-
-#			redirect_to pickup_url(uuid: sale.uuid)
-#   	 	else
-#			redirect_to book_path(book), notice: e.message
  	end
 
 	def pickup
-		@sale = Sale.find_by!(uuid:params)
+		@sale = Sale.find_by!(uuid: params[:uuid])
 		@experience = @sale.experience
-
 	end
 
 end

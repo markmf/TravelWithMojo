@@ -15,7 +15,8 @@ class Experience < ApplicationRecord
 	message: 'Only images (eg, jpeg, gif, png) allowed.'
 
 
-
+	validates_numericality_of :exp_price,
+		greater_than: 49, message: "Price must be at least 50 cents."
 	
 	private
 

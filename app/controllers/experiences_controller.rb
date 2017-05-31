@@ -46,7 +46,7 @@ class ExperiencesController < ApplicationController
     
     authorize! :manage, @experience
 
-    @experience.exp_email = current_user.email
+   # @experience.exp_email = current_user.email
     
  
      Rails.logger.debug experience_params.inspect
