@@ -1,4 +1,6 @@
 class Experience < ApplicationRecord
+	extend FriendlyId
+	friendly_id :exp_name, use: :slugged
 	
 	belongs_to :user
 	has_attached_file :image
