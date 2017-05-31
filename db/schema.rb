@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531011341) do
+ActiveRecord::Schema.define(version: 20170531072159) do
 
   create_table "experiences", force: :cascade do |t|
     t.string "exp_email"
-    t.integer "exp_id"
     t.string "exp_name"
     t.text "exp_desc"
     t.text "exp_provide"
@@ -53,6 +52,17 @@ ActiveRecord::Schema.define(version: 20170531011341) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
+  create_table "sales", force: :cascade do |t|
+    t.string "buyer_email"
+    t.string "seller_email"
+    t.integer "amount"
+    t.string "currency"
+    t.string "uuid"
+    t.integer "exp_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -66,6 +76,8 @@ ActiveRecord::Schema.define(version: 20170531011341) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

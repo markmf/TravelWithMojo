@@ -46,6 +46,8 @@ class ExperiencesController < ApplicationController
     
     authorize! :manage, @experience
 
+    experience_params.exp_email = current_user.email
+    
     respond_to do |format|
       if @experience.update(experience_params)
         format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
