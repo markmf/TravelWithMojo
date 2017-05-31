@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531111200) do
+ActiveRecord::Schema.define(version: 20170531152630) do
 
   create_table "experiences", force: :cascade do |t|
     t.string "exp_email"
@@ -62,6 +62,10 @@ ActiveRecord::Schema.define(version: 20170531111200) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "experience_id"
+    t.string "state"
+    t.string "stripe_token"
+    t.text "error"
+    t.string "stripe_id"
   end
 
   create_table "users", force: :cascade do |t|
