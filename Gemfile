@@ -66,4 +66,6 @@ gem 'aws-sdk', '~> 2'
 gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 gem 'stripe'
 gem 'aasm'
+gem 'geocoder'
+gem 'namecase', '~> 2.0'
 

@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   before_save { self.email = email.downcase }
+  #validates :first_name, presence: true
 
   has_many :experiences
 end

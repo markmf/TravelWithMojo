@@ -1,16 +1,20 @@
 
-<div class = 'col-md-3'>  
-    <div class = 'thumbnail' >
- <!--      <%= image_tag experience.image.url, class: 'img-responsive' %> -->
-       <%= link_to image_tag(experience.image.url, class: 'img-responsive'),  experience_path(experience) %> 
- 	</div>
-   
+<div class = 'col-xs-3'> 
 
-    <div class = 'caption' %>
-      <strong>$</strong><strong><%= link_to experience.exp_price, experience_path(experience) %></strong>
-      <strong><%= link_to experience.exp_name, experience_path(experience) %></strong> <br />
-      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    <div class ='thumbnail img-responsive' >
+
+       	<%= link_to image_tag(experience.image.url, class: 'img-responsive'),  experience_path(experience) %>  
+       
+       
     </div>
-    <br />
 
+   	<div class = 'caption' >
+     	<strong>$</strong><strong><%= link_to experience.exp_price, experience_path(experience) %></strong> 
+      	<strong><%= link_to experience.exp_name, experience_path(experience) %></strong> <br />
+      	<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      	<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+   	</div>
+
+    <br />
 </div>
+

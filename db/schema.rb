@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531152630) do
+ActiveRecord::Schema.define(version: 20170602080314) do
 
   create_table "experiences", force: :cascade do |t|
     t.string "exp_email"
@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(version: 20170531152630) do
     t.datetime "image_updated_at"
     t.integer "user_id"
     t.string "slug"
+    t.time "exp_duration"
+    t.float "latitude"
+    t.float "longitude"
+    t.text "exp_where_be"
     t.index ["slug"], name: "index_experiences_on_slug", unique: true
   end
 
@@ -83,6 +87,7 @@ ActiveRecord::Schema.define(version: 20170531152630) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
+    t.string "contact_no"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

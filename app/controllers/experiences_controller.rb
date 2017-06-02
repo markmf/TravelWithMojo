@@ -75,6 +75,11 @@ class ExperiencesController < ApplicationController
     end
   end
 
+
+  def google_map(center)
+    "https://maps.googleapis.com/maps/api/staticmap?center=#{center}&size=300x300&zoom=17"
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_experience
@@ -83,6 +88,6 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:exp_email, :exp_id, :exp_name, :exp_desc, :exp_provide, :exp_notes, :exp_location,  :about_me, :guest_reqs, :max_guest, :rsv_guest, :min_guest, :can_policy,  :exp_price, :start_time, :duration, :image)
+      params.require(:experience).permit(:exp_email, :exp_id, :exp_name, :exp_desc, :exp_where_be, :exp_location, :exp_provide, :exp_notes, :exp_location,  :about_me, :guest_reqs, :max_guest, :rsv_guest, :min_guest, :can_policy,  :exp_price, :start_time, :exp_duration, :image)
     end
 end
