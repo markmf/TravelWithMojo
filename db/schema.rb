@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170602080314) do
+ActiveRecord::Schema.define(version: 20170603090830) do
 
   create_table "experiences", force: :cascade do |t|
     t.string "exp_email"
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 20170602080314) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string "user_email"
+    t.integer "exp_id"
+    t.integer "rating"
+    t.text "rating_desc"
+    t.datetime "review_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sales", force: :cascade do |t|
     t.string "buyer_email"
     t.string "seller_email"
@@ -70,6 +80,14 @@ ActiveRecord::Schema.define(version: 20170602080314) do
     t.string "stripe_token"
     t.text "error"
     t.string "stripe_id"
+  end
+
+  create_table "table_reviews", force: :cascade do |t|
+    t.string "user_email"
+    t.integer "exp_id"
+    t.integer "rating"
+    t.text "rating_desc"
+    t.datetime "review_date"
   end
 
   create_table "users", force: :cascade do |t|

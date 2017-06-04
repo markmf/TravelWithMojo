@@ -8,4 +8,6 @@ class User < ApplicationRecord
   #validates :first_name, presence: true
 
   has_many :experiences
+  has_many :reviews
+  
 end

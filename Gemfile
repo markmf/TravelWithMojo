@@ -68,4 +68,4 @@ gem 'stripe'
 gem 'aasm'
 gem 'geocoder'
 gem 'namecase', '~> 2.0'
-
+gem 'bootstrap', '~> 4.0.0.alpha6'

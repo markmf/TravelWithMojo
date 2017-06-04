@@ -32,14 +32,13 @@
           </tr>
           
 
-
       </table>
 
  
       
 
       <div id="map">
-        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=550x550&sensor=false&zoom=16&markers=#{@experience.latitude}%2C#{@experience.longitude}" %>
+        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=400x400&sensor=false&zoom=16&markers=#{@experience.latitude}%2C#{@experience.longitude}" %>
       </div>
 
 
@@ -55,7 +54,7 @@
     <% if current_user %> 
 
       <%= form_tag buy_path(slug: @experience.slug) do %>
-      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 
             data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
             data-description="<%= @experience.exp_name %>"

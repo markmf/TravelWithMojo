@@ -1,27 +1,31 @@
-<%= simple_form_for(@experience) do |f| %>
-  <%= f.error_notification %>
+<div class="card">
+  <div class="card-block">
+    <%= simple_form_for(@experience, html: {class: 'form-signin'}) do |f| %>
+      <%= f.error_notification %>
 
-  <div class="form-inputs">
-   
-    <%= f.input :exp_name, null: false, required: true, autofocus: true, label: false, placeholder: "Enter experience name" %>
-    <%= f.input :exp_desc, required: true, label: false, placeholder: "Description of what we'll do" %>
-    <%= f.input :exp_provide, required: true, label:false, placeholder: "What you'll provide"  %>
-    <%= f.input :exp_notes, required: false, label: false, placeholder: "Notes" %>
-    <%= f.input :exp_where_be, required: true, label: false, placeholder: "Where we'll be" %>
-    <%= f.input :exp_location, required:true, label: false, placeholder: "Where you'll meet with your guests" %>
-    <%= f.input :image %>
-    <%= f.input :about_me, required: true, label: false, placeholder: "Info about yourself" %>
-    <%= f.input :guest_reqs %>
-    <%= f.input :max_guest, required: true, labe: false, placeholder: "Maximum no of guests" %>
-    <%= f.input :rsv_guest %>
-    <%= f.input :min_guest %>
-    <%= f.input :can_policy %>
-    <%= f.input :exp_price, required: true, label: false, placeholder: "Price" %>
-    <%= f.input :start_time, required: true %>
-    <%= f.input :exp_duration, required: true, placeholder: "Duration" %>
-  </div>
+      <div class="form-inputs">
+       
+        <%= f.input :exp_name, null: false, required: true, autofocus: true, label: false, placeholder: "Enter experience name" %>
+        <%= f.input :exp_desc, required: true, label: false, placeholder: "Description of what we'll do" %>
+        <%= f.input :exp_provide, required: true, label:false, placeholder: "What you'll provide"  %>
+        <%= f.input :exp_notes, required: false, label: false, placeholder: "Notes" %>
+        <%= f.input :exp_where_be, required: true, label: false, placeholder: "Where we'll be" %>
+        <%= f.input :exp_location, required:true, label: false, placeholder: "Where you'll meet with your guests" %>
+        <%= f.input :image %>
+        <%= f.input :about_me, required: true, label: false, placeholder: "Info about yourself" %>
+        <%= f.input :guest_reqs %>
+        <%= f.input :max_guest, required: true, labe: false, placeholder: "Maximum no of guests" %>
+        <%= f.input :rsv_guest %>
+        <%= f.input :min_guest %>
+        <%= f.input :can_policy %>
+        <%= f.input :exp_price, required: true, label: false, placeholder: "Price" %>
+        <%= f.input :start_time, required: true %>
+        <%= f.input :exp_duration, required: true, placeholder: "Duration" %>
+      </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+      <div class="form-actions">
+        <%= f.button :submit %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
