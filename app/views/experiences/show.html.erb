@@ -33,12 +33,13 @@
           
 
       </table>
+      
 
  
       
 
       <div id="map">
-        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=400x400&sensor=false&zoom=16&markers=#{@experience.latitude}%2C#{@experience.longitude}" %>
+        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=420x420&sensor=false&zoom=16&markers=#{@experience.latitude}%2C#{@experience.longitude}" %>
       </div>
 
 
@@ -66,7 +67,7 @@
 
       <% else %>
 
-        <p>Please log in to purchase this experience </p>
+        <p>Please Log in to book this experience </p>
 
       <% end %>
 

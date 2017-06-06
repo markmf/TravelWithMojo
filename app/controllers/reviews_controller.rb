@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
 
   # GET /reviews
   # GET /reviews.json
-  def index
+  def index 
     @reviews = Review.all
   end
 
@@ -15,11 +15,20 @@ class ReviewsController < ApplicationController
   # GET /reviews/new
   def new
     @review = Review.new
+    @sale = Sale.find.where(params[:id])
+    if @sale.empty?
+       puts "Not authorize to review"
+    else
+       put "We can review"
+    end
   end
 
   # GET /reviews/1/edit
   def edit
+     authorize! :manage, @review
   end
+
+
 
   # POST /reviews
   # POST /reviews.json
@@ -61,11 +70,19 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def current_exp
+    @experiences = current_user.experiences
+    @purchased = Sale.where(experience_id = current_user.experiences.id)
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_review
       @review = Review.find(params[:id])
     end
+
+    
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params

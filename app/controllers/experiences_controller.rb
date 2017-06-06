@@ -77,7 +77,7 @@ class ExperiencesController < ApplicationController
 
 
   def google_map(center)
-          "https://maps.googleapis.com/maps/api/staticmap?center=#{center}&size=400x400&zoom=17&key=AIzaSyDJdjhDvDJoxvVdEVz3Nn8Ia_uas00M34Q
+          "https://maps.googleapis.com/maps/api?center=#{center}&size=420x420&zoom=17&key=AIzaSyDJdjhDvDJoxvVdEVz3Nn8Ia_uas00M34Q
 "
   end
   

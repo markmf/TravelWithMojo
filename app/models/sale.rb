@@ -2,7 +2,7 @@ class Sale < ApplicationRecord
 	before_create :populate_uuid
 
 	belongs_to :experience
-	belongs_to :review
+	has_many   :reviews
 
 	include AASM
 

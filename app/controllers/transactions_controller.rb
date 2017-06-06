@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
 
 
+
 	def create
 		experience = Experience.find_by!(slug: params[:slug])
 		sale = experience.sales.create( 
@@ -15,6 +16,7 @@ class TransactionsController < ApplicationController
 		if sale.finished?
 			redirect_to pickup_url(uuid: sale.uuid)
 		else
+			puts "Someting is wrong"
 			redirect_to experience_path(experience), notice: e.message
 		end
  	end
