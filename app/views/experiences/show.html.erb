@@ -39,7 +39,11 @@
       
 
       <div id="map">
-        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=420x420&sensor=false&zoom=16&markers=#{@experience.latitude}%2C#{@experience.longitude}" %>
+      
+
+        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=500x500&sensor=false&zoom=16&markers=#{@experience.latitude},#{@experience.longitude}&key=AIzaSyDJdjhDvDJoxvVdEVz3Nn8Ia_uas00M34Q", class: 'img-fluid img-rounded' %> 
+       
+
       </div>
 
 

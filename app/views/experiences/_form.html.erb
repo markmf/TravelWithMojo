@@ -1,9 +1,8 @@
-<div class="card">
-  <div class="card-block">
+
     <%= simple_form_for(@experience, html: {class: 'form-signin'}) do |f| %>
       <%= f.error_notification %>
 
-      <div class="form-inputs">
+      <div class="form-group">
        
         <%= f.input :exp_name, null: false, required: true, autofocus: true, label: false, placeholder: "Enter experience name" %>
         <%= f.input :exp_desc, required: true, label: false, placeholder: "Description of what we'll do" %>
@@ -19,13 +18,13 @@
         <%= f.input :min_guest %>
         <%= f.input :can_policy %>
         <%= f.input :exp_price, required: true, label: false, placeholder: "Price" %>
-        <%= f.input :start_time, required: true %>
-        <%= f.input :exp_duration, required: true, placeholder: "Duration" %>
+       
+        <%= f.input :start_time, required: true, label: false, class: 'form-control', type: 'datetime-local' %>
+      
+        <%= f.input :exp_duration, required: true, class: 'form-control', type: 'time', label: false %>
       </div>
 
       <div class="form-actions">
-        <%= f.button :submit %>
+        <%= f.button :submit, class: 'btn btn-success btn-block' %>
       </div>
     <% end %>
-  </div>
-</div>
