@@ -15,6 +15,14 @@ class TransactionsController < ApplicationController
 
 		if sale.finished?
 			redirect_to pickup_url(uuid: sale.uuid)
+			# Send a confirmation email
+
+
+			puts "Entered Transactions Controller***************************************"
+    		puts "Experience Name => #{experience.exp_name}"
+    		puts "Sending Confirmation Email Now"
+      		UserMailer.send_confirmation_email(experience, current_user.email).deliver_later
+
 		else
 			puts "Someting is wrong"
 			redirect_to experience_path(experience), notice: e.message

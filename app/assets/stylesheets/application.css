@@ -18,23 +18,31 @@
 
 html {
   position: relative;
-  min-height: 100%;
+
 }
 
-html,
+
 
 
 
 body { 
-  padding-top: 20px;
+  padding-top: 60px;
+  padding-bottom: 0px;
+
+  max-height: relative;
  
    /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 70px; 
 
   /* font-family: 'Londrina Shadow', cursive; */
   font-family: helvetica; 
 } 
 
+div {
+  
+ 
+ 
+}
 
 Wrapper for page content to push down footer
 
@@ -52,7 +60,8 @@ Wrapper for page content to push down footer
 .footer {
     position: absolute;
     bottom: 0;
-    width: 100%;
+    
+    margin-left: -5px;
     /* Set the fixed height of the footer here */
     height: 60px;
     background-color: #f5f5f5;
