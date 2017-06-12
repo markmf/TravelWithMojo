@@ -14,3 +14,9 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+<script>
+  $('div').on('mouseenter', function() {
+      $(this).toggleClass('show-description');
+  });
+</script>

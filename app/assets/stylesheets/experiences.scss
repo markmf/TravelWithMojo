@@ -8,6 +8,7 @@
   /* font-family: 'Londrina Shadow', cursive; */
   font-family: 'PT Serif';
   font-size: 15px;
+
 }
 
 caption {
@@ -26,16 +27,53 @@ caption {
   margin: 2px;
 }
 
-.thumbnail {
-   position:relative;
-   overflow:hidden;
+.mydisplay {
+  position:relative;
+ overflow:hidden; 
    
-    margin: 0 0 0 0;
+  margin: 0 0 0 0;
 
-  width:  310px;
+/*
+  width:  300px;
   height:  300px;
-
-    
+*/
+  display: block;
+  max-width: 350px;
+  max-height: 350px;
+  width: auto;
+  height: auto;
 }
 
+/* Toggle experience info when cursor is enters the pics */
+.description-style {
+  opacity: 1;
+  color: rgba(255,255,255,1);
+  background: black;
+  background: linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  background: -webkit-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  background: -moz-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  padding: 10px;
+  line-height: 28px;
+  text-align: justify;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  height: 30px;
+  transition: height .5s;
+  -webkit-transition: height .5s;
+  -moz-transition: height .5s;
+}
+
+small {
+  opacity: 0;
+}
+
+.show-description p {
+  height: 100px;
+  opacity: 1;
+}
+
+.show-description small {
+  opacity: 1;
+}
 
