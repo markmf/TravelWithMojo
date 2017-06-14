@@ -8,6 +8,10 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '2130d4c3ec9914ea37acfe41ab9f98496a8a9fbd361d31006a0021aa83055a58dcea0d41e09e53e17a425452be736a73c60f149abb4600dbc916321df0425aa7'
 
+  # Adding this setup for modal Sign-up form - temporary
+  #config.http_authenticatable_on_xhr = false
+  #config.navigational_formats = ["*/*", :html, :json]
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class

@@ -21,7 +21,7 @@ class TransactionsController < ApplicationController
 			puts "Entered Transactions Controller***************************************"
     		puts "Experience Name => #{experience.exp_name}"
     		puts "Sending Confirmation Email Now"
-      		UserMailer.send_confirmation_email(experience, current_user.email).deliver_later
+      		UserMailer.send_confirmation_email(experience, current_user.email).deliver_now
 
 		else
 			puts "Someting is wrong"

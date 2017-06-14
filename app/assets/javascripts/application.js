@@ -12,11 +12,13 @@
 //
 //= require rails-ujs
 //= require bootstrap
+//= require jquery-ui
+//= require html.sortable
 //= require turbolinks
 //= require_tree .
 
-<script>
-  $('div').on('mouseenter', function() {
-      $(this).toggleClass('show-description');
-  });
-</script>
+
+
+
+
+
