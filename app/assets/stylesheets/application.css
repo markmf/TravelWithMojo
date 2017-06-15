@@ -14,8 +14,10 @@
  *= require font-awesome
  *= require_self
  */
+
 @import "bootstrap";
-@import "jquery-ui";
+
+@import "gritter";
 
 html {
   position: relative;

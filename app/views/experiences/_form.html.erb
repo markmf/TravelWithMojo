@@ -10,7 +10,11 @@
         <%= f.input :exp_notes, required: false, label: false, placeholder: "Notes" %>
         <%= f.input :exp_where_be, required: true, label: false, placeholder: "Where we'll be" %>
         <%= f.input :exp_location, required:true, label: false, placeholder: "Where you'll meet with your guests" %>
-        <%= f.input :image %>
+        <div class="form-group">
+          <label class="btn btn-primary">
+            Upload your photos<%= f.input :image, style: "display:none;", label: false %>
+          </label>
+        </div>
         <%= f.input :about_me, required: true, label: false, placeholder: "Info about yourself" %>
         <%= f.input :guest_reqs %>
         <%= f.input :max_guest, required: true, labe: false, placeholder: "Maximum no of guests" %>
@@ -28,4 +32,4 @@
         <%= f.button :submit, class: 'btn btn-success btn-block' %>
       </div>
     <% end %>
-
+s

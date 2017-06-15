@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 /* Classes to set fixed height of experience photos */
 
+
 .row {
 
   /* font-family: 'Londrina Shadow', cursive; */
@@ -27,21 +28,29 @@ caption {
   margin: 2px;
 }
 
-.mydisplay {
-  position:relative;
- overflow:hidden; 
-   
-  margin: 0 0 0 0;
 
-/*
-  width:  300px;
-  height:  300px;
-*/
-  display: block;
-  max-width: 350px;
-  max-height: 350px;
-  width: auto;
-  height: auto;
+.thumbnail {
+  border: 0px none;
+  max-height: 100%;
+  max-height: 100%;
+  padding-right: 0px;
+ 
+
+
+  
+}
+
+.mydisplay > thumbnail {
+  position: relative; 
+  overflow: hidden; 
+
+   
+
+  display: block; 
+  /*
+  max-width: 400px;
+  max-height: 400px; */
+  
 }
 
 /* Toggle experience info when cursor is enters the pics */

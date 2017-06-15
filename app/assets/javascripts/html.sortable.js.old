@@ -1,4 +1,4 @@
-alert("Is this working?")
+#alert("Is this working?")
 
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) {

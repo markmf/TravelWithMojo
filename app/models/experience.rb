@@ -10,7 +10,7 @@ class Experience < ApplicationRecord
 	has_many :sales
 	has_many :reviews
 
-	has_attached_file :image, styles: { medium: "500x500>", thumb: "200x200>" }
+	has_attached_file :image, styles: { medium: "500x500>", thumb: "200x200#" }
 
  
 
