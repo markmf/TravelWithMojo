@@ -86,3 +86,44 @@ small {
   opacity: 1;
 }
 
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  /*
+  background-color: rgba(0, 0, 0, 0.8);
+  */
+} 
+
+.small {
+  opacity: 0;
+}
+
+.show-description small {
+  opacity: 1;
+}
+
+
+img.hover-shadow {
+  transition: 0.5s
+}
+
+.hover-shadow:hover {
+  /*
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: rgba(0, 0, 0, 0.90);
+  */
+  
+
+
+    -webkit-transform:scale(1.10); /* Safari and Chrome */
+    -moz-transform:scale(1.10); /* Firefox */
+    -ms-transform:scale(1.10); /* IE 9 */
+    -o-transform:scale(1.10); /* Opera */
+     transform:scale(1.10);
+
+     
+
+      opacity: 1;
+
+   
+}

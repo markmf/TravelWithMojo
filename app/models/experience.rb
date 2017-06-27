@@ -2,6 +2,7 @@ class Experience < ApplicationRecord
 	validates :exp_name, :exp_desc, :exp_where_be, :exp_location, :exp_provide, :exp_duration, presence: true
 	
 	
+	#mount_uploader :image, ImageUploader
 
 	extend FriendlyId
 	friendly_id :exp_name, use: :slugged

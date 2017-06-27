@@ -99,6 +99,8 @@ GEM
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
+    dropzonejs-rails (0.8.0)
+      rails (> 3.1)
     erubi (1.6.0)
     execjs (2.7.0)
     faraday (0.12.1)
@@ -265,6 +267,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
+  dropzonejs-rails
   font-awesome-rails
   friendly_id (~> 5.1.0)
   geocoder

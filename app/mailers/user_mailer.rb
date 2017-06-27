@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
 		puts "User email => #{user.email}"
 		@user = user
 		@url  =  "www.syzygy.com" # generate confirmation url
-		mail(to: @user.email, subject: "Confirm your SyZyGy Membership")
+		mail(to: @user.email, subject: "Confirm your Caper Membership")
 	end
 
 
@@ -15,7 +15,7 @@ class UserMailer < ApplicationMailer
 		puts "Entering user_mailer.rb file, Buyer email is => #{buyer_email}"
 		puts "Sending email now experience name is #{experience.exp_name}"
 	
-		@url  =  "www.syzygy.com" # generate confirmation url
+		@url  =  "www.caper.com" # generate confirmation url
 		mail(to: buyer_email, subject: "Your purchase confirmation")
 	end
 

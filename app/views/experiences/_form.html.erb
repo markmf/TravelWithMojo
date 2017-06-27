@@ -12,7 +12,7 @@
         <%= f.input :exp_location, required:true, label: false, placeholder: "Where you'll meet with your guests" %>
         <div class="form-group">
           <label class="btn btn-primary">
-            Upload your photos<%= f.input :image, style: "display:none;", label: false %>
+            Upload your photos<%= f.input :image, style: "display:none;", label: false, html: { multipart: true, class: "dropzone"} %>
           </label>
         </div>
         <%= f.input :about_me, required: true, label: false, placeholder: "Info about yourself" %>
@@ -32,4 +32,6 @@
         <%= f.button :submit, class: 'btn btn-success btn-block' %>
       </div>
     <% end %>
-s
+
+
+

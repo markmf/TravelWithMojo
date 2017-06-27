@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require dropzone
 //= require bootstrap-sprockets
 //= require bootstrap
 //= require jquery-ui
