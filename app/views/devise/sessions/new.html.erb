@@ -1,3 +1,6 @@
+
+
+
 <div  class="modal-dialog">
 	<div class="modal-content animate">
     	<div class="modal-header">
@@ -7,8 +10,14 @@
 
 		<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-signin'}) do |f| %>
 		  
-		 
+			<%= render 'shared/devisemes' %>
+
 		  	<h2 class = 'text-center'> Log in</h2>
+		 	<%= link_to "Sign In with Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary" %>
+
+		  	<h3 class ='text-center'> Or </h3>
+
+		  	<span class="input-group-addon"><i class="fa fa-user"></i></span>
 		    <%= f.input :email, required: false, autofocus: true, label: false, placeholder: 'Email' %>
 		    <%= f.input :password, required: false, label: false, placeholder: 'Password' %>
 		    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>

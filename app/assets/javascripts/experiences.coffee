@@ -1,14 +1,11 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+	$('.mydisplay').hover ->
+		$(this).toggleClass('show-description');
+		
 
-#alert("Hi I am in apllication.js")
+    	
+   
 
 
-ready = undefined
 
-ready = ->
-	$('.sortable').sortable()
-	return
 
-$(document).ready ready

@@ -11,12 +11,16 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require jquery-ui
+ *= require toastr
  *= require dropzone/basic
  *= require font-awesome
  *= require_self
  */
-
+ 
+@import "bootstrap-sprockets";
 @import "bootstrap";
+@import "toastr"
 
 @import "gritter";
 
@@ -25,6 +29,21 @@ html {
 
 }
 
+.avatar-small {
+  width: 28px;
+}
+
+.avatar-medium {
+  width: 48px;
+}
+
+.avatar-large {
+  width: 68px;
+}
+
+.avatar-full {
+  width: 100%;
+}
 
 body { 
   padding-top: 60px;

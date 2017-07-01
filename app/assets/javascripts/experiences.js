@@ -1,18 +1,13 @@
-alert("Entering Dropzone Javascript!!!!")
+//= require_self
 
-$(document).ready(function(){
-  // disable auto discover
-  Dropzone.autoDiscover = false;
 
-  alert("Entering Dropzone function!!!!")
-  var dropzone = new Dropzone (".dropzone", {
-    maxFilesize: 256, // set the maximum file size to 256 MB
-    paramName: "image[image_file_name]", // Rails expects the file upload to be something like model[field_name]
-    addRemoveLinks: false // don't show remove links on dropzone itself.
+<script type="text/javascript">
+alert("inside experiences.js");
+
+$(function(){
+    alert("inside funciton");
+
+
   });
 
-  dropzone.on("success", function(file) {
-    this.removeFile(file);
-    $.getScript("/images");
-  })
-});
+</script>

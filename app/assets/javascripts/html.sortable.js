@@ -1,4 +1,7 @@
-#alert("Is this working?")
+/*
+alert("I am in the bottom section ofhtml.sortable.js"); 
+*/
+
 
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -737,4 +740,7 @@ sortable.disable = function (sortableElement) {
 
 return sortable;
 }));
+
+
+
 

@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get '/pickup/:uuid', to: 'transactions#pickup', as: :pickup
 
   # New addition for overriding devise
-  devise_for :users, :controllers => { :registrations => "my_registrations", sessions: 'sessions' }
+  devise_for :users, 
+            :controllers => { :registrations => "my_registrations", sessions: 'sessions', :omniauth_callbacks => 'omniauth_callbacks'}
   
   # devise_for :users, :controllers => { :registrations => "my_registrations", sessions: 'sessions' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

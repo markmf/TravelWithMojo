@@ -10,14 +10,19 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
 //= require rails-ujs
 //= require dropzone
 //= require bootstrap-sprockets
 //= require bootstrap
+//= require toastr
 //= require jquery-ui
 //= require gritter
+//= require_self
 //= require turbolinks
 //= require_tree .
+
+
 
 
 

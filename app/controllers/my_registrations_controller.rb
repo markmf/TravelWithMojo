@@ -9,6 +9,8 @@ class MyRegistrationsController < Devise::RegistrationsController
     	puts "User email => #{@user.email}"
       	UserMailer.welcome_email(@user).deliver_now
     end
+
+    
   end
 
 end

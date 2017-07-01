@@ -79,7 +79,7 @@
 /* Add Zoom Animation */
 .animate {
     -webkit-animation: animatezoom 0.8s;
-    
+    -o-transform: animatezoom 0.8s; /* Opera */
     animation: animatezoom 0.8s
     
 }

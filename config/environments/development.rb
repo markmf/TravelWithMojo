@@ -57,6 +57,8 @@ Rails.application.configure do
   # Use for testing with mailcatcher
   #config.action_mailer.smtp_settings = {:address => 'localhost', :port => 1025}
 
+ 
+
   config.action_mailer.smtp_settings = {
       address: "smtp.gmail.com", 
       port: 587,
@@ -65,7 +67,17 @@ Rails.application.configure do
       user_name: ENV["GMAIL_USERNAME"],
       password: ENV["GMAIL_PASSWORD"],
       enable_starttls_auto: true
-    }
+   } 
+
+ 
+#  config.action_mailer.smtp_settings = {
+#    address: 'smtp.mandrillapp.com',
+#    port: 587,
+#    enable_starttls_auto: true,
+#    user_name: ENV["GMAIL_USERNAME"],
+#    password:  ENV["MANDRILL_API_KEY"],
+#    authentication: 'login'
+#  }
 
 
 end

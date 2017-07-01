@@ -4,18 +4,20 @@
  
   <div class = 'mydisplay hover-shadow img-responsive'>
       <%= link_to image_tag(experience.image.url, width: 255, height: 350),  experience_path(experience) %> 
+        
+        <!-- <small><div class ='expname'><%= link_to experience.exp_name %></div></small> -->
   </div>
 
   <div class='caption'>
     <p>
-      <span>$</span><strong><%= link_to experience.exp_price, experience_path(experience) %></strong> 
+      <span><br/>$</span><strong><%= link_to experience.exp_price, experience_path(experience) %></strong> 
       <strong><%= link_to experience.exp_name, experience_path(experience) %> <br/></strong>
      
       <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
       <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
       28 reviews
     </p>
-    <br/>
+    <br/><br/>
   </div>
 
 </div>
