@@ -19,15 +19,16 @@ class User < ApplicationRecord
       return user
     else
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-          user.name = auth.info.name
-          user.provider = auth.provider
-          user.uid = auth.uid
-          user.email = auth.info.email
-          user.image = auth.info.image
-          user.password = Devise.friendly_token[0,20]
+          user.name       = auth.info.name
+          user.first_name = user.name.partition(" ").first
+          user.last_name  = user.name.partition(" ").last
+          user.provider   = auth.provider
+          user.uid        = auth.uid
+          user.email      = auth.info.email
+          user.image      = auth.info.image
+          user.password   = Devise.friendly_token[0,20]
           user.save!
       end
-      puts "Created & Updated Facebook User ********"
     end
   end
 

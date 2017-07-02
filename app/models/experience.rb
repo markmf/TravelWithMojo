@@ -1,5 +1,5 @@
 class Experience < ApplicationRecord
-	validates :exp_name, :exp_desc, :exp_where_be, :exp_location, :exp_provide, :exp_duration, presence: true
+	validates :exp_name, :exp_desc, :exp_where_be, :exp_location, :exp_provide, :exp_duration, :exp_price, presence: true
 	
 	
 	#mount_uploader :image, ImageUploader
@@ -10,6 +10,7 @@ class Experience < ApplicationRecord
 	belongs_to :user
 	has_many :sales
 	has_many :reviews
+	has_many :photos
 
 	has_attached_file :image, styles: { medium: "500x500>", thumb: "200x200#" }
 

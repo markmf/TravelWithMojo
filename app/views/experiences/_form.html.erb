@@ -1,39 +1,114 @@
-<div  class="modal-dialog">
-  <div class="modal-content ">
-      <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
-             <h4 class="modal-title" id="myModalLabel">Create New Experience</h4>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Create an amazing experience
+  </div>
+  <div class="panel-body">
+    <div class="container">
 
 
-    <%= simple_form_for(@experience, html: {class: 'form-signin'}) do |f| %>
-      <%= f.error_notification %>
+      <%= simple_form_for(@experience, :html => { multipart: true } ) do |f| %>
 
-
-        <%= f.input :exp_name, null: false, required: true, autofocus: true, label: false, placeholder: "Enter experience name" %>
-        <%= f.input :exp_desc, required: true, label: false, placeholder: "Description of what we'll do" %>
-        <%= f.input :exp_provide, required: true, label:false, placeholder: "What you'll provide"  %>
-        <%= f.input :exp_notes, required: false, label: false, placeholder: "Notes" %>
-        <%= f.input :exp_where_be, required: true, label: false, placeholder: "Where we'll be" %>
-        <%= f.input :exp_location, required:true, label: false, placeholder: "Where you'll meet with your guests" %>
-        <div class="form-group">
-          <label class="btn btn-primary">
-            Upload your photos<%= f.input :image, style: "display:none;", label: false, html: { multipart: true, class: "dropzone"} %>
-          </label>
+        <%= render 'shared/message' %>
+         <%= f.error_notification %>
+     
+        <div class="row">
+          <div class="form-group">
+            <label>Experience Name</label>
+            <%= f.input :exp_name, null: false, required: true, autofocus: true, label: false, placeholder: "Be creative", class: "form-control" %>
+          </div>
         </div>
-       
-        <%= f.input :about_me, required: true, label: false, placeholder: "Info about yourself" %>
-        <%= f.input :guest_reqs %>
-        <%= f.input :max_guest, required: true, label: false, placeholder: "Maximum no of guests" %>
-        <%= f.input :rsv_guest %>
-        <%= f.input :min_guest %>
-        <%= f.input :can_policy, placeholder: "Cancellation policy" %>
-        <%= f.input :exp_price, required: true, label: false, placeholder: "Price" %>
+      
+        <div class="row">
+          <div class="form-group">
+            <label>Description of what we'll do</label>
+            <%= f.text_area :exp_desc, rows: 5, placeholder: "Be clear and descriptive", class: "form-control" %>
+          </div>
+        </div>
+     
+        <div class="row">
+          <div class="form-group">
+            <label>Description of what you'll provide</label>
+            <%= f.text_area :exp_provide, rows: 5, required: true, placeholder: "Be clear and descriptive. For example, provide snacks, etc.", class: "form-control"  %>
+          </div>
+        </div>
+
+        <div class=row>
+          <div class="form-group">
+            <label>Notes</label>
+            <%= f.text_area :exp_notes, rows:3, required: false, placeholder: "Put additional information here", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class=row>
+          <div class="form-group">
+            <label>Where we'll be</label>
+            <%= f.text_area :exp_where_be, rows: 3, required: true, label: false, placeholder: "Where the event will be held", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class=row>
+          <div class="form-group">
+            <label>Meeting location</label>
+            <%= f.text_area :exp_location, rows: 3, required: true, label: false, placeholder: "Meeting location where you will initially meet your guests", class: "form-control" %>
+          </div>
+        </div>
+
+     
+        <div class=row>
+          <div class="form-group">
+            <label>Info about yourself</label>
+            <%= f.text_area :about_me, rows: 3, required: true, label: false, placeholder: "Describe why you're qualified to do this experience", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class=row>
+          <div class="form-group">
+            <label>Guest Requirements</label>
+             <%= f.text_area :guest_reqs, rows:2, placeholder: "For example, drivers license for ID", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class=row>
+          <div class="form-group">
+            <label>Cancellation Policy</label>
+            <%= f.text_area :can_policy, placeholder: "Describe cancellation policy", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 select">    
+            <div class="form-group">
+              <label>Maximum Number of Guests</label>
+              <%= f.input :max_guest, label:false, input_html: { value: '1' },  collection: 1..20, prompt: "Select...", class: "form-control", required: true %>
+            </div>     
+          </div>
+     
+          <div class="col-md-6 select"> 
+            <div class="form-group"> 
+              <label>How much does it cost?</label>
+              <div class="input-group">
+                <div class="input-group-addon">$</div>
+                  <%= f.text_field :exp_price, placeholder: "eg. $100", required:true, class: "form-control" %>
+              </div>  
+
+             
+            </div>
+          </div>
+        </div>
+
+
+      
        
         <%= f.input :start_time, required: true, label: false, class: 'form-control', type: 'datetime-local' %>
       
         <%= f.input :exp_duration, required: true, class: 'form-control', type: 'time', label: false %>
      
+
+        <div class="form-group">
+          <label class="btn btn-primary">
+            Upload your photos<%= f.input :image, style: "display:none;", label: false, html: { multipart: true, class: "dropzone"} %>
+          </label>
+        </div>
 
       <div class="form-actions">
         <%= f.button :submit, class: 'btn btn-success btn-block' %>
@@ -42,6 +117,6 @@
  
 
     <% end %>
+  </div>
+  </div>
 </div>
-</div>
-

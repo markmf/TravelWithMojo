@@ -13,13 +13,19 @@
 			<%= render 'shared/devisemes' %>
 
 		  	<h2 class = 'text-center'> Log in</h2>
-		 	<%= link_to "Login In using Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary" %>
+		 	<%= link_to "Login In with Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary" %>
+		 	<%= link_to "Login In with Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-primary" %>
 
-		  	<h3 class ='text-center'> Or </h3>
+		  	<h3 class ='text-center'> OR </h3>
 
-		  	<span class="input-group-addon"><i class="fa fa-user"></i></span>
-		    <%= f.input :email, required: false, autofocus: true, label: false, placeholder: 'Email' %>
-		    <%= f.input :password, required: false, label: false, placeholder: 'Password' %>
+		  	<span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i>
+		    <%= f.email_field :email, required: false, autofocus: true, label: false, placeholder: 'Email' %>
+		    </span>
+			<br>
+		    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i>
+		    <%= f.password_field :password, required: false, label: false, placeholder: 'Password' %>
+		    </span>
+
 		    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
 		 
 

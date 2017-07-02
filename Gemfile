@@ -80,6 +80,7 @@ gem 'dropzonejs-rails'
 gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 gem 'toastr-rails'
 gem 'sendgrid-ruby'
 

@@ -12,6 +12,7 @@ class ExperiencesController < ApplicationController
   # GET /experiences/1
   # GET /experiences/1.json
   def show
+    @photos = @experience.photos
   end
 
   # GET /experiences/new
@@ -22,6 +23,8 @@ class ExperiencesController < ApplicationController
   # GET /experiences/1/edit
   def edit
     authorize! :manage, @experience
+
+    @photos = @experience.photos
   end
 
   # POST /experiences
@@ -29,8 +32,21 @@ class ExperiencesController < ApplicationController
   def create
     @experience = current_user.experiences.new(experience_params)
 
+
+     Rails.logger.debug experience_params.inspect
+
     respond_to do |format|
+
       if @experience.save
+
+        if params[:images] 
+          params[:images].each do |image|
+            @experience.photos.create(image: image)
+          end
+        end
+        @photos = @experience.photos
+     #   format.html { redirect_to edit_experience_path(@experience), notice: 'Experience was successfully created.' }
+
         format.html { redirect_to @experience, notice: 'Experience was successfully created.' }
         format.json { render :show, status: :created, location: @experience }
       else
@@ -53,7 +69,18 @@ class ExperiencesController < ApplicationController
 
     respond_to do |format|
       if @experience.update(experience_params)
-        format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
+
+
+        if params[:images] 
+          params[:images].each do |image|
+            @experience.photos.create(image: image)
+          end
+        end
+       
+ #       format.html { redirect_to edit_experience_path(@experience), notice: 'Experience was successfully updated.' }
+
+
+       format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
         format.json { render :show, status: :ok, location: @experience }
       else
         format.html { render :edit }
