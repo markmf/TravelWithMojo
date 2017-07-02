@@ -58,7 +58,7 @@ Rails.application.configure do
   #config.action_mailer.smtp_settings = {:address => 'localhost', :port => 1025}
 
  
-
+# GMAIL
   config.action_mailer.smtp_settings = {
       address: "smtp.gmail.com", 
       port: 587,
@@ -69,7 +69,7 @@ Rails.application.configure do
       enable_starttls_auto: true
    } 
 
- 
+# MANDRILL EMAIL
 #  config.action_mailer.smtp_settings = {
 #    address: 'smtp.mandrillapp.com',
 #    port: 587,
@@ -79,5 +79,14 @@ Rails.application.configure do
 #    authentication: 'login'
 #  }
 
+# SENDGRID
+#config.action_mailer.smtp_settings = {
+#    address: 'smtp.sendgrid.net',
+#    port: 587,
+#    enable_starttls_auto: true,
+#    user_name: 'markmf',
+#    password: ENV["SENDGRID_API_KEY"],
+#    authentication: 'plain'
+#}
 
 end

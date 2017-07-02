@@ -81,6 +81,9 @@ gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'toastr-rails'
+gem 'sendgrid-ruby'
+
+
 
 
 
