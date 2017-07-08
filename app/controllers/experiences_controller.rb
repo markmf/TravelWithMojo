@@ -3,10 +3,33 @@ class ExperiencesController < ApplicationController
   before_action :set_experience, only: [:show, :edit, :update, :destroy]
 
 
+    Rails.logger.debug :search
+
   # GET /experiences
   # GET /experiences.json
   def index
-    @experiences = Experience.all
+
+    
+    if params[:search].present? && params[:search].strip != ""
+        session[:loc_search] = params[:search]
+        @experiences = Experience.where(active: true).near(session[:loc_search] , 15, order: 'distance')
+    else
+        @experiences = Experience.where(active: true).all
+    end
+
+  
+
+#    if session[:loc_search] && session[:loc_search] != ""
+ #     @experiences = Experience.where(active: true).near(session[:loc_search], 5, order: 'distance')
+#    else
+#     #  @experiences = Experience.where(active: true).near("Tokyo", 5, order: 'distance')
+ #  @experiences = Experience.where(active: true).all
+      # @experiences = Experience.all
+#    end
+
+
+#   Original search for all
+ #   @experiences = Experience.all
   end
 
   # GET /experiences/1
@@ -18,6 +41,12 @@ class ExperiencesController < ApplicationController
   # GET /experiences/new
   def new
     @experience = Experience.new
+  end
+
+  # Display as a host all your experiences (ie events)
+  def listing
+    @experiences = current_user.experiences
+
   end
 
   # GET /experiences/1/edit
@@ -34,20 +63,26 @@ class ExperiencesController < ApplicationController
 
 
      Rails.logger.debug experience_params.inspect
+    
+    #set default to true
+    @experience.active = true
 
     respond_to do |format|
 
       if @experience.save
 
+
+
         if params[:images] 
+          puts "***********CREATING Photo File********************************"
           params[:images].each do |image|
             @experience.photos.create(image: image)
           end
         end
         @photos = @experience.photos
-     #   format.html { redirect_to edit_experience_path(@experience), notice: 'Experience was successfully created.' }
+        format.html { redirect_to edit_experience_path(@experience), notice: 'Experience was successfully created.' }
 
-        format.html { redirect_to @experience, notice: 'Experience was successfully created.' }
+   #     format.html { redirect_to @experience, notice: 'Experience was successfully created.' }
         format.json { render :show, status: :created, location: @experience }
       else
         format.html { render :new }
@@ -77,10 +112,10 @@ class ExperiencesController < ApplicationController
           end
         end
        
- #       format.html { redirect_to edit_experience_path(@experience), notice: 'Experience was successfully updated.' }
+        format.html { redirect_to edit_experience_path(@experience), notice: 'Experience was successfully updated.' }
 
 
-       format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
+  #     format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
         format.json { render :show, status: :ok, location: @experience }
       else
         format.html { render :edit }
@@ -116,6 +151,6 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:exp_email, :exp_id, :exp_name, :exp_desc, :exp_where_be, :exp_location, :exp_provide, :exp_notes, :exp_location,  :about_me, :guest_reqs, :max_guest, :rsv_guest, :min_guest, :can_policy,  :exp_price, :start_time, :exp_duration, :image)
+      params.require(:experience).permit(:exp_email, :exp_id, :exp_name, :exp_desc, :exp_where_be, :exp_location, :exp_provide, :exp_notes, :exp_location,  :about_me, :guest_reqs, :max_guest, :rsv_guest, :min_guest, :can_policy,  :exp_price, :go_time, :exp_duration, :start_date, :image)
     end
 end

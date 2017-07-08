@@ -4,6 +4,8 @@
 // Classes to set fixed height of experience photos 
 // @ import "jquery-ui";
 
+@import "toastr";
+
 .row {
 
   /* font-family: 'Londrina Shadow', cursive; */
@@ -45,11 +47,9 @@ caption {
   overflow: hidden; 
 
    
-
+/*
   display: block; 
-  /*
-  max-width: 400px;
-  max-height: 400px; */
+ */
   
 }
 
@@ -169,7 +169,9 @@ img.hover-shadow {
     /*
     border:solid 1px green;
     */
+    margin-left: 10px;
     overflow: hidden;
+    
 }
 
 .rightcol {
@@ -178,4 +180,5 @@ img.hover-shadow {
     */
     overflow-y:scroll;
     height: 600px; /* I WANT THIS BUT DYNAMICALLY CHANGES W/ .OUTER */
+    width: 900px;
 }

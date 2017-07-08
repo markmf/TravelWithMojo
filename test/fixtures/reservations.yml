@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  experience: one
+  start_date: 2017-07-05 21:00:28
+  end_date: 2017-07-05 21:00:28
+  price: 1
+  total: 1
+
+two:
+  user: two
+  experience: two
+  start_date: 2017-07-05 21:00:28
+  end_date: 2017-07-05 21:00:28
+  price: 1
+  total: 1

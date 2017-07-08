@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-md-3">
+		<ul class="sidebar-list">
+			<li class="sidebar-item"><%= link_to "Manage my Experiences", index_path, class: "sidebar-link" %></li>
+			<li class="sidebar-item"><%= link_to "Upcoming Activities", event_path, class: "sidebar-link active" %></li>
+			<li class="sidebar-item"><%= link_to "Your Trips", '#', class: "sidebar-link" %></li>
+		</ul>
+	</div>
+	<div class="col-md-9">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Upcoming Activities
+			</div>
+			<div class="panel-body">
+				
+				<% @experiences.each do |experience| %>
+					<div class="row">
+						<div class="col-md-3">
+							 <div class = 'mydisplay hover-shadow img-responsive'>
+								<%= link_to image_tag(experience.photos[0].image.url(:thumb)), edit_experience_path(experience) if experience.photos.length > 0 %>
+					<!--		<%= image_tag experience.photos[0].image.url(:thumb) if experience.photos.length > 0 %> -->
+							  </div> 
+						</div>		
+						<div class="col-md-7">
+							<h4><%= experience.exp_name %></h4> 
+							<h4>$<%= experience.exp_price %></h4>
+							<h4><%= experience.start_date %></h4>
+							<h4><%= experience.go_time %></h4>
+						</div>		
+						<div class="col-md-2 right">
+							<%= link_to "View", experience_path(experience), class: "btn btn-primary" %>
+						</div>		
+					</div>
+					<hr>
+				<% end %>
+
+			</div>
+		</div>
+	</div>
+</div>

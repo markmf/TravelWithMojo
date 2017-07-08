@@ -8,8 +8,14 @@
 
       <%= simple_form_for(@experience, :html => { multipart: true } ) do |f| %>
 
-        <%= render 'shared/message' %>
-         <%= f.error_notification %>
+        <% unless @experience.errors.empty? %>
+          <script type="text/javascript">
+            <% experience.errors.full_messages.each do |msg| %>
+              toastr.error('<%= msg %>')
+            <% end %>
+          </script>
+        <% end %>
+         
      
         <div class="row">
           <div class="form-group">
@@ -21,7 +27,7 @@
         <div class="row">
           <div class="form-group">
             <label>Description of what we'll do</label>
-            <%= f.text_area :exp_desc, rows: 5, placeholder: "Be clear and descriptive", class: "form-control" %>
+            <%= f.text_area :exp_desc, rows: 5, null: false,  required: true, placeholder: "Be clear and descriptive", class: "form-control" %>
           </div>
         </div>
      
@@ -76,7 +82,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6 select">    
+          <div class="col-md-6">    
             <div class="form-group">
               <label>Maximum Number of Guests</label>
               <%= f.input :max_guest, label:false, input_html: { value: '1' },  collection: 1..20, prompt: "Select...", class: "form-control", required: true %>
@@ -88,7 +94,7 @@
               <label>How much does it cost?</label>
               <div class="input-group">
                 <div class="input-group-addon">$</div>
-                  <%= f.text_field :exp_price, placeholder: "eg. $100", required:true, class: "form-control" %>
+                  <%= f.text_field :exp_price, placeholder: "eg. $100", required: true, class: "form-control" %>
               </div>  
 
              
@@ -97,19 +103,78 @@
         </div>
 
 
-      
-       
-        <%= f.input :start_time, required: true, label: false, class: 'form-control', type: 'datetime-local' %>
-      
-        <%= f.input :exp_duration, required: true, class: 'form-control', type: 'time', label: false %>
-     
-
-        <div class="form-group">
-          <label class="btn btn-primary">
-            Upload your photos<%= f.input :image, style: "display:none;", label: false, html: { multipart: true, class: "dropzone"} %>
-          </label>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">              
+              <span class="btn btn-default btn-file">
+                  <i class="fa fa-cloud-upload fa-lg"></i> Upload Photos
+                  <%= file_field_tag "images[]", type: :file, multiple: true, required: true %>
+              </span>
+            </div>    
+          </div>
         </div>
 
+
+        <div id="photos"><%= render 'photos/list' %></div>  
+
+
+<!--        <%= f.input :start_time, required: true, label: false, id: 'start-date', class: 'form-control' %> -->
+        <div class="row">
+          <div class="col-md-3">           
+                  <label>Date </label>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                       </span>      
+                      <%= f.text_field :start_date,  id: 'start-date', label: false, class: 'form-control' %>
+                   </div>
+           
+          </div>
+
+          <div class="col-md-3">           
+                  <label>Start Time</label>
+                  
+                         
+                      <%= f.input :go_time,  id: 'start-time', label: false, class: 'form-control', type: 'time' %>
+                  
+           
+          </div>
+       
+       
+<script>
+  $(function() {
+
+    $('#start-date').datepicker({
+        dateFormat: 'M d, yy',
+       timeFormat: 'hh:mm tt'
+    });
+
+  });
+</script>
+
+
+<script>
+  $(function() {
+
+    $('#start-time').timepicker({
+       timeFormat: 'hh:mm '
+    });
+
+  });
+</script>
+     
+          <div class="col-md-4">    
+       
+               
+                    <label>How Long?</label>
+                    <%= f.input :exp_duration,  id: 'duration', class: 'form-control', label: false, type: 'time' %>          
+          
+          </div>
+      </div>
+
+
+
+      <br/>
       <div class="form-actions">
         <%= f.button :submit, class: 'btn btn-success btn-block' %>
       </div>

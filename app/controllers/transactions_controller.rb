@@ -8,6 +8,7 @@ class TransactionsController < ApplicationController
 				amount: experience.exp_price,
 				buyer_email: current_user.email,
 				seller_email: experience.user.email,
+				exp_id: experience.id,
 				stripe_token: params[:stripeToken])
 		
 		sale.currency = "USD"
@@ -21,7 +22,8 @@ class TransactionsController < ApplicationController
 			puts "Entered Transactions Controller***************************************"
     		puts "Experience Name => #{experience.exp_name}"
     		puts "Sending Confirmation Email Now"
-      		UserMailer.send_confirmation_email(experience, current_user.email).deliver_now
+      		UserMailer.send_confirmation_email(experience, current_user.email, experience.user.email).deliver_now
+
 
 		else
 			puts "Someting is wrong"

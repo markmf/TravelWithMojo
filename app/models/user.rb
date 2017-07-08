@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   has_many :experiences
   has_many :reviews
+  has_many :reservations
   
 
   def self.from_omniauth(auth)
@@ -24,7 +25,9 @@ class User < ApplicationRecord
           user.last_name  = user.name.partition(" ").last
           user.provider   = auth.provider
           user.uid        = auth.uid
-          user.email      = auth.info.email
+  # Need to update Twitters' settings so  I can retrieve guest's email
+  #        user.email      = auth.info.email
+          user.email      = "test@test.com"
           user.image      = auth.info.image
           user.password   = Devise.friendly_token[0,20]
           user.save!

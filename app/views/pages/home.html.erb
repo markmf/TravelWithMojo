@@ -1,9 +1,19 @@
+<br/>
 <div class="jumbotron">
-  <h1>Welcome to Caper</h1>
-  <p>Be an authentic traveler. Connecting you with locals to experience amazing stuff. Discover your city.</p> 
-<!--  <p><a class="btn btn-primary btn-lg" href= "experiences_path" role="button">Learn more</a></p> -->
-   <%= link_to 'Learn More', experiences_path, class: 'btn btn-primary btn-lg' %>
-   
+	
+	<div class="jumbotron text">
+		<div class="text-center">
+		<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></span>
+  				<span class="sr-only">Loading...</span>
+  		</div>
+  		<h2	class="text-center">Learn New Skills</h2> 
+  		<h2 class="text-center">Discover City  Gems</h2>
+		<h2 class="text-center">Be an Authentic Traveler </h2>
+  		<h2	class="text-center">Connecting you with Locals to Experience Amazing Stuff</h2> 
+	</div>
+	<div class="text-center">
+   		<%= link_to 'Join Us', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+	</div>
 </div>
 
 <div class = 'row'>

@@ -1,11 +1,23 @@
 class PagesController < ApplicationController
   
   def home
+
+    @experiences = Experience.all
+
   	if current_user
   		redirect_to experiences_path
 
-  	end
+    end
 
-  	@experiences = Experience.all
   end
+
+
+  def search
+
+  	
+
+  end
+
+  	
+  
 end

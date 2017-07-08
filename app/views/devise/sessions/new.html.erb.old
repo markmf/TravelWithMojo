@@ -1,0 +1,39 @@
+
+
+
+<div  class="modal-dialog">
+	<div class="modal-content animate">
+    	<div class="modal-header">
+      		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+             <h4 class="modal-title" id="myModalLabel">Login to your Caper Account</h4>
+		</div>
+
+		<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-signin'}) do |f| %>
+		  
+			<%= render 'shared/devisemes' %>
+
+		  	<h2 class = 'text-center'> Log in</h2>
+		 	<%= link_to "Login In with Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary" %>
+		 	<%= link_to "Login In with Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-primary" %>
+
+		  	<h3 class ='text-center'> OR </h3>
+
+		  	<span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i>
+		    <%= f.email_field :email, required: false, autofocus: true, label: false, placeholder: 'Email' %>
+		    </span>
+			<br>
+		    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i>
+		    <%= f.password_field :password, required: false, label: false, placeholder: 'Password' %>
+		    </span>
+
+		    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+		 
+
+		  
+		    <%= f.button :submit, "Get Started", class: 'btn btn-primary btn-block'%>
+
+		<% end %>
+
+		<%= render "devise/shared/links" %>
+	</div>
+</div>

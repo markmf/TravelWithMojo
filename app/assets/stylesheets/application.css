@@ -20,8 +20,7 @@
  
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "toastr"
-
+@import "toastr";
 @import "gritter";
 
 html {
@@ -63,6 +62,18 @@ Wrapper for page content to push down footer
  /* padding: 0 0 60px; */
 }
 
+.jumbotron {
+    background-image: url("/img/your-image.jpg");
+    background-color: black;
+
+  
+}
+
+.jumbotron text {
+
+  color: white;
+  font-size: large;
+}
 
 .footer {
     position: relative;
@@ -116,7 +127,7 @@ body {
 }
 
 .container {
-  width: 80%;
+ width: 80%; 
 }
 
 .navbar-default {
@@ -318,6 +329,51 @@ input[type="checkbox"]:checked:before {
 }
 
 .panel-heading.preview img{  
+ 
   width: 100%;
+ 
 }
 
+.amenities li {
+  margin-bottom: 10px;
+  list-style-type: none;
+}
+
+.text-line-through {
+  text-decoration: line-through
+}
+
+/* Button for Purchase */
+
+.button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.caret-up {
+    width: 0; 
+    height: 0; 
+    border-left: 4px solid rgba(0, 0, 0, 0);
+    border-right: 4px solid rgba(0, 0, 0, 0);
+    border-bottom: 4px solid;
+    
+    display: inline-block;
+    margin-left: 2px;
+    vertical-align: middle;
+}

@@ -8,10 +8,23 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
+  resources :experiences do
+    resources :reservations, only: [:create]
+  end
+
+ 
+
+
+  get '/search' => 'experiences#index'
    
   
   post 'buy/:/slug', to: 'transactions#create', as: :buy
   get '/pickup/:uuid', to: 'transactions#pickup', as: :pickup
+  
+  get '/listing', to: 'listing#index', as: :index
+  get '/event', to: 'events#index', as: :event
+
+
 
   # New addition for overriding devise
   devise_for :users, 

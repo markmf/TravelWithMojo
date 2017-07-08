@@ -1,12 +1,9 @@
 
-
 <div class = 'col-md-3'>
  
   <div class = 'mydisplay hover-shadow img-responsive'>
-
-      <%= link_to image_tag(experience.photos[0].image.url, width: 255, height: 350), experience_path(experience) if experience.photos.length > 0 %>
-       
-      <!-- <%= link_to image_tag("/assets/surfer.png", width: 255, height: 350),  experience_path(experience) %>  -->
+     <%= link_to image_tag(experience.image.url, width: 255, height: 350),  experience_path(experience) %>  
+     
         <!-- <small><div class ='expname'><%= link_to experience.exp_name %></div></small> -->
   </div>
 

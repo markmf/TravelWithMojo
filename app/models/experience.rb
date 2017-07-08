@@ -1,7 +1,7 @@
 class Experience < ApplicationRecord
-	validates :exp_name, :exp_desc, :exp_where_be, :exp_location, :exp_provide, :exp_duration, :exp_price, presence: true
+	validates :exp_name, :exp_desc, :exp_where_be, :exp_location, :exp_provide, :exp_duration, :exp_price, :go_time, :start_date, presence: true
 	
-	
+	# before_save { self.active = true }
 	#mount_uploader :image, ImageUploader
 
 	extend FriendlyId
@@ -11,15 +11,15 @@ class Experience < ApplicationRecord
 	has_many :sales
 	has_many :reviews
 	has_many :photos
+	has_many :reservations
 
-	has_attached_file :image, styles: { medium: "500x500>", thumb: "200x200#" }
+#	has_attached_file :image, styles: { medium: "500x500>", thumb: "200x200#" }
 
  
 
-	validates_attachment :image, presence: true, 
-#	styles: { medium: "400x400#", thumb: "200x200#" },
-	content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
-	message: 'Only images (eg, jpeg, gif, png) allowed.'
+#	validates_attachment :image,  
+#	content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
+#	message: 'Only images (eg, jpeg, gif, png) allowed.'
 
 
 	validates_numericality_of :exp_price,

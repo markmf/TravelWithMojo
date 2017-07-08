@@ -1,5 +1,5 @@
 <div id="wrap">
-<nav class="navbar navbar-default navbar-fixed-top " role = "navigation">
+<nav class="navbar  navbar-fixed-top  navbar-inverse bg-inverse" role = "navigation">
 
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -13,15 +13,11 @@
       
       <%= link_to '<i class="fa fa-circle-o-notch"></i>Caper'.html_safe, root_path, class:'navbar-brand' %>
 
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Where?">
-        </div>
-        <!-- <button type="submit" class="btn btn-default">Submit</button> -->
-      </form>
-      
-        
-      
+      <%= form_tag(search_path, method: 'get', class: 'navbar-form navbar-left') do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Where are you going?", class: "form-control" %>    
+        <%= submit_tag "Search", class: 'btn btn-primary' %>
+      <% end %>
+ 
 
     </div>
 
@@ -33,21 +29,30 @@
       
       <ul class="nav navbar-nav navbar-right">
       
-         
-
           <% if current_user %>
             <li><%= link_to 'Host an Experience', new_experience_path %></li>
             <li><%= link_to 'Profile', edit_user_registration_path %></li>
-            <li><%= link_to 'Dashboard', root_path %></li>
+            <li><%= link_to 'Dashboard', index_path %></li>
+<!-- root_path -->
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <%= image_tag avatar_url(current_user), width: 25, class: "img-circle avatar-small" %>&nbsp;
                 <%= current_user.first_name %> <span class="caret"></span>
-              </a>
+              </a>       
+              <ul class="dropdown-menu">          
+                <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Account Setting</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Experiences</a></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+              </ul>
             </li>
             <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
           <% else %>
-            <li><%= link_to 'Host an Experience', experiences_path %></li>
+            <li><%= link_to 'Host an Experience', new_user_registration_path %></li>
             <li><%= link_to 'Sign Up', new_user_registration_path %></li>
             <li><%= link_to '<i class="glyphicon glyphicon-user"></i>Login'.html_safe, new_user_session_path %></li>
           <% end %>
@@ -60,3 +65,19 @@
 
 </nav>
 </div>
+
+<script>
+   $(function() {
+    $(".dropdown").hover(            
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
+                $(this).toggleClass('open');
+                $('b', this).toggleClass("caret caret-up");                
+            },
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
+                $(this).toggleClass('open');
+                $('b', this).toggleClass("caret caret-up");                
+            });
+    });
+</script>
