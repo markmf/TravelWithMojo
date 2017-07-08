@@ -26,8 +26,8 @@ class User < ApplicationRecord
           user.provider   = auth.provider
           user.uid        = auth.uid
   # Need to update Twitters' settings so  I can retrieve guest's email
-  #        user.email      = auth.info.email
-          user.email      = "test@test.com"
+          user.email      = auth.info.email
+   #       user.email      = "test@test.com"
           user.image      = auth.info.image
           user.password   = Devise.friendly_token[0,20]
           user.save!

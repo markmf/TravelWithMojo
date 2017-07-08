@@ -1,9 +1,12 @@
 
-
+<div id="myModal">
+<div  class="modal-dialog">
+	<div class="modal-content animate">
+    	<div class="modal-header">
       		
              <h4 class="modal-title" id="myModalLabel">Create a Caper Account
              <span class="closebtn" onclick="document.getElementById('myModal').style.display='none'">&times;</span></h4>
-	
+		</div>
 		 
 
 
@@ -18,7 +21,7 @@
 
 		    <%= f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email'%>
 		    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),  label: false, placeholder: 'Password' %>
-		    <%= f.input :password_confirmation, required: true,  label: false, placeholder: 'Confirm Password' %>
+		    <%= f.input :password_confirmation, required: true,  label: false, placeholder: 'Reenter Password' %>
 		    <%= f.input :first_name, required: true, label: false, placeholder: 'First Name' %>
 		    <%= f.input :last_name, required: true, label: false, placeholder: 'Last Name' %>
 
@@ -34,7 +37,3 @@
 	</div>
 </div>
 </div>
-
-
-
-
