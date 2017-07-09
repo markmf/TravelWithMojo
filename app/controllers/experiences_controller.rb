@@ -17,16 +17,6 @@ class ExperiencesController < ApplicationController
         @experiences = Experience.where(active: true).all
     end
 
-  
-
-#    if session[:loc_search] && session[:loc_search] != ""
- #     @experiences = Experience.where(active: true).near(session[:loc_search], 5, order: 'distance')
-#    else
-#     #  @experiences = Experience.where(active: true).near("Tokyo", 5, order: 'distance')
- #  @experiences = Experience.where(active: true).all
-      # @experiences = Experience.all
-#    end
-
 
 #   Original search for all
  #   @experiences = Experience.all
@@ -36,11 +26,24 @@ class ExperiencesController < ApplicationController
   # GET /experiences/1.json
   def show
     @photos = @experience.photos
+
+ #   @booked = Sale.where("exp_id = ? AND buyer_email = ?", @experience.id, current_user.email).present? if current_user
+
+  #  puts "***Booked is #{@booked}****"
+
+ #   @reviews = @experience.reviews
+   # @hasReview = @reviews.where("buyer_email = ?", current_user.email) if current_user
+ #   @hasReview = @reviews.find_by(user_id: current_user.id) if current_user
+
+#    puts "***Reviews.count = #{@reviews.count} &&"
+ #   puts "***hasReview = #{@hasReview} "
+ #   puts "**** current.userID is #{current_user.id}***"
   end
 
   # GET /experiences/new
   def new
-    @experience = Experience.new
+  #  @experience = current_user.experiences.new
+   @experience = Experience.new
   end
 
   # Display as a host all your experiences (ie events)

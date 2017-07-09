@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170707071219) do
+ActiveRecord::Schema.define(version: 20170708163923) do
 
   create_table "experiences", force: :cascade do |t|
     t.string "exp_email"
@@ -85,13 +85,15 @@ ActiveRecord::Schema.define(version: 20170707071219) do
 
   create_table "reviews", force: :cascade do |t|
     t.string "user_email"
-    t.integer "exp_id"
-    t.integer "rating"
+    t.integer "rating", default: 1
     t.text "rating_desc"
     t.datetime "review_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "exp_name"
+    t.integer "experience_id"
+    t.integer "user_id"
+    t.index ["experience_id"], name: "index_reviews_on_experience_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "sales", force: :cascade do |t|

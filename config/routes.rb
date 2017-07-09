@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+
+
+  #resources :users
   resources :reviews
   resources :experiences
   resources :photos
@@ -12,7 +15,9 @@ Rails.application.routes.draw do
     resources :reservations, only: [:create]
   end
 
- 
+ #resources :experiences do
+ #   resources :reviews, only: [:create, :new, :destroy]
+ # end
 
 
   get '/search' => 'experiences#index'

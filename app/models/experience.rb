@@ -28,7 +28,9 @@ class Experience < ApplicationRecord
 	geocoded_by :exp_where_be
     after_validation :geocode, if: ->(obj){ obj.exp_where_be.present? && obj.exp_where_be_changed? }
 	
-	
+	def average_rating
+    	reviews.count == 0 ? 0 : reviews.average(:rating).round(2)
+  	end
 
 	private
 

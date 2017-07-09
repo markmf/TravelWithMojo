@@ -27,7 +27,7 @@ class TransactionsController < ApplicationController
 
 		else
 			puts "Someting is wrong"
-			redirect_to experience_path(experience), notice: e.message
+			redirect_to experience_path(experience), notice: "Unable to process Stripe payment"
 		end
  	end
 

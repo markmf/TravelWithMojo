@@ -3,6 +3,7 @@ class Sale < ApplicationRecord
 
 	belongs_to :experience
 	has_many   :reviews
+	
 
 	include AASM
 
