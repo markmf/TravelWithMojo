@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20170708163923) do
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
+
   create_table "reviews", force: :cascade do |t|
     t.string "user_email"
     t.integer "rating", default: 1

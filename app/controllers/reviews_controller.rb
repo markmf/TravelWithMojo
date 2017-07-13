@@ -15,7 +15,6 @@ class ReviewsController < ApplicationController
   # GET /reviews/new
   def new
 
-
     @review = Review.new
     @sale = Sale.find.where(params[:id])
     if @sale.empty?
@@ -30,7 +29,11 @@ class ReviewsController < ApplicationController
   def create
     
     Rails.logger.debug review_params.inspect
+   
+   # @experience = Experience.friendly.find(params[:id])
     @review = current_user.reviews.create(review_params)
+    #@review = Review.new
+
 
       respond_to do |format|
         if @review.save

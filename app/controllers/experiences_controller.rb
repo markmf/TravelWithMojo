@@ -1,7 +1,7 @@
 class ExperiencesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   before_action :set_experience, only: [:show, :edit, :update, :destroy]
-
+  before_action :get_reviews, only: [:show]
 
     Rails.logger.debug :search
 
@@ -9,13 +9,26 @@ class ExperiencesController < ApplicationController
   # GET /experiences.json
   def index
 
-    
+   
+
     if params[:search].present? && params[:search].strip != ""
         session[:loc_search] = params[:search]
         @experiences = Experience.where(active: true).near(session[:loc_search] , 15, order: 'distance')
     else
         @experiences = Experience.where(active: true).all
     end
+
+ 
+
+  # get the average rating per experience
+    @experiences.each do |e |
+      @per_experience = Experience.friendly.find(e.id)
+      @reviews = @per_experience.reviews
+      @rew = @reviews.average(:rating)
+     puts "# of reviews: #{@reviews.count}, Average review is #{@rate} for experience #{@per_experience.id}, NAME: #{@per_experience.exp_name}"
+   
+    end
+
 
 
 #   Original search for all
@@ -27,17 +40,6 @@ class ExperiencesController < ApplicationController
   def show
     @photos = @experience.photos
 
- #   @booked = Sale.where("exp_id = ? AND buyer_email = ?", @experience.id, current_user.email).present? if current_user
-
-  #  puts "***Booked is #{@booked}****"
-
- #   @reviews = @experience.reviews
-   # @hasReview = @reviews.where("buyer_email = ?", current_user.email) if current_user
- #   @hasReview = @reviews.find_by(user_id: current_user.id) if current_user
-
-#    puts "***Reviews.count = #{@reviews.count} &&"
- #   puts "***hasReview = #{@hasReview} "
- #   puts "**** current.userID is #{current_user.id}***"
   end
 
   # GET /experiences/new
@@ -150,6 +152,20 @@ class ExperiencesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_experience
       @experience = Experience.friendly.find(params[:id])
+    end
+
+    def get_reviews
+        @booked = Sale.where("exp_id = ? AND buyer_email = ?", @experience.id, current_user.email).present? if current_user
+        
+        @reviews = @experience.reviews
+  
+        @hasReview = @reviews.find_by(user_id: current_user.id) if current_user
+
+ # @hasReview = @reviews.where("buyer_email = ?", current_user.email) if current_user
+    puts "***Booked is #{@booked}****"
+    puts "***Reviews.count = #{@reviews.count} &&"
+    puts "***hasReview = #{@hasReview} "
+    puts "**** current.userID is #{current_user.id}***" if current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

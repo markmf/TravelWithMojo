@@ -89,6 +89,7 @@ gem 'omniauth-twitter', :github => 'arunagw/omniauth-twitter'
 gem 'toastr-rails'
 gem 'sendgrid-ruby'
 gem 'ransack'
+gem 'ratyrate'
 
 
 

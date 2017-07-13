@@ -1,6 +1,59 @@
-<button class="button">See Dates</button>
+
+<br/>
+
+<button id="myBtn" class="button" >See Dates</button>
+
+
+<%= simple_form_for(@experience, :html => { multipart: true } ) do |f| %>
+   <div class="row">
+      <div class="col-md-6"> 
+        <div class="form-group">
+            <label>Date</label>
+              <%= f.input :start_date,  collection: ["Jan", "feb", "marhc" ], label: false, placeholder: "Date" %>
+        </div>
+      </div>
+    </div>
+<% end %>
+
 <br><br/>
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+var agreebtn = document.getElementById("cancelbtn")
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
   
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+agreebtn.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+
+}
+</script>
+
+
+
 <script>
 $('.carousel').carousel({ interval: 2000 });
 </script>
@@ -60,8 +113,26 @@ $('.carousel').carousel({ interval: 2000 });
 
 
             <p>Hosted by: <%= NameCase(@experience.user.first_name) %> <%= NameCase(@experience.user.last_name) %></p>
+           
             <!-- Reviews -->
-  
+            <%= render 'experiences/reviews' %>
+            <!--
+            <div class="row">
+              <div class="col-md-12">
+                <h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
+                <div class="container">
+                  <div>
+                    <%= render 'reviews/form' if @booked && !@hasReview %>
+                  </div>
+                  <div>
+                    <%= render 'reviews/list' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          -->
+
+
             <% if current_user %> 
 
             <% else %>
@@ -167,14 +238,36 @@ $('.carousel').carousel({ interval: 2000 });
 </script>
 
 
+<!-- Modal -->
 
-
-
-
-
-
-
-
-
-
+  <div id="myModal" class="modal" role="dialog">>
+     <!-- Modal content -->
+    <div class="modal-content animate">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+        </div>
+        <br/>
+        <div class="modal-body">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+              When do you want to go?
+              </div>
+              <div class="panel-body">    
+                  <div class="row">      
+                    <div class="col-md-6">
+                      <strong>3 spots left</strong>
+                       <p>Thur, july 20, 2017<p>
+                      <h4><%=@experience.exp_name %></h4>
+                      <%= @experience.go_time.strftime('%r') %>
+                    </div>    
+                    <div class="col-md-6">
+                      <%= link_to "Choose Date", "#", class: "btn btn-primary" %>
+                    </div>    
+                  </div>
+                   <span><hr class="colorgraph"></span>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
 

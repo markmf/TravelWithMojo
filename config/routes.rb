@@ -11,13 +11,15 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  resources :experiences do
-    resources :reservations, only: [:create]
-  end
+ #resources :experiences, :has_many => [:reviews]
 
- #resources :experiences do
- #   resources :reviews, only: [:create, :new, :destroy]
- # end
+  #resources :experiences do
+   #  resources :reservations, only: [:create]
+  #end
+
+ resources :experiences do
+    resources :reviews, only: [:create, :new, :destroy]
+  end
 
 
   get '/search' => 'experiences#index'

@@ -14,12 +14,26 @@
     <p>
       <span><br/>$</span><strong><%= link_to experience.exp_price, experience_path(experience) %></strong> 
       <strong><%= link_to experience.exp_name, experience_path(experience) %> <br/></strong>
-     
+     <!--
       <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-      28 reviews
+      <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 
+    -->
+  
+     <span id="average_rating_<%= experience.id %>"</span><label> Reviews </label>(<%= experience.reviews.count %>)
+    
     </p>
     <br/><br/>
   </div>
 
 </div>
+
+<script>
+$('#average_rating_<%= experience.id %>').raty({
+    path: '/assets',
+    readOnly: true,
+    targetKeep: false,
+    score: <%= experience.reviews.average(:rating) %>
+  });
+</script>
+
+
