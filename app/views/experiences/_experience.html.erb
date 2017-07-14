@@ -4,7 +4,7 @@
  
   <div class = 'mydisplay hover-shadow img-responsive'>
 
-      <%= link_to image_tag(experience.photos[0].image.url, width: 255, height: 350), experience_path(experience) if experience.photos.length > 0 %>
+      <%= link_to image_tag(experience.photos[0].image.url, width: 255, height: 350), experience_path(experience), class: "img-rounded"  if experience.photos.length > 0 %>
        
       <!-- <%= link_to image_tag("/assets/surfer.png", width: 255, height: 350),  experience_path(experience) %>  -->
         <!-- <small><div class ='expname'><%= link_to experience.exp_name %></div></small> -->
@@ -19,7 +19,17 @@
       <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 
     -->
   
-     <span id="average_rating_<%= experience.id %>"</span><label> Reviews </label>(<%= experience.reviews.count %>)
+     <span id="average_rating_<%= experience.id %>"></span>
+      <% if experience.reviews.count == 0 %>
+        No Reviews
+      <% else %>
+          <%= experience.reviews.count %> 
+          <% if experience.reviews.count > 1 %> 
+            Reviews
+          <% else %>
+            Review
+           <% end %>
+      <% end %>
     
     </p>
     <br/><br/>

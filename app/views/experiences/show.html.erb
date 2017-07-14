@@ -9,7 +9,7 @@
       <div class="col-md-6"> 
         <div class="form-group">
             <label>Date</label>
-              <%= f.input :start_date,  collection: ["Jan", "feb", "marhc" ], label: false, placeholder: "Date" %>
+              <%= f.input :start_date,  collection: ["Jan", "Feb", "March", "April", "May"], label: false, placeholder: "Date" %>
         </div>
       </div>
     </div>
@@ -60,10 +60,10 @@ $('.carousel').carousel({ interval: 2000 });
 
 <% if @experience.photos.length > 0  %>
   <div class="fluid-container">
-  <div class = 'row' >
+    <div class = 'row' >
 
-    <div = class ='outer'>
-      <div class='row'> 
+     <div = class ='outer'>
+       <div class='row'> 
           <div class='col-md-3 leftcol'>  
 
             <!-- Create Carousel -->
@@ -85,7 +85,7 @@ $('.carousel').carousel({ interval: 2000 });
                       <% @photos.each do |photo| %>
 
                         <div class="item <%= 'active' if photo.id == @photos[0].id %>">          
-                          <%= image_tag photo.image.url, class: "mydisplay d-block img-fluid img-responsive" %>
+                          <%= image_tag photo.image.url, class: "mydisplay  img-rounded d-block img-fluid img-responsive" %>
                         </div>
                       <% end %> 
                     <% end %>
@@ -102,35 +102,26 @@ $('.carousel').carousel({ interval: 2000 });
                 </div>
               </div>
               
-              
+    
+      
 
             </div>
 
 
-          <!--   <%= image_tag "/assets/surfer.png",   class: 'img-responsive' %>  -->
+            <!--   <%= image_tag "/assets/surfer.png",   class: 'img-responsive' %>  -->
             <p><strong>$<%= @experience.exp_price %></strong> per person </p>
 
-
-
+            <!-- Reviews -->
+           <span id="average_rating"></span> <%= @reviews.count %> 
+             <% if @reviews.count > 1 %> 
+                Reviews
+             <% else %>
+                Review
+             <% end %>
+            <br/><br/>
             <p>Hosted by: <%= NameCase(@experience.user.first_name) %> <%= NameCase(@experience.user.last_name) %></p>
            
-            <!-- Reviews -->
-            <%= render 'experiences/reviews' %>
-            <!--
-            <div class="row">
-              <div class="col-md-12">
-                <h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
-                <div class="container">
-                  <div>
-                    <%= render 'reviews/form' if @booked && !@hasReview %>
-                  </div>
-                  <div>
-                    <%= render 'reviews/list' %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          -->
+
 
 
             <% if current_user %> 
@@ -140,85 +131,85 @@ $('.carousel').carousel({ interval: 2000 });
 
             <% end %>
           </div>
-   
+    
+          
           <div class='col-md-9 rightcol'>
+          
+            <div class="panel panel-default">
+           
+              <div class="panel-heading"><%= @experience.exp_name %></div>
+               <div class="panel-body">
+                  
+                  <table class="table table-striped table-nobordered ">
+                    <tr>
+                      <th class="center"></th>
+                      <th class="center"></th>
+                    </tr>
+                    <tr>
+                      <td class="center" ><h4><strong>What we'll do</strong></h4></td>
+                      <td class="center" ><p><%= @experience.exp_desc %></p> </td>
+                    </tr>
+                    <tr>
+                      <td class="center"><h4><strong>What I'll provide</strong></h4></td>
+                      <td class="center"> <p><%= @experience.exp_provide %></p></td>
+                    </tr>
+                    <tr>
+                      <td class="center" ><h4><strong>Notes</strong></h4></td>
+                      <td class="center" ><p><%= @experience.exp_notes %></p> </td>
+                    </tr>
+                    <tr>
+                      <td class="center" ><h4><strong>Where we'll be</strong></h4></td>
+                      <td class="center" ><p><%= @experience.exp_location %></p> </td>
+                    </tr>
+                  </table>
+          
+                  <div id="map">
+                    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=700x400&sensor=false&zoom=16&markers=#{@experience.latitude},#{@experience.longitude}&key=AIzaSyDJdjhDvDJoxvVdEVz3Nn8Ia_uas00M34Q", class: 'img-fluid img-rounded' %> 
+                  </div>
+
+                  <span><hr class="colorgraph"></span>
+
+                  <div class="center" ><h4><strong> About your host, </strong><%= @experience.user.first_name %></h4></div>
+                  <div class="center" ><p><%=  @experience.about_me %></p> </div>
+
+                  <!-- Reviews -->
+                  <%= render 'experiences/reviews' %>
+
+
+                  <% if current_user %> 
+
+                    <%= form_tag buy_path(slug: @experience.slug) do %>
+                      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+
+                          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                          data-description="<%= @experience.exp_name %>"
+                          data-name= "Caper"
+                          data-amount="<%= @experience.exp_price * 100 %>"
+                          data-email= "<%= current_user.email %>"
+                          data-locale="auto"></script>
+                     <% end %>
+
+                    <% else %>
+
+                      <p><h3><strong>Please Log in to book this experience</h3></strong> </p>
+
+                  <% end %>
+           
+               <!-- container -->
+            </div> <!-- panel-body -->
+          </div> <!-- end of panel default -->
+                         
+          </div>
          
-            <table class="table table-striped table-nobordered ">
-              <tr>
-                <th class="center"></th>
-                <th class="center"></th>
-              </tr>
-              <tr>
-                  <h2>
-                    <strong>  <%= @experience.exp_name %></strong>
-                  </h2>
-              </tr>
-              <tr>
-                <td class="center" ><h4><strong>What we'll do</strong></h4></td>
-                <td class="center" ><p><%= @experience.exp_desc %></p> </td>
-              </tr>
-              <tr>
-                <td class="center"><h4><strong>What I'll provide</strong></h4></td>
-                <td class="center"> <p><%= @experience.exp_provide %></p></td>
-              </tr>
-              <tr>
-                <td class="center" ><h4><strong>Notes</strong></h4></td>
-                <td class="center" ><p><%= @experience.exp_notes %></p> </td>
-              </tr>
-              <tr>
-                <td class="center" ><h4><strong>Where we'll be</strong></h4></td>
-                <td class="center" ><p><%= @experience.exp_location %></p> </td>
-              </tr>
-            </table>
-        
-         
-
-            <div id="map">
-              <%= image_tag "http://maps.google.com/maps/api/staticmap?size=700x400&sensor=false&zoom=16&markers=#{@experience.latitude},#{@experience.longitude}&key=AIzaSyDJdjhDvDJoxvVdEVz3Nn8Ia_uas00M34Q", class: 'img-fluid img-rounded' %> 
-            </div>
-
-            <hr>
-
-             <div class="center" ><h4><strong>About your host, </strong><%= @experience.user.first_name %></h4></div>
-             <div class="center" ><p><%= @experience.about_me %></p> </div>
-
-             <h3><strong>What we'll do</strong></h3>
-            <p><%= @experience.exp_desc %></p>
-            <h3><strong>What I'll provide</strong></h3>
-            <p><%= @experience.exp_provide %></p>
-
-
-            <% if current_user %> 
-
-              <%= form_tag buy_path(slug: @experience.slug) do %>
-                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-
-                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                    data-description="<%= @experience.exp_name %>"
-                    data-name= "Caper"
-                    data-amount="<%= @experience.exp_price * 100 %>"
-                    data-email= "<%= current_user.email %>"
-                    data-locale="auto"></script>
-               <% end %>
-
-              <% else %>
-
-                <p><h3><strong>Please Log in to book this experience</h3></strong> </p>
-
-            <% end %>
-
-        </div>
-
       </div>
-   
-   </div>
+
+     </div> 
+
+   <%= link_to 'Edit', edit_experience_path(@experience) %> |
+   <%= link_to 'Back', experiences_path %>
 
   </div>
 
-  <%= link_to 'Edit', edit_experience_path(@experience) %> |
-  <%= link_to 'Back', experiences_path %>
-
-  </div>
 
 <% else %>
 
@@ -238,14 +229,12 @@ $('.carousel').carousel({ interval: 2000 });
 </script>
 
 
-<!-- Modal -->
+<!-- Modal Dates-->
 
-  <div id="myModal" class="modal" role="dialog">>
+  <div id="myModal" class="modal" role="dialog">
      <!-- Modal content -->
     <div class="modal-content animate">
-        <div class="modal-header">
-          <span class="close">&times;</span>
-        </div>
+          <span class="close">&times;</span>   
         <br/>
         <div class="modal-body">
           <div class="panel panel-default">

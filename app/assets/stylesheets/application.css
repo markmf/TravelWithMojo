@@ -33,6 +33,7 @@ html {
 
 
 body { 
+
   padding-top: 60px;
   padding-bottom: 0px;
 
@@ -122,6 +123,7 @@ Wrapper for page content to push down footer
 body {  
   
   color: #565a5c;
+  
   background-color: #F8F8F8;
   
 }
