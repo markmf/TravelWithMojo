@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   
   get '/listing', to: 'listing#index', as: :index
   get '/event', to: 'events#index', as: :event
+  get '/payout', to: 'payout#welcome', as: :payout
 
 
 

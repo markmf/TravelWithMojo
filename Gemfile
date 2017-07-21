@@ -90,6 +90,7 @@ gem 'toastr-rails'
 gem 'sendgrid-ruby'
 gem 'ransack'
 gem 'ratyrate'
+gem 'omniauth-stripe-connect'
 
 
 

@@ -282,4 +282,9 @@ Devise.setup do |config|
   config.omniauth :facebook, ENV['FB_APP_CLIENT_ID'], ENV['FB_APP_CLIENT_SECRET'], scope: 'email', info_fields: 'email, name'
   config.omniauth :google_oauth2, ENV['GOOGLE_APP_CLIENT_ID'], ENV['GOOGLE_APP_CLIENT_SECRET']
   config.omniauth :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
+  config.omniauth :stripe_connect,
+      ENV['STRIPE_CONNECT_CLIENT_ID'],
+      ENV['SECRET_KEY'],
+      :scope => 'read_write',
+      :stripe_landing => 'register'
 end

@@ -1,41 +1,52 @@
 
+<!--
 
-<div class = 'col-md-3'>
- 
-  <div class = 'mydisplay hover-shadow img-responsive'>
+    <div class =  'col-xs-6 col-sm-5cols'>
+-->
 
-      <%= link_to image_tag(experience.photos[0].image.url, width: 255, height: 350), experience_path(experience), class: "img-rounded"  if experience.photos.length > 0 %>
-       
-      <!-- <%= link_to image_tag("/assets/surfer.png", width: 255, height: 350),  experience_path(experience) %>  -->
-        <!-- <small><div class ='expname'><%= link_to experience.exp_name %></div></small> -->
-  </div>
 
-  <div class='caption'>
-    <p>
-      <span><br/>$</span><strong><%= link_to experience.exp_price, experience_path(experience) %></strong> 
-      <strong><%= link_to experience.exp_name, experience_path(experience) %> <br/></strong>
-     <!--
-      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-      <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 
-    -->
-  
-     <span id="average_rating_<%= experience.id %>"></span>
-      <% if experience.reviews.count == 0 %>
-        No Reviews
-      <% else %>
-          <%= experience.reviews.count %> 
-          <% if experience.reviews.count > 1 %> 
-            Reviews
-          <% else %>
-            Review
-           <% end %>
-      <% end %>
+
+   <div class = 'col-md-3 col-sm-6'>
+   
+    <div class = 'mydisplay hover-shadow img-responsive'>
+
+        <%= link_to image_tag(experience.photos[0].image.url, width: 255, height: 350), experience_path(experience), target: :_blank, class: "img-rounded"  if experience.photos.length > 0 %>
+         
+        <!-- <%= link_to image_tag("/assets/surfer.png", width: 255, height: 350),  experience_path(experience) %>  -->
+          <!-- <small><div class ='expname'><%= link_to experience.exp_name %></div></small> -->
+    </div>
+
+    <div class='caption'>
+      <p>
+        <span><br/>$</span><strong><%= link_to experience.exp_price, experience_path(experience) %></strong> 
+        <strong><%= link_to experience.exp_name, experience_path(experience) %> <br/></strong>
+       <!--
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 
+      -->
     
-    </p>
-    <br/><br/>
+       <span id="average_rating_<%= experience.id %>"></span>
+        <% if experience.reviews.count == 0 %>
+          No Reviews
+        <% else %>
+            <%= experience.reviews.count %> 
+            <%= experience.reviews.count > 1 ? "Reviews" : "Review" %>
+            <!--
+            <% if experience.reviews.count > 1 %> 
+              Reviews
+            <% else %>
+              Review
+             <% end %>
+            -->
+        <% end %>
+      
+      </p>
+      <br/><br/>
+    </div>
+
   </div>
 
-</div>
+
 
 <script>
 $('#average_rating_<%= experience.id %>').raty({

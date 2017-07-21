@@ -23,7 +23,7 @@ var modal = document.getElementById("myModal");
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 
-var agreebtn = document.getElementById("cancelbtn")
+var agreebtn = document.getElementById("cancelbtn");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
@@ -113,11 +113,14 @@ $('.carousel').carousel({ interval: 2000 });
 
             <!-- Reviews -->
            <span id="average_rating"></span> <%= @reviews.count %> 
+            <%= @reviews.count > 1 ? "Reviews" : "Review" %>
+            <!--
              <% if @reviews.count > 1 %> 
                 Reviews
              <% else %>
                 Review
              <% end %>
+           -->
             <br/><br/>
             <p>Hosted by: <%= NameCase(@experience.user.first_name) %> <%= NameCase(@experience.user.last_name) %></p>
            
@@ -195,9 +198,9 @@ $('.carousel').carousel({ interval: 2000 });
 
                   <% end %>
            
-               <!-- container -->
-            </div> <!-- panel-body -->
-          </div> <!-- end of panel default -->
+               
+               </div> <!-- panel-body -->
+            </div> <!-- end of panel default -->
                          
           </div>
          

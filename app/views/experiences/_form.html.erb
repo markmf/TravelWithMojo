@@ -139,7 +139,7 @@
                   
            
           </div>
-       
+   
        
 <script>
   $(function() {
@@ -173,16 +173,39 @@
           </div>
       </div>
 
-
+      <!--
+      <div id="progressMessage" style="display:none; padding:5px; border:1px Solid #000">
+        <div id="activityIndicator">&nbsp;</div>
+        <label style="font:bold; display:block; padding:5px; text-align: centre;"
+             id="progressMessageLbl">Loading...</label>
+      </div>
+      -->
 
       <br/>
       <div class="form-actions">
-        <%= f.button :submit, class: '"btn btn-primary btn-block' %>
+        <%= f.button :submit,  id: 'submit-btn', class: '"btn btn-primary btn-block' %>
       </div>
 
  
 
     <% end %>
+
+<script>
+// Get the button that opens the modal
+var sub = document.getElementById("submit-btn");
+
+// When the user clicks the button, open the modal 
+sub.onclick = function() {
+  
+  document.body.style.cursor='wait';
+   
+//  alert("inside the load click");
+//  $("#progressMessageLbl").html("Loading....");
+//  $("#progressMessage").show();
+}
+
+</script>  
+
   </div>
   </div>
 </div>

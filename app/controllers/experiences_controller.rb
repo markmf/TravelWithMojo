@@ -29,7 +29,11 @@ class ExperiencesController < ApplicationController
    
     end
 
-
+    if current_user.present?
+     
+    else
+      redirect_to root_path(params[:search])
+    end
 
 #   Original search for all
  #   @experiences = Experience.all

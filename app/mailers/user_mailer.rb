@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
 		puts "User email => #{user.email}"
 		@user = user
 		@url  =  "www.kaper.com" # generate confirmation url
-		mail(to: @user.email, subject: "Welcome to Kaper.com")
+		mail(to: @user.email, subject: "Welcome to Kaper!")
 	end
 
 

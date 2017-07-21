@@ -36,9 +36,6 @@ caption {
   max-height: 100%;
   max-height: 100%;
   padding-right: 0px;
- 
-
-
   
 }
 
@@ -183,4 +180,45 @@ img.hover-shadow {
     overflow-y:scroll;
     height: 600px; /* I WANT THIS BUT DYNAMICALLY CHANGES W/ .OUTER */
     width: 900px;
+}
+
+
+/* CSS used here will be applied after bootstrap.css */
+/* Display 5 colums of experiences */
+
+.col-sm-5cols{
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+@media (min-width: 768px) {
+.col-sm-5cols {
+        width: 20%;
+        float: left;
+    }
+}
+
+/* Wait Cursor */
+ #progressMessage
+ {
+    position:absolute;
+    top:45%;
+    left:25%;
+    width:50%;
+    z-index:3000;
+ }
+
+ #activityIndicator 
+ {
+   height: 32px;
+   width: 32px;
+   -webkit-background-size: 32px 32px;
+   -o-background-size: 32px 32px;
+   -moz-background-size: 32px 32px;
+   background-size: 32px 32px;
+   margin: 0px auto;
+   background-image: url("activity_indicator.gif");
+   background-color: transparent; 
 }

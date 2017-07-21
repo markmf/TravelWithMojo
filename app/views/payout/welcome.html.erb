@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="col-md-3">
+		<ul class="sidebar-list">
+			<li class="sidebar-item"><%= link_to "Manage my Experiences", index_path, class: "sidebar-link" %></li>
+			<li class="sidebar-item"><%= link_to "Upcoming Activities", event_path, class: "sidebar-link" %></li>
+			<li class="sidebar-item"><%= link_to "Payout Preferences", payout_path, class: "sidebar-link active" %></li>
+			<li class="sidebar-item"><%= link_to "Transaction History", '#', class: "sidebar-link" %></li>
+		</ul>
+	</div>
+	<br/>
+	<div class="col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Payout Methods
+				</div>
+				<div class="panel-body">
+					<div class="text-center">
+						Set up your payout method in order to get paid
+						Kaper releases payouts approximately 24 hours after the end of the experience.
+						The time it takes for the funds to appear in your account depends on your payout method.
+					</div>
+					<%= link_to "Add Payout Method", "#", class: "btn btn-primary" %>
+					<%= link_to "Connect with Stripe", user_stripe_connect_omniauth_authorize_path, class: "btn btn-primary" %>
+					
+					<%= link_to image_tag('blue-on-light.png'),  user_stripe_connect_omniauth_authorize_path %>
+				</div>
+			</div>
+	</div>
+</div>
