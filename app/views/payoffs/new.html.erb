@@ -1,0 +1,124 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+   Add Payout Account
+  </div>
+  <div class="panel-body">
+    <div class="container">
+
+
+      <%= simple_form_for(@payoff, :html => { multipart: true } ) do |f| %>
+
+
+        <% unless @payoff.errors.empty? %>
+          <script type="text/javascript">
+            <% payoff.errors.full_messages.each do |msg| %>
+              toastr.error('<%= msg %>')
+            <% end %>
+          </script>
+        <% end %>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Country</label>
+            <%= f.country_select :country, {only: ["JP", "US"], include_blank: "select country"}, null: false, required: true, autofocus: true, label: false, placeholder: "Country", class: "form-control" %>
+          </div>
+        </div>
+
+         <div class="row">
+          <div class="form-group">
+            <label>First Name in Katakana</label>
+            <%= f.input :first_name_kana,  null: false, required: true,  label: false, placeholder: "First Name Katakana", class: "form-control" %>
+          </div>
+        </div>
+
+
+         <div class="row">
+          <div class="form-group">
+            <label>First Name Kanji</label>
+            <%= f.input :first_name_kanji,  null: false, required: true, label: false, placeholder: "First Name Kanji", class: "form-control" %>
+          </div>
+        </div>
+
+
+         <div class="row">
+          <div class="form-group">
+            <label>Last Name in Katakana</label>
+            <%= f.input :last_name_kana,  null: false, required: true,  label: false, placeholder: "Last Name in Katakana", class: "form-control" %>
+          </div>
+        </div>
+
+
+
+         <div class="row">
+          <div class="form-group">
+            <label>Last Name in Kanji</label>
+            <%= f.input :last_name_kanji,  null: false, required: true,  label: false, placeholder: "Last Name in Kanji", class: "form-control" %>
+          </div>
+        </div>
+
+
+         <div class="row">
+          <div class="form-group">
+            <label>Gender</label>
+            <%= f.select :gender,  %w{Male Female}, :prompt => 'Select', required: true,   placeholder: "Gender", class: "form-control" %>
+          </div>
+        </div>
+
+
+         <div class="row">
+          <div class="form-group">
+            <label>Bank Name</label>
+            <%= f.input :bank_name,   required: true,  label: false,  placeholder: "Bank Name", class: "form-control" %>
+          </div>
+        </div>
+
+
+		 <div class="row">
+          <div class="form-group">
+            <label>Branch Name</label>
+            <%= f.input :branch_name,   required: true,  label: false, placeholder: "Branch Name", class: "form-control" %>
+          </div>
+        </div>
+
+
+		 <div class="row">
+          <div class="form-group">
+            <label>Bank Code</label>
+            <%= f.input :bank_code,   required: true, maxlength: 4, label: false, placeholder: "Bank Code", class: "form-control" %>
+          </div>
+        </div>
+
+
+		<div class="row">
+          <div class="form-group">
+            <label>Branch Code</label>
+            <%= f.input :branch_code,   required: true,  maxlength: 3, label: false, placeholder: "Branch Code", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Account Number</label>
+            <%= f.input :account_no,   required: true,  maxlength: 8, label: false, placeholder: "Account Number", class: "form-control" %>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="form-group">
+            <label>Account Owner Name</label>
+            <%= f.input :account_name_kana,   required: true, label: false, placeholder: "Account Owner Name", class: "form-control" %>
+          </div>
+        </div>
+
+        <br/>
+      	<div class="form-actions">
+        	<%= f.button :submit, "Create Payoff Account", id: 'submit-btn', class: '"btn btn-primary btn-block' %>
+     	</div>
+
+
+      <% end %>
+
+     </div>
+   </div>
+</div>

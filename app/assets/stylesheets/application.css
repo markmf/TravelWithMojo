@@ -97,7 +97,7 @@ Wrapper for page content to push down footer
 .linkedin-blue { color: #0080b2; }
 
 
-@media (max-width: 500px) {
+@media only screen and (max-width: 480px) {
   h1 {
     font-size: 50px;
     margin-top: 20px;

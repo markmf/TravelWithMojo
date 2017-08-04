@@ -50,7 +50,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 	      session["devise.stripe_connect_data"] = request.env["omniauth.auth"]
 	      redirect_to new_user_registration_url
 	    end
-  end
+	   
+		puts "ACCESS CODE: #{request.env["omniauth.auth"].credentials.token} #{@user.access_code} UID: #{@user.uid}"
+  	end
 
 	
 

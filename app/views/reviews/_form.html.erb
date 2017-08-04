@@ -1,5 +1,5 @@
 
-<%= form_for(@reviews.new) do |f| %>
+<%= form_for(@reviews.new, :html => { multipart: true } ) do |f| %>
 
   <div id="user_stars"></div>
    

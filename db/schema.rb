@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720154535) do
+ActiveRecord::Schema.define(version: 20170720154737) do
 
   create_table "experiences", force: :cascade do |t|
     t.string "exp_email"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20170720154535) do
     t.float "latitude"
     t.float "longitude"
     t.text "exp_where_be"
-    t.boolean "active"
+    t.boolean "active",             default: true
     t.date "start_date"
     t.time "go_time"
     t.index ["slug"], name: "index_experiences_on_slug", unique: true
@@ -57,6 +57,47 @@ ActiveRecord::Schema.define(version: 20170720154535) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
+  create_table "payoffs", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "custom_stripe_id"
+    t.string "country"
+    t.string "type"
+    t.integer "dob_day"
+    t.integer "dob_month"
+    t.integer "dob_year"
+    t.string "gender"
+    t.string "phone_no"
+    t.string "first_name_kana"
+    t.string "first_name_kanji"
+    t.string "last_name_kana"
+    t.string "last_name_kanji"
+    t.string "business_name_kana"
+    t.string "business_name_kanji"
+    t.string "address_line1_kana"
+    t.string "address_line1_kanji"
+    t.string "address_line2_kana"
+    t.string "address_line2_kanji"
+    t.string "state_kana"
+    t.string "state_kanji"
+    t.string "city_kana"
+    t.string "city_kanji"
+    t.string "town_kana"
+    t.string "town_kanji"
+    t.string "postal_code"
+    t.string "bank_name"
+    t.string "branch_name"
+    t.string "account_name_kana"
+    t.string "account_name_english"
+    t.string "account_no"
+    t.string "swift"
+    t.string "bank_code"
+    t.string "branch_code"
+    t.integer "account_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_payoffs_on_user_id"
   end
 
   create_table "photos", force: :cascade do |t|

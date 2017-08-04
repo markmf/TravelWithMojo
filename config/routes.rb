@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :reviews
   resources :experiences
   resources :photos
+  resources :payoffs
   #devise_for :users
   #get 'pages/home'
 
@@ -30,7 +31,7 @@ Rails.application.routes.draw do
   
   get '/listing', to: 'listing#index', as: :index
   get '/event', to: 'events#index', as: :event
-  get '/payout', to: 'payout#welcome', as: :payout
+ # get '/payout', to: 'payout#welcome', as: :payout
 
 
 
