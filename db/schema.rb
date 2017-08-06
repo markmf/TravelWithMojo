@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720154737) do
+ActiveRecord::Schema.define(version: 20170720191512) do
 
   create_table "experiences", force: :cascade do |t|
     t.string "exp_email"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20170720154737) do
     t.float "latitude"
     t.float "longitude"
     t.text "exp_where_be"
-    t.boolean "active",             default: true
+    t.boolean "active"
     t.date "start_date"
     t.time "go_time"
     t.index ["slug"], name: "index_experiences_on_slug", unique: true
@@ -151,6 +151,18 @@ ActiveRecord::Schema.define(version: 20170720154737) do
     t.string "stripe_token"
     t.text "error"
     t.string "stripe_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "experience_id"
+    t.datetime "start_date"
+    t.integer "no_guests"
+    t.integer "max_guests"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["experience_id"], name: "index_schedules_on_experience_id"
+    t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

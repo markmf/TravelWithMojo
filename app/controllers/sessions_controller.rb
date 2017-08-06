@@ -15,6 +15,7 @@ class SessionsController < Devise::SessionsController
  			puts "**********Deauthorizing Stripe***************"
  			puts "UID: #{current_user.uid}"
  			puts "ACCESS_CODE: #{current_user.access_code}"
+ 			# Check if user connected to Stripe
  			if !session["devise.stripe_connect_data"].nil?
 	 			acct = Stripe::Account.retrieve(current_user.uid)
 				acct.deauthorize(ENV['STRIPE_CONNECT_CLIENT_ID'])

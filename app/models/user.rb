@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :experiences
   has_many :reviews
   has_many :reservations
+  has_many :schedules
 
 
 

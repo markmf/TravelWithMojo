@@ -88,6 +88,16 @@ class ExperiencesController < ApplicationController
             @experience.photos.create(image: image)
           end
         end
+        #create schedule file
+        puts "***********CREATING Schedule File********************************"
+        #@schedule = Schedule.new
+        #@schedule.user_id    = @experience.user_id
+        #@schedule.id         = @experience.id
+        #@schedule.start_date = @experience.start_date
+        #@schedule.max_guests  = @experience.max_guest
+
+        @experience.schedules.create(max_guests: @experience.max_guest, user_id: @experience.user_id, experience_id: @experience.id, start_date: @experience.start_date)
+
         @photos = @experience.photos
         format.html { redirect_to edit_experience_path(@experience), notice: 'Experience was successfully created.' }
 
@@ -120,6 +130,10 @@ class ExperiencesController < ApplicationController
             @experience.photos.create(image: image)
           end
         end
+
+        #update schedule as well - to do 
+        puts "***********Updating Schedule File********************************"
+        @experience.schedules.update(max_guests: @experience.max_guest, user_id: @experience.user_id, experience_id: @experience.id, start_date: @experience.start_date)
        
         format.html { redirect_to edit_experience_path(@experience), notice: 'Experience was successfully updated.' }
 
@@ -174,6 +188,7 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:exp_email, :exp_id, :exp_name, :exp_desc, :exp_where_be, :exp_location, :exp_provide, :exp_notes, :exp_location,  :about_me, :guest_reqs, :max_guest, :rsv_guest, :min_guest, :can_policy,  :exp_price, :go_time, :exp_duration, :start_date, :image)
+      params.require(:experience).permit(:exp_email, :exp_id, :exp_name, :exp_desc, :exp_where_be, :exp_location, :exp_provide, :exp_notes, :exp_location,  :about_me, :guest_reqs, :max_guest, :rsv_guest, :min_guest, :can_policy,  :exp_price, :go_time, :exp_duration, :start_date, :image) 
     end
+
 end
