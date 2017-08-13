@@ -49,7 +49,14 @@ class ExperiencesController < ApplicationController
   # GET /experiences/new
   def new
   #  @experience = current_user.experiences.new
-   @experience = Experience.new
+
+    # check if potential host has created a stripe payout method
+    if !current_user.is_active_host
+      return redirect_to payoffs_path, alert: "Please Connect to Stripe Express first."
+    end
+
+    @experience = Experience.new
+    
   end
 
   # Display as a host all your experiences (ie events)
@@ -68,6 +75,11 @@ class ExperiencesController < ApplicationController
   # POST /experiences
   # POST /experiences.json
   def create
+  # check if potential host has created a stripe payout method
+    if !current_user.is_active_host
+      return redirect_to payoffs_path, alert: "Please Connect to Stripe Express first."
+    end
+
     @experience = current_user.experiences.new(experience_params)
 
 

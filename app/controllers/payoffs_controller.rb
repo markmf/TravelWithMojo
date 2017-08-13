@@ -16,6 +16,13 @@ class PayoffsController < ApplicationController
 
   end
 
+  def payout
+    if !current_user.uid.blank?
+      account = Stripe::Account.retrieve(current_user.uid)
+      @login_link = account.login_links.create()
+    end
+  end
+
 
   def create
 

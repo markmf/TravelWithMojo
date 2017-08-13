@@ -4,6 +4,7 @@
 			<li class="sidebar-item"><%= link_to "Manage my Experiences", index_path, class: "sidebar-link" %></li>
 			<li class="sidebar-item"><%= link_to "Upcoming Activities", event_path, class: "sidebar-link" %></li>
 			<li class="sidebar-item"><%= link_to "Payout Preferences", payoffs_path, class: "sidebar-link active" %></li>
+			<li class="sidebar-item"><%= link_to "Notification Settings", notification_settings_path, class: "sidebar-link" %></li>
 			<li class="sidebar-item"><%= link_to "Transaction History", '#', class: "sidebar-link" %></li>
 		</ul>
 	</div>
@@ -14,15 +15,34 @@
 					Payout Methods
 				</div>
 				<div class="panel-body">
-					<div class="text-center">
-						Set up your payout method in order to get paid
-						Kaper releases payouts approximately 24 hours after the end of the experience.
-						The time it takes for the funds to appear in your account depends on your payout method.
-					</div>
-					<%= link_to "Add Payout Method", new_payoff_path, class: "btn btn-primary" %>
-					<%= link_to "Connect with Stripe", user_stripe_connect_omniauth_authorize_path, class: "btn btn-primary" %>
 					
-					<%= link_to image_tag('blue-on-light.png'),  user_stripe_connect_omniauth_authorize_path %>
+					<% if current_user.uid.blank? %>
+						<!--
+						<%= link_to "Add Payout Method", new_payoff_path, class: "btn btn-primary" %>
+						<%= link_to image_tag('blue-on-light.png'),  user_stripe_connect_omniauth_authorize_path %>
+						-->
+						<div class="text-center">
+							Set up your payout method in order to get paid.
+							Kaizen releases payouts approximately 24 hours after the end of the experience.
+							The time it takes for the funds to appear in your account depends on your payout method.
+						</div>
+						<br/>
+						<div class="text-center">
+							<%= link_to "Connect with Stripe", user_stripe_connect_omniauth_authorize_path, class: "btn btn-primary" %>	
+						</div>					
+						
+					<% else %>
+						<div class="text-center">
+							Stripe payout has already been established.
+							Kaizen releases payouts approximately 24 hours after the end of the experience.
+						</div>
+						<br/>
+						<div class="text-center">
+							<%= link_to "Update Stripe Account", user_stripe_connect_omniauth_authorize_path, class: "btn btn-primary" %>	
+						</div>	
+						
+
+					<% end %>
 				</div>
 			</div>
 	</div>

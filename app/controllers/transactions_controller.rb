@@ -22,9 +22,14 @@ class TransactionsController < ApplicationController
 			puts "Entered Transactions Controller***************************************"
     		puts "Experience Name => #{experience.exp_name}"
     		puts "Sending Confirmation Email Now"
-      		UserMailer.send_confirmation_email(experience, current_user.email, experience.user.email).deliver_now
-
-
+    		setting = Setting.find_by(user_id: current_user.id)
+    		
+      		UserMailer.send_confirmation_email(experience, current_user.email, experience.user.email, current_user.first_name).deliver_now if setting.enable_email
+      		UserMailer.send_host_email(experience, current_user.first_name + current_user.last_name, experience.user.email).deliver_now 
+      		send_sms(experience, current_user) if setting.enable_sms
+      		send_sms_host(experience, current_user)
+      		
+      		flash[:notice] = "Succesfully booked experience!"
 		else
 			puts "Someting is wrong"
 			redirect_to experience_path(experience), notice: "Unable to process Stripe payment"
@@ -35,6 +40,31 @@ class TransactionsController < ApplicationController
 		@sale = Sale.find_by!(uuid: params[:uuid])
 		@experience = @sale.experience
 	end
+
+	private
+
+		def send_sms(experience, user)
+			puts("User Contact no: #{user.contact_no}")
+
+	      @client = Twilio::REST::Client.new
+	      @client.messages.create(
+	        from: '+18564223781',
+	        to: user.contact_no,
+	        body: "#{user.first_name}  #{user.last_name } booked your '#{experience.exp_name}'"
+     	 )
+   		end
+
+
+		def send_sms_host(experience, user)
+		  hostno = experience.user.contact_no
+	      @client = Twilio::REST::Client.new
+	      @client.messages.create(
+	        from: '+18564223781',
+	        to: hostno,
+	        body: "#{user.first_name}  #{user.last_name } booked your '#{experience.exp_name}'"
+     	 )
+   		end
+
 
 end
 

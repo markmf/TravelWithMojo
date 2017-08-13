@@ -66,7 +66,7 @@ gem "paperclip", "~> 5.0.0"
 gem 'dotenv-rails', groups: [:development]
 gem 'aws-sdk', '~> 2'
 gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
-gem 'stripe'
+
 gem 'aasm'
 gem 'geocoder'
 gem 'namecase', '~> 2.0'
@@ -92,7 +92,15 @@ gem 'ransack'
 gem 'ratyrate'
 gem 'omniauth-stripe-connect'
 gem 'country_select'
+gem 'twilio-ruby', '~> 4.11.1'
 
+gem 'fullcalendar-rails', '~> 3.4.0'
+gem 'momentjs-rails', '~> 2.17.1'
 
+#gem 'stripe'
+gem 'stripe', '~> 3.0.0'
+gem 'rails-assets-card', source: 'https://rails-assets.org'
+
+gem 'chartkick', '~> 2.2.4'
 
 

@@ -112,8 +112,13 @@ $('.carousel').carousel({ interval: 2000 });
             <p><strong>$<%= @experience.exp_price %></strong> per person </p>
 
             <!-- Reviews -->
+         <!-- TEmporary
            <span id="average_rating"></span> <%= @reviews.count %> 
             <%= @reviews.count > 1 ? "Reviews" : "Review" %>
+          -->
+
+             <!-- Reviews -->
+                  <%= render 'experiences/reviews' %>
             <!--
              <% if @reviews.count > 1 %> 
                 Reviews
@@ -181,12 +186,13 @@ $('.carousel').carousel({ interval: 2000 });
 
                   <% if current_user %> 
 
+                    
                     <%= form_tag buy_path(slug: @experience.slug) do %>
                       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 
                           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                           data-description="<%= @experience.exp_name %>"
-                          data-name= "Caper"
+                          data-name= "Kaizen"
                           data-amount="<%= @experience.exp_price * 100 %>"
                           data-email= "<%= current_user.email %>"
                           data-locale="auto"></script>

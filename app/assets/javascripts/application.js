@@ -19,6 +19,11 @@
 //= require dropzone
 //= require bootstrap
 //= require toastr
+//= require moment
+//= require fullcalendar
+//= require card
+//= require Chart.bundle
+//= require chartkick
 //= require gritter
 //= require turbolinks
 //= require_self

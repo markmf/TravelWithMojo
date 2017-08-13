@@ -31,13 +31,23 @@ class Sale < ApplicationRecord
 	def charge_card
 		begin
 			save!
+			
+			user = User.find_by(email: self.seller_email)
+			experience = Experience.find_by(id: self.exp_id)
+			logger.debug " Seller Stripe Cust Uid: #{user.uid}"
 			charge = Stripe::Charge.create(
 				amount: self.amount * 100,
 				currency: "usd",
 				card: self.stripe_token,
-				description: "TravelWithMojo")
+				description: experience.exp_name,
+				destination: {
+					amount: self.amount * 80, # 80% of the total amount goes to the Host
+					account: user.uid
+				} )
 
 			self.update(stripe_id: charge.id)
+
+			logger.debug "Strip Charge: #{charge}"
 
 			self.finish!
 
