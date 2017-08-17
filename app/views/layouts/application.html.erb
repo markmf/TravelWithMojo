@@ -1,47 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>ZenZen</title>
+
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Custom styles for this template -->
    <!--  <link href="sticky-footer-navbar.css" rel="stylesheet"> -->
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<!--
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+-->
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
 
-    <link href='https://fonts.googleapis.com/css?family=PT Serif' rel='stylesheet'>
 
-   
+    <link href='https://fonts.googleapis.com/css?family=PT Serif' rel='stylesheet'>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/hot-sneaks/jquery-ui.css">
+<!--
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+-->
 
 
 
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 
-     <title>Kaizen</title>
 
-    <%= csrf_meta_tags %>
-    <%= action_cable_meta_tag %>
 
     <%= favicon_link_tag 'favicon/tvm.ico' %>
+
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> 
-
-
-<!--     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->
-
-
   
   </head>
 
@@ -52,11 +55,11 @@
 
 
   	<%= render 'layouts/navbar' %>
+    <%= render 'shared/message' %>
 
-
-   <%= render 'shared/message' %>
-
-   
+    <% if current_user %>
+        <input type="hidden" id="user_id" value="<%= current_user.id %>">
+    <% end %>
 
 
   	<div class = 'container-fluid' >

@@ -1,0 +1,59 @@
+
+<div class="row">
+ <div class="col-md-3">
+    <div class="center">   
+        <%= image_tag avatar_url(@host), class: "avatar-full" %>
+        <br/>
+        <% if current_user && current_user.id != @host.id %>
+        <br/>
+        <div class="text-center">
+        <%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @host.id), method: :post, class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+    <br/>
+    <div class="panel panel-default">
+        <div class="panel-heading"><%= @host.first_name %> <%= @host.last_name %></div>
+        <div class="panel-body">
+          <ul class="sidebar-list">
+            <% if @host.confirmation_token %>
+              <li>Email Address<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+            <% end %>
+            <% if @host.provider %>
+              <li>Facebook<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+            <% end %>
+            <% if @host.phone_verified %>
+              <li>Phone Number<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+            <% end %>
+          </ul>
+        </div>
+    </div>
+
+  
+
+  </div>
+
+  <div class="col-md-9">
+    <h2>Hey, I'm <%= @host.first_name %></h2>
+    <div class="description row-space-3">
+      <%= @host.description %>
+    </div>
+
+     <h4>Listings (<%= @host_experiences.length %>)</h4><br/>
+
+    <div class="row">   
+      <%= render partial: "exp_list", locals: {host_experiences: @host_experiences} %>
+    </div>
+
+      <span><hr class="colorgraph"></span>
+
+
+    <h4>Reviews From Guests (<%= @host_reviews.count %>)</h4>
+     <div class="row">
+        <%= render "host_reviews" %>
+     </div>
+    <br/>
+
+  </div>
+
+</div>

@@ -26,8 +26,8 @@ class TransactionsController < ApplicationController
     		
       		UserMailer.send_confirmation_email(experience, current_user.email, experience.user.email, current_user.first_name).deliver_now if setting.enable_email
       		UserMailer.send_host_email(experience, current_user.first_name + current_user.last_name, experience.user.email).deliver_now 
-      		send_sms(experience, current_user) if setting.enable_sms
-      		send_sms_host(experience, current_user)
+      	#	send_sms(experience, current_user) if setting.enable_sms
+      	#	send_sms_host(experience, current_user)
       		
       		flash[:notice] = "Succesfully booked experience!"
 		else

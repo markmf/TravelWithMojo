@@ -2,7 +2,7 @@ class Photo < ApplicationRecord
   belongs_to :experience
 
 
-  has_attached_file :image, styles: { medium: "500x500>", thumb: "200x200#" }
+  has_attached_file :image, styles: { medium: "500x500>", thumb: "100x100#" }
 
   validates_attachment :image,  presence: true,
 #	styles: { medium: "400x400#", thumb: "200x200#" },

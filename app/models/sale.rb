@@ -32,9 +32,10 @@ class Sale < ApplicationRecord
 		begin
 			save!
 			
-			user = User.find_by(email: self.seller_email)
+			seller = User.find_by(email: self.seller_email)
+			buyer = User.find_by(email: self.buyer_email)
 			experience = Experience.find_by(id: self.exp_id)
-			logger.debug " Seller Stripe Cust Uid: #{user.uid}"
+			logger.debug " Seller Stripe Cust Uid: #{seller.uid}"
 			charge = Stripe::Charge.create(
 				amount: self.amount * 100,
 				currency: "usd",
@@ -42,7 +43,7 @@ class Sale < ApplicationRecord
 				description: experience.exp_name,
 				destination: {
 					amount: self.amount * 80, # 80% of the total amount goes to the Host
-					account: user.uid
+					account: seller.uid
 				} )
 
 			self.update(stripe_id: charge.id)
@@ -50,6 +51,9 @@ class Sale < ApplicationRecord
 			logger.debug "Strip Charge: #{charge}"
 
 			self.finish!
+
+			#Create notification for Seller
+			create_notification(buyer, seller)
 
 		rescue Stripe::StripeError => e
 			self.update_attributes(error: e.message)
@@ -63,5 +67,11 @@ class Sale < ApplicationRecord
 		def populate_uuid
 			self.uuid  = SecureRandom.uuid()
 		end
+
+		def create_notification(guest, seller)
+	      type =  "New Booking" 
+	   
+	      Notification.create(content: "#{type} from #{guest.first_name}  #{guest.last_name}", user_id: seller.id)
+	    end
 	
 end

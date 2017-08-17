@@ -1,0 +1,41 @@
+<% @host_experiences.each do |experience| %>
+	<div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading preview">
+			<div class = 'mydisplay img-responsive'>
+				
+          		<%= image_tag experience.photos[0].image.url(:thumb) if experience.photos.length > 0 %>
+          	</div>
+        </div>
+        <div class="panel-body">
+        	<%= experience.exp_name %><br/>
+        	$<%= experience.exp_price %>
+         	<!--
+          	<div id="star_<%= experience.id %>"></div> <%= pluralize(experience.average_rating, "Ratings") %>
+      		-->
+      		<br/>
+      		
+	        <% if experience.reviews.count == 0 %>
+	          <br/>
+	          No Reviews
+	        <% else %>
+	       		<div id="star_<%= experience.id %>"></div> <%= pluralize(experience.average_rating, "Ratings") %>
+	            <%= experience.reviews.count > 1 ? "- Reviews" : "- Review" %>
+	            ( <%= experience.reviews.count %> )
+	        <% end %>
+
+        </div>
+      </div>
+    </div>
+
+
+	<script>
+      $('#star_<%= experience.id %>').raty({
+        path: '/assets',
+        readOnly: true,
+        score: <%= experience.average_rating %>
+      });
+    </script>
+<% end %>
+
+

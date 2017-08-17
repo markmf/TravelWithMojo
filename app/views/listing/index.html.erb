@@ -1,5 +1,6 @@
 <div class="row">
 	<div class="col-md-3">
+
 		<ul class="sidebar-list">
 			<li class="sidebar-item"><%= link_to "Manage my Experiences", index_path, class: "sidebar-link active" %></li>
 			<li class="sidebar-item"><%= link_to "Upcoming Activities", event_path, class: "sidebar-link" %></li>
@@ -14,7 +15,7 @@
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Listings
+				Experiences (<%= @experiences.length %>)
 			</div>
 			<div class="panel-body">
 				
@@ -42,4 +43,5 @@
 			</div>
 		</div>
 	</div>
+	
 </div>

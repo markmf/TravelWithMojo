@@ -1,17 +1,51 @@
 
 <div class="row">
  <div class="col-md-3">
+    <div class="center">
+        <%= image_tag avatar_url(current_user), class: "avatar-full" %>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><%= current_user.first_name %> <%= current_user.last_name %></div>
+        <div class="panel-body">
+          <ul class="sidebar-list">
+            <% if current_user.confirmation_token %>
+              <li>Email Address<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+            <% end %>
+             <% if current_user.social_provider %>
+              <li>Facebook<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+            <% end %>
+            <% if current_user.provider %>
+              <li>Payout Account<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+            <% end %>
+            <% if current_user.phone_verified %>
+              <li>Phone Number<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+            <% end %>
+          </ul>
+        </div>
+    </div>
+
+     <!-- Notification -->
+    <div class="panel panel-default">
+      <div class="panel-heading">Notifications</div>
+      <div class="panel-body">
+          <%= link_to notifications_path do %>
+              You have <span id="num_of_unread"><%= current_user.unread %></span> notification(s).
+          <% end %>
+      </div>
+    </div>
+    <!--
     <ul class="sidebar-list">
       <li class="sidebar-item"><%= link_to "Edit Profile", edit_user_registration_path, class: "sidebar-link active" %></li>
     </ul>
+    -->
     <br>
-    <%= link_to "View My Profile", "#", class: "btn btn-default wide" %>
+    <%= link_to "View Profile", "#", class: "btn btn-default wide" %>
   </div>
 
 
   <div class="col-md-9 text-center">
     <div class="panel panel-default">
-      <div class="panel-heading">My Profile</div>  
+      <div class="panel-heading">Profile</div>  
       <div class="panel-body">
         <div class="container">
           <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -34,16 +68,39 @@
             
             <%= f.input :contact_no, label: false, placeholder: "Phone Number (enter country code, eg +1)" %>
            
+             <%= f.text_area :description, rows: 5, required: false, label: false, placeholder: "Describe Yourself", class: "form-control"  %>
 
-            <%= f.input :password, autocomplete: "off",  required: false, label: false, placeholder: "New Password (leave it blank if you don't want to change it)" %>
-            <%= f.input :password_confirmation, required: false, label: false, placeholder: 'New Password Confirmation' %>
-           
-           
+              Kaizen is built on relationships. Help other people get to know you.
+
+              Tell them about the things you like: What are 5 things you can’t live without? Share your favorite travel destinations, books, movies, shows, music, food.
+
+              Tell them about you: Do you have a life motto?
+
+             <br/>
+             <br/>
  
+            <%= f.input :password, autocomplete: "off",  required: false, label: false, placeholder: "New Password (leave it blank if you don't want to change it)" %>
+          
+            <%= f.input :password_confirmation, required: false, label: false, placeholder: 'New Password Confirmation' %>
+          
+
+            <% if current_user.profile_pic.present? %>
+              <%= image_tag(avatar_url(current_user), class: "img-circle avatar-medium") %>
+            <% end %>
+
+ 
+            <div class="form-group">              
+              <span class="btn btn-default btn-file">
+                  <i class="fa fa-cloud-upload fa-lg"></i> Upload Profile Pic
+                  <%= f.file_field :profile_pic  %>
+              </span>
+            </div> 
+           
 
   
             <%= f.button :submit, "Update", class: 'btn btn-primary btn-block' %>
          
+
           <% end %>
           </div>
         </div>
@@ -55,12 +112,13 @@
         <div class="container">
           <% if !current_user.contact_no.blank? %>
               <h4><%= current_user.contact_no %></h4>
-              <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#update-phone">Update Phone Number</button>
+
+              <button id="updatephone" class="btn btn-primary btn-block" >Update Phone Number</button>
               <% if current_user.phone_verified == false %>
-                  <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#verify-phone">Verify</button>
+                  <button  id="abc" class="btn btn-primary btn-block" >Verify (Enter Pin #)</button>
               <% end %>
           <% else %>
-              <button class="btn btn-primary btn-block" id="myPhoneNo">Add Phone Number</button>
+              <button id="updatephone" class="btn btn-primary btn-block" >Add Phone Number</button>
           <% end %>
         </div>
       </div>
@@ -80,14 +138,19 @@
 <%= link_to "Back", :back %>
 -->
 
-</div>
-
 <script>
 // Get the modal
-var modal = document.getElementById("update-phone");
+var modal  = document.getElementById("update-phone");
+
+
+var xyz  = document.getElementById("verify-phone");
+
+
 
 // Get the button that opens the modal
-var btn = document.getElementById("myPhoneNo");
+var btn = document.getElementById("updatephone");
+
+var newbuts = document.getElementById("abc");
 
 
 // Get the <span> element that closes the modal
@@ -95,53 +158,97 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
-  
+   
     modal.style.display = "block";
+}
+
+newbuts.onclick = function() {
+
+    xyz.style.display = "block";
+  
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
     modal.style.display = "none";
+   
 }
 
+if (event.target == modal) {
+        modal.style.display = "none";
+    }
+
+if (event.target == xyz) {
+        modal.style.display = "none";
+    }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        xyz.style.display = "none";
+       
     }
 
 }
 </script>
 
+
 <!-- MODAL FOR PHONE NUMBER -->
+
 <div id="update-phone" class="modal" role="dialog">
-  <div class="modal-dialog">
+
     <div class="modal-content animate">
-
-      <div class="modal-header">
-        <button class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Phone Number</h4>
-      </div>
-
+        <span class="close">&times;</span>   
+        <br/> 
       <div class="modal-body">
-         <%= form_for current_user, url: update_phone_number_path(current_user) do |f| %>
-            <div class="form-group">
-              <%= f.phone_field :contact_no, class: "form-control", placeholder: "Your Phone Number (enter country code, eg +1)" %>
-            </div>
-            <div class="text-center">
-              <%= f.submit "Save", class: "btn btn-normal" %>
-            </div>
-        <% end %>
+        <div class="panel panel-default">
+              <div class="panel-heading">
+              Enter Phone No.
+              </div>
+           <%= form_for current_user, url: update_phone_number_path(current_user) do |f| %>
+              <div class="form-group">
+                <%= f.phone_field :contact_no, class: "form-control", placeholder: "Your Phone Number (enter country code, eg +1)" %>
+              </div>
+              <div class="text-center">
+                <%= f.submit "Save", class: "btn btn-normal" %>
+              </div>
+          <% end %>
+        </div>
       </div>
     </div>
 
-   </div>
+
   
 </div>
 
 
 
-<!-- MODAL FOR VERIFICATION -->
 
+<!-- MODAL FOR VERIFICATION -->
+<div id="verify-phone" class="modal" role="dialog">
+
+    <div class="modal-content animate">
+
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Verification Code</h4>
+      </div>
+
+      <div class="modal-body">
+        <%= form_for current_user, url: verify_phone_number_path(current_user), method: :post do |f| %>
+            <div class="form-group">
+              <%= f.text_field :pin, class: "form-control", placeholder: "Your PIN", value: "" %>
+            </div>
+            <div class="text-center">
+              <%= f.submit "Verify", class: "btn btn-normal" %>
+            </div>
+        <% end %>
+      </div>
+
+    </div>
+ 
+</div>
+
+</div>
 

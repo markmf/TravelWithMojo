@@ -171,9 +171,9 @@
 
 
 
-.omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998;}
-.omb_login .omb_socialButtons .omb_btn-twitter {background: #00aced;}
-.omb_login .omb_socialButtons .omb_btn-google {background: #c32f10;}
+.omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998; font-size: small}
+.omb_login .omb_socialButtons .omb_btn-twitter {background: #00aced; font-size: small}
+.omb_login .omb_socialButtons .omb_btn-google {background: #c32f10; font-size: small}
 
 
 .omb_login .omb_socialButtons a:hover {
@@ -298,3 +298,6 @@ body {
     border-color:#ebccd1;
 }
 
+.size-fonts {
+    font-size: small;
+}

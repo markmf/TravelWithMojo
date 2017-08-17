@@ -24,23 +24,17 @@
         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 
       -->
-    
+    <%= link_to experience_path(experience) do %>
        <span id="average_rating_<%= experience.id %>"></span>
         <% if experience.reviews.count == 0 %>
           No Reviews
         <% else %>
-            <%= experience.reviews.count %> 
             <%= experience.reviews.count > 1 ? "Reviews" : "Review" %>
-            <!--
-            <% if experience.reviews.count > 1 %> 
-              Reviews
-            <% else %>
-              Review
-             <% end %>
-            -->
-        <% end %>
-      
+            ( <%= experience.reviews.count %> )
+        <% end %>     
       </p>
+    <% end %>
+    
       <br/><br/>
     </div>
 

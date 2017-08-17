@@ -411,3 +411,10 @@ input[type="checkbox"]:checked:before {
   vertical-align: middle;
   display: table-cell;
 }
+
+.badge {
+  background-color: #FF5A5F;
+  position: relative;
+  top: -15px;
+  left: -5px;
+}

@@ -5,6 +5,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :omniauthable
 
+
+ has_attached_file :profile_pic, styles: { medium: "500x500>", thumb: "100x100#" }
+
+  validates_attachment :profile_pic,
+# styles: { medium: "400x400#", thumb: "200x200#" },
+  content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
+  message: 'Only images (eg, jpeg, gif, png) allowed.'
+
+
   before_save { self.email = email.downcase }
   validates :first_name, :last_name, presence: true
 
@@ -12,12 +21,14 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :reservations
   has_many :schedules
+  has_many :notifications
 
   has_one :setting
   after_create :add_setting
 
   def add_setting
     Setting.create(user: self, enable_sms: true, enable_email: true)
+  
   end
 
 
@@ -31,13 +42,16 @@ class User < ApplicationRecord
           user.name       = auth.info.name
           user.first_name = user.name.partition(" ").first
           user.last_name  = user.name.partition(" ").last
-          user.provider   = auth.provider
+          user.social_provider = auth.provider 
+    # Used for Stripe
+          user.provider   = auth.provider 
           user.uid        = auth.uid
   # Need to update Twitters' settings so  I can retrieve guest's email
           user.email      = auth.info.email
    #       user.email      = "test@test.com"
           user.image      = auth.info.image
           user.password   = Devise.friendly_token[0,20]
+          logger.debug "AUTHORIZATION #{auth}"
           user.save!
       end
     end

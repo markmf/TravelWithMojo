@@ -7,10 +7,6 @@ class PagesController < ApplicationController
 
   #  @experiences = Experience.all
 
-
-
-
-
     if  session[:loc_search].present? 
         @experiences = Experience.where(active: true).near(session[:loc_search] , 15, order: 'distance')
         session[:loc_search] = ""

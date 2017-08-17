@@ -13,12 +13,13 @@ module ApplicationHelper
   end
 
   def avatar_url(user)
-		gravatar_id = Digest::MD5::hexdigest(user.email).downcase 
-		if user.image
-			user.image
+
+		if user.profile_pic.present?
+			user.profile_pic
 		else
   #   "https://www.gravatar.com/avatar/#{gravatar_id}.jpg?d=identical&s=100"
-		"https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(current_user.email)}"
+      gravatar_id = Digest::MD5::hexdigest(user.email).downcase 
+		  "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(current_user.email)}"
 		end
   end
   

@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-
+	before_action :authenticate_user!
+	
 # Display as a host all your experiences (ie events)
   def index
   
