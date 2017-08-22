@@ -23,6 +23,8 @@
 @import "toastr";
 @import "fullcalendar";
 @import "gritter";
+@import 'bootstrap-datetimepicker';
+
 
 html {
   position: relative;
@@ -417,4 +419,22 @@ input[type="checkbox"]:checked:before {
   position: relative;
   top: -15px;
   left: -5px;
+}
+
+/* Stripe style sheet */
+
+.stripe-button {
+  width: 200px;
+  border-radius: 0;
+  background-image: none;
+  background-color: red;
+  border-color: #e00007;
+}
+
+.stripe-button span {
+  font-family: arial;
+  font-size: 20px;
+  border-radius: 0;
+  background-image: none;
+  background-color: red;
 }

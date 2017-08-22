@@ -2,6 +2,24 @@
 *= require_self
 */
 
+/* CSS used here will be applied after bootstrap.css */
+/* display 5 cols per row */
+.col-sm-5cols{
+    position: relative;
+    min-height: 1px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+@media (min-width: 768px) {
+.col-sm-5cols {
+        width: 20%;
+        float: left;
+    }
+}
+
+
+
 .form-signin {
 	max-width: 300px;
 	padding: 15px;

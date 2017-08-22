@@ -122,56 +122,111 @@
         <div class="row">
           <div class="col-md-3">           
                   <label>Date </label>
+                 
                   <div class="input-group">
                       <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
-                       </span>      
-                      <%= f.text_field :start_date,  id: 'start-date', label: false, class: 'form-control input-sm' %>
-                   </div>
+                      </span>  
+                      <% if @experience.start_date.blank? %>
+                        <%= f.text_field :start_date,  id: 'start-date', value: Time.now.strftime("%Y-%m-%d"), label: false, class: 'form-control input-sm' %>
+                      <% else %>
+                        <% @experience.start_date = @experience.start_date.strftime("%Y-%m-%d") %>
+                        <%= f.text_field :start_date,  id: 'start-date',  label: false, class: 'form-control input-sm' %>
+                      <% end %>
+                  </div>
+              
            
           </div>
 
           <div class="col-md-3">           
                   <label>Start Time</label>
-                  
-                         
-                      <%= f.input :go_time,  id: 'start-time', label: false, class: 'form-control', type: 'time' %>
-                  
-           
+                      <% if @experience.go_time.blank? %>  
+
+                                           
+                         <%= f.text_field :go_time,  id: 'start-time',  value:  Time.now.to_s(:time), label: false, class: 'form-control timepicker' %>     
+                      <% else %>
+                    
+                    <!--
+                       <%= @experience.go_time = @experience.go_time.strftime("%H:%M") %>
+                    -->
+
+                         <%= f.text_field :go_time,  id: 'start-time', value: @experience.go_time, label: false, class: 'form-control timepicker' %>   
+                      <% end %>     
           </div>
-   
-       
-<script>
-  $(function() {
-
-    $('#start-date').datepicker({
-        dateFormat: 'M d, yy',
-        todayHighlight: true,
-       timeFormat: 'hh:mm tt'
-    });
-
-  });
-</script>
 
 
-<script>
-  $(function() {
 
-    $('#start-time').timepicker({
-       timeFormat: 'hh:mm'
-    });
-
-  });
-</script>
-     
-          <div class="col-md-4">    
-       
-               
-                    <label>How Long?</label>
-                    <%= f.input :exp_duration,  id: 'duration', class: 'form-control', label: false, type: 'time' %>          
+          <div class="col-md-4">                    
+                    <label>End Time</label>
+                    <% if @experience.exp_duration.blank? %>
+                      <%= f.text_field :exp_duration,  id: 'duration',  class: 'form-control timepicker', label: false, placeholder: "(HH:MM)" %>    
+                    <% else  %> 
+                    
+                      <% @experience.exp_duration = @experience.exp_duration.strftime('%H %M') %>
+                  
+                      <%= f.text_field :exp_duration,  id: 'duration',  class: 'form-control timepicker', label: false, placeholder: "(HH:MM)" %>  
+                    <% end %>   
           
           </div>
+   
+        <!--
+
+        # Convert DateTime to Time
+        DateTime.parse('March 3rd 2013 04:05:06 AM').to_time.class # => Time
+
+      -->
+
+
+
+
+
+<script>
+  $(function() {
+
+    $('#start-date').datetimepicker({
+        dateFormat: "yy-mm-dd",
+        timeText: "Start Time",
+        todayHighlight: true,
+        minDate: 0,
+        showButtonPanel: true
+    });
+
+  });
+</script>
+
+
+<script>
+  $(function() {
+    var startTimeTextBox = $('#start-time');
+    var endTimeTextBox = $('#duration');
+      
+   
+
+    $.timepicker.timeRange(
+    startTimeTextBox,
+    endTimeTextBox,
+    { 
+    
+
+      minInterval: (1000*60*60), // 1hr
+      timeFormat: 'HH:mm',
+      dateFormat: 'yy-mm-dd',
+      start: {}, // start picker options
+      end: {} // end picker options
+    }
+
+    );
+
+
+  });
+</script>
+
+
+     
+          
       </div>
+
+
 
       <!--
       <div id="progressMessage" style="display:none; padding:5px; border:1px Solid #000">
@@ -184,6 +239,9 @@
       <br/>
       <div class="form-actions">
         <%= f.button :submit,  id: 'submit-btn', class: '"btn btn-primary btn-block' %>
+        <!--
+        <%= f.button :button, "Save Post".html_safe, data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+       -->
       </div>
 
  
@@ -198,7 +256,7 @@ var sub = document.getElementById("submit-btn");
 sub.onclick = function() {
   
   document.body.style.cursor = 'wait';
-   
+ 
 //  alert("inside the load click");
 //  $("#progressMessageLbl").html("Loading....");
 //  $("#progressMessage").show();

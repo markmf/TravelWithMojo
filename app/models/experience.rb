@@ -10,10 +10,11 @@ class Experience < ApplicationRecord
 	belongs_to :user
 	has_many :sales
 	has_many :reviews
-	has_many :photos
+	has_many :photos,  dependent: :destroy
 	has_many :reservations
 	has_many :schedules
-
+	has_many :guests
+	
 #	has_attached_file :image, styles: { medium: "500x500>", thumb: "200x200#" }
 
  
@@ -24,7 +25,7 @@ class Experience < ApplicationRecord
 
 
 	validates_numericality_of :exp_price,
-		greater_than: 49, message: "Price must be at least 50 cents."
+		greater_than: 10, message: "Price must be at least 10 dollars"
 
 	geocoded_by :exp_where_be
     after_validation :geocode, if: ->(obj){ obj.exp_where_be.present? && obj.exp_where_be_changed? }

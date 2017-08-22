@@ -97,11 +97,14 @@ gem 'twilio-ruby', '~> 4.11.1'
 
 gem 'fullcalendar-rails', '~> 3.4.0'
 gem 'momentjs-rails', '~> 2.17.1'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
 #gem 'stripe'
 gem 'stripe', '~> 3.0.0'
 gem 'rails-assets-card', source: 'https://rails-assets.org'
 
 gem 'chartkick', '~> 2.2.4'
+
+gem 'pusher'
 
 

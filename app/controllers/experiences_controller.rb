@@ -21,13 +21,12 @@ class ExperiencesController < ApplicationController
  
 
   # get the average rating per experience
-    @experiences.each do |e |
-      @per_experience = Experience.friendly.find(e.id)
-      @reviews = @per_experience.reviews
-      @rew = @reviews.average(:rating)
-     puts "# of reviews: #{@reviews.count}, Average review is #{@rate} for experience #{@per_experience.id}, NAME: #{@per_experience.exp_name}"
-   
-    end
+  #  @experiences.each do |e |
+  #    @per_experience = Experience.friendly.find(e.id)
+  #    @reviews = @per_experience.reviews
+  #    @rew = @reviews.average(:rating)
+  #   puts "# of reviews: #{@reviews.count}, Average review is #{@rate} for experience #{@per_experience.id}, NAME: #{@per_experience.exp_name}" 
+  # end
 
     if current_user.present?
      
@@ -44,6 +43,10 @@ class ExperiencesController < ApplicationController
   def show
     @photos = @experience.photos
 
+    #Get available dates for this selected experience
+    @schedules = Schedule.where(experience_id: @experience.id).all
+    logger.debug "No of schedule #{@schedules.length}"
+    
   end
 
   # GET /experiences/new

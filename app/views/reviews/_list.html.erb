@@ -11,13 +11,18 @@
 			</div>
 			<div class="col-md-11">
 				<div>
-					<strong><%= r.user.first_name %> <%= r.user.last_name %><div id="stars_<%= r.id %>"></div></strong>
-					
+					<span style="display:inline-block; width: 20;"></span>
+					<div>&emsp;  &ensp;</div>
+					<strong><%= r.user.first_name %> <%= r.user.last_name %>
+					<br/>
+					<div id="stars_<%= r.id %>"></div></strong>
+				
+
 					<span class="pull-right">
 						<%= link_to "Remove My Review", [@experience, r], method: :delete, data: {confirm: "Are you sure?"} if current_user && current_user == r.user %>
 					</span>
 				</div>
-				
+				<br/>
 			
 				
 

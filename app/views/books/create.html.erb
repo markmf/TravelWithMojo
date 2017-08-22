@@ -1,0 +1,267 @@
+
+<div class="row">
+
+	<div class="col-md-6">
+		<div class="text-center" >
+			
+			<h2> Who else is coming? </h2>
+			<br/>
+			<span><hr class="colorgraph"></span>
+			<div class="row">
+				<div class="col-md-6">
+					<%= current_user.first_name %> <%= current_user.last_name %>
+				</div>
+				<div class="col-md-6">
+					<%= image_tag(avatar_url(current_user), class: "img-circle avatar-large") %>
+				</div>
+				
+			</div>
+			<span><hr class="colorgraph"></span>
+			<div class="row">
+				<div class="col-md-6">
+					Add another guest 
+				</div>
+				<div class="col-md-6">
+					<!--
+					 <a href="#" class="btn btn-info btn-lg">
+						<i class="fa fa-plus-square-o" aria-hidden="true"></i>
+					 </a>
+					
+					 <a href="#" class="btn btn-info btn-lg">
+          				<span class="glyphicon glyphicon-plus-sign"></span>
+       				 </a>
+       				-->
+       				 
+       				 <button onclick="addGuest()" id="add-guest" class="btn btn-info btn-lg" type="button">
+   						<span class="glyphicon glyphicon-plus-sign"></span>
+					</button>
+				</div>
+				
+			</div>
+			<span><hr class="colorgraph"></span>
+			<div class="row" id="guest-form" >
+				<div class="col-md-12">
+				 	Enter the following info so we can send guest the itinerary. Make sure to enter their actual email.
+				
+
+				</div>
+          
+			</div>
+		</div>
+		<% if current_user %> 
+			<br/><br/>
+			
+
+			<div class="text-center">
+            	<%= link_to "Next", confirm_path(slug: @schedule.id, exp_id: @experience.id, qty: @qty), class: "btn btn-primary" %>
+            </div>   
+            <br/>
+            <br/>
+
+
+
+<button class="btn btn-primary" id="customButton">Confirm Payment</button>
+
+
+
+
+<!--
+          	<div class="text-center" >
+	            <%= form_tag buy_path(slug: @experience.slug) do %>
+	              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+
+	                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+	                  data-description="<%= @experience.exp_name %>"
+	                  data-name= "ZenZen"
+	                  data-label= "$<%= @experience.exp_price * @qty %> - Confirm Payment"
+	                  data-amount="<%= @experience.exp_price * 100 %>"
+	                  data-email= "<%= current_user.email %>"
+	                  data-locale="auto">
+	              </script>
+	            <% end %>
+       	 	</div>
+-->
+        <% else %>
+
+        	flash[:notice] = "Please Log in to book this experience"	
+            <p><h3><strong>Please Log in to book this experience</h3></strong> </p>
+
+        <% end %>
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">				
+				<%= @experience.exp_name %>
+			</div>
+			<div class="panel-body">
+				<div class="row" >
+					<div class="col-md-6" >
+						Hosted by: <%= NameCase(@experience.user.first_name)%> 
+					</div>
+					<div class="col-md-6" >
+						<!--
+		             	<%= image_tag(avatar_url(@experience.user), class: "img-circle avatar-large") %>
+		             	-->
+		             	<%= image_tag(@experience.photos[0].image.url(:thumb)) %>
+           			</div>
+				</div>
+				<span><hr class="colorgraph"></span>
+				<div class="row" >
+					<div class="col-md-6" >
+						<%= @schedule.start_date.strftime('%A, %v') %>
+						<br/>
+						<%= @experience.go_time.strftime('%r')  %>
+					</div>
+					<div class="col-md-6" >
+		             
+		            </div>	
+				</div>
+				<span><hr class="colorgraph"></span>
+				<div class="row" >
+					
+					<div class="col-md-6">
+					
+						
+
+						<span>$<%= @experience.exp_price %> &#215; <label id="qty-cnt"><%= @qty %></label></span>
+
+						<br/><br/>
+						Total
+					</div>
+					<div class="col-md-6" >		             
+		             	<% @tot_amt = @experience.exp_price * @qty %>
+		             	
+		             	$<label id="tot-amt"><%= @tot_amt %></label>
+		             	<br/><br/>
+		             	<strong>$<label id="final-amt"><%= @tot_amt %></label></strong>
+		            </div>	
+		           
+		            <span><hr class="colorgraph"></span>
+				</div>
+				<span><hr class="colorgraph"></span>
+				<div class="row" >
+					
+					<div class="col-md-12" >
+						Cancellation Policy 
+					</div>
+					
+		            <span><hr class="colorgraph"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<%= form_tag buy_path(slug: @experience.slug), id: 'chargeForm' do %>
+	<script src="https://checkout.stripe.com/checkout.js"></script>
+	 <%= hidden_field_tag 'stripeToken' %>
+	  <%= hidden_field_tag 'stripeEmail' %>
+	  <%= hidden_field_tag 'qty_booked' %>
+	  <%= hidden_field_tag 'sched_id' %>
+	<script>
+	  var qty = parseInt("<%= @qty %>");
+	  var price  = parseInt("<%= @experience.exp_price * 100 %>");
+	  var sched_id = "<%= @schedule.id %>";
+
+	 
+
+	  var handler = StripeCheckout.configure({
+	    key: "<%= Rails.configuration.stripe[:publishable_key] %>",
+	    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+	    locale: 'auto',
+	    token: function(token, args) {
+	      // Use the token to create the charge with a server-side script.
+	      // You can access the token ID with `token.id`
+	        document.getElementById("stripeToken").value = token.id;
+	        document.getElementById("stripeEmail").value = token.email;
+	        document.getElementById("qty_booked").value = qty;
+	        document.getElementById("sched_id").value = sched_id;
+	        document.getElementById("chargeForm").submit();
+	    }
+	  });
+
+	var btn = document.getElementById("customButton");
+
+	// When the user clicks the button, open the modal
+
+
+	   btn.onclick = function(e) {
+	    // Open Checkout with further options
+	    alert("Hit Confirm Button");
+	    alert(qty);
+	    alert(sched_id);
+
+	    handler.open({
+	      name: "ZenZen",
+	      description: "<%= @experience.exp_name %>",
+	      amount: qty * price,
+	      email: "<%= current_user.email %>"
+	    });
+	    e.preventDefault();
+	  };
+
+
+
+	  // Close Checkout on page navigation
+	  $(window).on('popstate', function() {
+	    handler.close();
+	  });
+	</script>
+
+<% end %>
+
+
+
+<script>
+// Get the modal
+
+document.getElementById("guest-form").style.visibility = "hidden";
+
+var qty = <%= @qty %>;
+var totAmt = <%= @tot_amt %>;
+var expPrice = <%= @experience.exp_price %>;
+
+
+function addGuest() {
+//	var qty = <%= @qty %> + 1
+
+    qty++;
+   	alert(qty);
+  	$('.exp-Price').data('exp_price');
+   
+   	
+   	 alert(totAmt);
+   	$('#qty-cnt').html(function(i, val) { 
+   		return qty;
+   	});
+
+
+ 	
+   	totAmt = expPrice * qty;
+   	$('#tot-amt').html(function(i, val) { 
+   		return totAmt
+    });
+
+    $('#final-amt').html(function(i, val) { 
+   		return totAmt
+    });
+
+
+  
+
+    document.getElementById("guest-form").style.visibility = "visible";
+
+    
+    $.get("/bookpay?qty=" + qty + "&tot_amt=" + totAmt);
+
+
+}
+
+</script>
+
+
+
+
+
+	
+</div>

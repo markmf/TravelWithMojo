@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :reservations
   has_many :schedules
   has_many :notifications
+  has_many :guests
 
   has_one :setting
   after_create :add_setting

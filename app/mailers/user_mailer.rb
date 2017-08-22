@@ -4,8 +4,8 @@ class UserMailer < ApplicationMailer
 		puts "Entering user_mailer.rb file"
 		puts "User email => #{user.email}"
 		@user = user
-		@url  =  "www.kaizen.com" # generate confirmation url
-		mail(to: @user.email, subject: "Welcome to Kaizen!")
+		@url  =  "www.zenzen.com" # generate confirmation url
+		mail(to: @user.email, subject: "Thanks for signing up")
 	end
 
 

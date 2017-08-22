@@ -1,0 +1,26 @@
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+  Upcoming Activities
+  </div>
+  <div class="panel-body">  
+
+      <% @schedules.each do |schedule| %>  
+          <div class="row">      
+                <div class="col-md-6">
+                   <h4><%=@experience.exp_name %></h4>
+                  <% avail_seat = schedule.max_guests - schedule.no_guests %>
+                  <strong><%= avail_seat  %> spots left</strong> 
+                  <p><%= schedule.start_date.strftime('%A, %v') %>,
+                  <%= @experience.go_time.strftime('%r') %></p>
+                </div>    
+                <div class="col-md-6">
+                  <%= link_to "Choose Date", bookit_path(sched_id: schedule.id, exp_id: @experience.id), class: "btn btn-primary" %>
+                </div>    
+          </div>
+          <br/>
+          <span><hr class="colorgraph"></span>
+      <% end %>
+     
+  </div>
+</div>

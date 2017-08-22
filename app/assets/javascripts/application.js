@@ -20,6 +20,7 @@
 //= require toastr
 //= require moment
 //= require fullcalendar
+//= require bootstrap-datetimepicker
 //= require card
 //= require Chart.bundle
 //= require chartkick

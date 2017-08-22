@@ -4,11 +4,16 @@ class TransactionsController < ApplicationController
 
 	def create
 		experience = Experience.find_by!(slug: params[:slug])
+		schedule = Schedule.where("id = ? AND experience_id = ?", params[:sched_id], experience.id).first
+		DEBUG
+		booked_qty = params[:qty_booked].to_i
+		puts "***********Booked qty: #{booked_qty}*********"
 		sale = experience.sales.create( 
-				amount: experience.exp_price,
+				amount: experience.exp_price * booked_qty,
 				buyer_email: current_user.email,
 				seller_email: experience.user.email,
 				exp_id: experience.id,
+				booked_qty: booked_qty,
 				stripe_token: params[:stripeToken])
 		
 		sale.currency = "USD"
@@ -23,9 +28,12 @@ class TransactionsController < ApplicationController
     		puts "Experience Name => #{experience.exp_name}"
     		puts "Sending Confirmation Email Now"
     		setting = Setting.find_by(user_id: current_user.id)
+
+# Things to do - update no_guests in Schedule table
     		
       		UserMailer.send_confirmation_email(experience, current_user.email, experience.user.email, current_user.first_name).deliver_now if setting.enable_email
       		UserMailer.send_host_email(experience, current_user.first_name + current_user.last_name, experience.user.email).deliver_now 
+      	# Uncomment before launch
       	#	send_sms(experience, current_user) if setting.enable_sms
       	#	send_sms_host(experience, current_user)
       		

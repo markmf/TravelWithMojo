@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :photos
   resources :payoffs
   resources :hosts
+  resources :guests, only: [:create, :new, :destroy, :show]
+
   #devise_for :users
   #get 'pages/home'
 
@@ -30,7 +32,11 @@ Rails.application.routes.draw do
 
   get '/search' => 'experiences#index'
    
-  
+  get '/book', to: 'books#create', as: :bookit
+  get '/bookpay', to: 'books#index'
+
+  get '/confirm', to: 'confirms#create', as: :confirm
+
   post 'buy/:/slug', to: 'transactions#create', as: :buy
   get '/pickup/:uuid', to: 'transactions#pickup', as: :pickup
   

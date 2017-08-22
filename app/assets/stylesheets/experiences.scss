@@ -103,7 +103,8 @@ small {
 
 
 img.hover-shadow {
-  transition: 0.5s
+  /* transition: 0.5s */
+  transform: scale(0.5s);
 }
 
 .hover-shadow:hover {
@@ -157,11 +158,11 @@ img.hover-shadow {
 
 /* Display experience attribute */
 .outer {
-  /*
-    border:solid 1px #000;
-    height:200px;
+  
+    /* border:solid 1px #000; */
+    height: 100%;
     overflow:hidden; 
-  */
+  
 }
 
 .leftcol {
@@ -178,8 +179,12 @@ img.hover-shadow {
     border:solid 1px red;
     */
     overflow-y:scroll;
-    height: 600px; /* I WANT THIS BUT DYNAMICALLY CHANGES W/ .OUTER */
-    width: 900px;
+    height: 100%; /* I WANT THIS BUT DYNAMICALLY CHANGES W/ .OUTER */
+    width:   100%;      /* 900px; */
+  
+
+
+
 }
 
 

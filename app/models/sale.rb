@@ -8,10 +8,14 @@ class Sale < ApplicationRecord
 	include AASM
 
 		aasm column: 'state' do
+			after_all_transitions :log_status_change
+
 			state :pending, initial: true
 			state :processing
 			state :finished
 			state :failure
+
+			
 
 			event :process, after: :charge_card do
 				transitions from: :pending, to: :processing
@@ -27,6 +31,10 @@ class Sale < ApplicationRecord
 			end
 
 		end
+
+	def log_status_change
+    	puts "*********Changed from #{aasm.from_state} to #{aasm.to_state} (event: #{aasm.current_event})**********"
+  	end
 
 	def charge_card
 		begin

@@ -1,0 +1,117 @@
+
+<div class="row">
+
+	<div class="col-md-6">
+		<div class="text-center" >
+			
+			<h2> Confirm and Pay</h2>
+			<br/>
+			<span><hr class="colorgraph"></span>
+			<div class="row">
+				<div class="col-md-6">
+					<%= current_user.first_name %> <%= current_user.last_name %>
+				</div>
+				<div class="col-md-6">
+					<%= image_tag(avatar_url(current_user), class: "img-circle avatar-large") %>
+				</div>
+				
+			</div>
+			<span><hr class="colorgraph"></span>
+			<div class="row">
+				<div class="col-md-6">
+					Print Name of Gues
+				</div>
+				<div class="col-md-6">
+					
+				</div>
+				
+			</div>
+			<span><hr class="colorgraph"></span>
+			
+		</div>
+		<% if current_user %> 
+			<br/><br/>
+			
+          	
+          	<div class="text-center" >
+	            <%= form_tag buy_path(slug: @experience.slug) do %>
+	             <% tot_price = @experience.exp_price  %>
+	              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+
+	                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+	                  data-description="<%= @experience.exp_name %>"
+	                  data-name= "ZenZen"
+	                  data-label= "$<%= tot_price %> - Confirm Payment"
+	                  data-amount="<%= @experience.exp_price * 100 %>"
+	                  data-email= "<%= current_user.email %>"
+	                  data-locale="auto">
+	              </script>
+	            <% end %>
+       	 	</div>
+        <% else %>
+
+        	flash[:notice] = "Please Log in to book this experience"	
+            <p><h3><strong>Please Log in to book this experience</h3></strong> </p>
+
+        <% end %>
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">				
+				<%= @experience.exp_name %>
+			</div>
+			<div class="panel-body">
+				<div class="row" >
+					<div class="col-md-6" >
+						Hosted by: <%= NameCase(@experience.user.first_name)%> 
+					</div>
+					<div class="col-md-6" >
+						<!--
+		             	<%= image_tag(avatar_url(@experience.user), class: "img-circle avatar-large") %>
+		             	-->
+		             	<%= image_tag(@experience.photos[0].image.url(:thumb)) %>
+           			</div>
+				</div>
+				<span><hr class="colorgraph"></span>
+				<div class="row" >
+					<div class="col-md-6" >
+						<%= @schedule.start_date.strftime('%A, %v') %>
+						<br/>
+						<%= @experience.go_time.strftime('%r')  %>
+					</div>
+					<div class="col-md-6" >
+		             
+		            </div>	
+				</div>
+				<span><hr class="colorgraph"></span>
+				<div class="row" >
+					
+					<div class="col-md-6">
+						<span>$<%= @experience.exp_price %> &#215; <%= @qty %></span>
+						<br/><br/>
+						Total
+					</div>
+					<div class="col-md-6" >		             
+		             	<% @tot_amt = @experience.exp_price * @qty %>
+		             	$<%= @tot_amt %>
+		             	<br/><br/>
+		             	<strong>$<%= @tot_amt %></strong>
+		            </div>	
+		            <span><hr class="colorgraph"></span>
+				</div>
+				<span><hr class="colorgraph"></span>
+				<div class="row" >
+					
+					<div class="col-md-12" >
+						Cancellation Policy 
+					</div>
+					
+		            <span><hr class="colorgraph"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+</div>
