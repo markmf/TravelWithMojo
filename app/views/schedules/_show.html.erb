@@ -1,7 +1,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-  Upcoming Activities
+  When do you want to go?
   </div>
   <div class="panel-body">  
 
@@ -15,7 +15,16 @@
                   <%= @experience.go_time.strftime('%r') %></p>
                 </div>    
                 <div class="col-md-6">
-                  <%= link_to "Choose Date", bookit_path(sched_id: schedule.id, exp_id: @experience.id), class: "btn btn-primary" %>
+                  <% if current_user %>
+                    <% if avail_seat > 0 %>
+                      <%= link_to "Choose Date",  bookit_path(sched_id: schedule.id, exp_id: @experience.id), class: "btn btn-primary" %>
+                    <% else %>
+                      <%= link_to "Choose Date",  bookit_path(sched_id: schedule.id, exp_id: @experience.id), class: "btn btn-primary", disabled: "disabled" %>
+                    <% end %>
+                  <% else %>
+                    
+                    <%= link_to "Choose Date", new_user_session_path, class: "btn btn-primary" %>
+                  <% end %>
                 </div>    
           </div>
           <br/>

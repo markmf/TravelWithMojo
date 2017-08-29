@@ -1,6 +1,8 @@
 
 <div class="row">
 
+	<% @avail_seat = @schedule.max_guests - @schedule.no_guests %>
+
 	<div class="col-md-6">
 		<div class="text-center" >
 			
@@ -32,36 +34,57 @@
        				 </a>
        				-->
        				 
-       				 <button onclick="addGuest()" id="add-guest" class="btn btn-info btn-lg" type="button">
+       				 <button onclick="addGuest()" id="add-guest" class="text-center btn btn-info btn-lg" type="button">
    						<span class="glyphicon glyphicon-plus-sign"></span>
 					</button>
+					
 				</div>
 				
 			</div>
 			<span><hr class="colorgraph"></span>
+			<div class="row" id="remove-guest">
+				<div class="col-md-6">
+					Remove guest 
+				</div>
+				<div class="col-md-6">
+					 <button onclick="minusGuest()" id="minus-guest" class="text-center btn btn-info btn-lg" type="button" >
+   						<span class="glyphicon glyphicon-minus-sign"></span>
+					</button>
+				</div>
+				
+			</div>
+
+
+			
 			<div class="row" id="guest-form" >
 				<div class="col-md-12">
 				 	Enter the following info so we can send guest the itinerary. Make sure to enter their actual email.
-				
-
+					<br/>
+					<%= render 'guests/form' %>
 				</div>
           
 			</div>
+			
 		</div>
 		<% if current_user %> 
 			<br/><br/>
 			
-
+			<!--
 			<div class="text-center">
             	<%= link_to "Next", confirm_path(slug: @schedule.id, exp_id: @experience.id, qty: @qty), class: "btn btn-primary" %>
-            </div>   
+            </div> 
+            -->  
             <br/>
             <br/>
 
+            <div class="progress progress-striped active" id="progress-bar">
+          	  <div class="progress-bar progress-bar-info" id="realtime-progress-bar" role="progressbar"style="width: 0%"></div>
+          	</div>
+            <h3 id="messages"></h3>
 
-
-<button class="btn btn-primary" id="customButton">Confirm Payment</button>
-
+            <div class="text-center" >
+				<button class="btn btn-primary" id="customButton">Confirm Payment</button>
+			</div>
 
 
 
@@ -114,7 +137,9 @@
 						<%= @experience.go_time.strftime('%r')  %>
 					</div>
 					<div class="col-md-6" >
-		             
+						<% duration = (( @experience.exp_duration - @experience.go_time) / 60 ) / 60 %>
+						 <%= pluralize(duration, "Hour") %> Duration
+		             	
 		            </div>	
 				</div>
 				<span><hr class="colorgraph"></span>
@@ -143,16 +168,38 @@
 				<div class="row" >
 					
 					<div class="col-md-12" >
-						Cancellation Policy 
+						<p>Review Guest Requirements</p>
+						
+						<p><%= @experience.guest_reqs %></p>
 					</div>
 					
+		           
+				</div>
+				 <span><hr class="colorgraph"></span>
+				<div class="row" >
+					
+					<div class="col-md-12" >
+						<p>Cancellation Policy </p>
+					
+						<p><%= @cancellation.desc %></p>
+					</div>
 		            <span><hr class="colorgraph"></span>
 				</div>
 			</div>
 		</div>
 	</div>
 
+
+<script>
+
+	document.getElementById("minus-guest").style.display = "none";
+	document.getElementById("guest-form").style.display = "none";
+	document.getElementById("remove-guest").style.display = "none";
+
+</script>
+
 <%= form_tag buy_path(slug: @experience.slug), id: 'chargeForm' do %>
+
 	<script src="https://checkout.stripe.com/checkout.js"></script>
 	 <%= hidden_field_tag 'stripeToken' %>
 	  <%= hidden_field_tag 'stripeEmail' %>
@@ -160,10 +207,12 @@
 	  <%= hidden_field_tag 'sched_id' %>
 	<script>
 	  var qty = parseInt("<%= @qty %>");
+	  var exp_price = parseInt("<%= @experience.exp_price %>");
 	  var price  = parseInt("<%= @experience.exp_price * 100 %>");
 	  var sched_id = "<%= @schedule.id %>";
 
 	 
+
 
 	  var handler = StripeCheckout.configure({
 	    key: "<%= Rails.configuration.stripe[:publishable_key] %>",
@@ -182,14 +231,21 @@
 
 	var btn = document.getElementById("customButton");
 
+	$('#customButton').html(function(i, val) { 
+   		return "$" + qty * exp_price + " - Confirm Booking";
+   	});
+
+	
+
 	// When the user clicks the button, open the modal
 
 
 	   btn.onclick = function(e) {
 	    // Open Checkout with further options
-	    alert("Hit Confirm Button");
+	  
 	    alert(qty);
 	    alert(sched_id);
+	    document.body.style.cursor = 'wait';
 
 	    handler.open({
 	      name: "ZenZen",
@@ -204,6 +260,7 @@
 
 	  // Close Checkout on page navigation
 	  $(window).on('popstate', function() {
+	  	document.body.style.cursor = 'default';
 	    handler.close();
 	  });
 	</script>
@@ -215,22 +272,41 @@
 <script>
 // Get the modal
 
-document.getElementById("guest-form").style.visibility = "hidden";
+document.getElementById("guest-form").style.display = "none";
+//document.getElementById("minus-guest").style.display = "none";
+document.body.style.cursor = "default";
+
 
 var qty = <%= @qty %>;
 var totAmt = <%= @tot_amt %>;
 var expPrice = <%= @experience.exp_price %>;
-
+var availSpot = <%= @avail_seat %>;
+var leftSpot = availSpot;
 
 function addGuest() {
-//	var qty = <%= @qty %> + 1
+
+
+	leftSpot = availSpot - qty;
+
+
+	if ( qty + 1 > availSpot) {
+		alert("There are no more spots left for this event.");
+		return;
+	}
+
+	
 
     qty++;
-   	alert(qty);
+
+    $('#customButton').html(function(i, val) { 
+   		return "$" + qty * expPrice + " - Confirm Booking";
+ 	});
+
+  
   	$('.exp-Price').data('exp_price');
    
    	
-   	 alert(totAmt);
+
    	$('#qty-cnt').html(function(i, val) { 
    		return qty;
    	});
@@ -238,10 +314,12 @@ function addGuest() {
 
  	
    	totAmt = expPrice * qty;
+  
    	$('#tot-amt').html(function(i, val) { 
    		return totAmt
     });
 
+   
     $('#final-amt').html(function(i, val) { 
    		return totAmt
     });
@@ -249,18 +327,135 @@ function addGuest() {
 
   
 
-    document.getElementById("guest-form").style.visibility = "visible";
-
+    document.getElementById("guest-form").style.display = "none";
+	document.getElementById("minus-guest").style.display = "block";
+	document.getElementById("add-guest").style.display = "block";
+	document.getElementById("remove-guest").style.display = "block";
     
     $.get("/bookpay?qty=" + qty + "&tot_amt=" + totAmt);
 
 
 }
 
+
+function minusGuest() {
+
+	
+
+	qty--;
+
+	if (qty == 1) {
+		document.getElementById("minus-guest").style.display = "none";
+		document.getElementById("remove-guest").style.display = "none";
+	};
+
+    document.getElementById("guest-form").style.display = "none";
+//	document.getElementById("minus-guest").style.display = "none";
+	document.getElementById("add-guest").style.display = "block";
+	
+    
+
+	$('#customButton').html(function(i, val) { 
+   		return "$" + qty * expPrice + " - Confirm Booking";
+ 	});
+
+      	
+
+   	$('#qty-cnt').html(function(i, val) { 
+   		return qty;
+   	});
+
+
+
+   	totAmt = expPrice * qty;
+  
+   	$('#tot-amt').html(function(i, val) { 
+   		return totAmt
+    });
+
+   
+    $('#final-amt').html(function(i, val) { 
+   		return totAmt
+    });
+
+}
 </script>
 
 
+<script>
+ 
 
+  $(function() {
+   // alert("Entering Pusher JS");
+ 
+     var pusher = new Pusher("ee11638b413352bc6ebd"); 
+     var channel = pusher.subscribe("my-channel"); 
+
+     var elem = document.getElementById("realtime-progress-bar");  
+     var elem1 = document.getElementById("progress-bar");
+     var msg = document.getElementById("messages");
+
+     elem1.style.display = "none"; 
+     msg.style.display = "none";
+  
+    
+     channel.bind('payment', function(data) {
+      
+        var width = data.progress;
+        elem1.style.display = "block"; 
+        msg.style.display = "block";
+       
+        
+
+        switch( width ) {
+            case 10:
+              elem.style.width = 10 + '%';
+              elem.innerHTML = width * 1  + '%';
+              $("#messages").html(function(i, val) { 
+                  return data.message;
+              });
+              break;
+            case 30:
+              elem.style.width = 30 + '%';
+              elem.innerHTML = width * 1  + '%';
+              $("#messages").html(function(i, val) { 
+                  return data.message;
+              });
+              break;
+            case 60:
+              elem.style.width = 60 + '%';
+              elem.innerHTML = width * 1  + '%';
+              $("#messages").html(function(i, val) { 
+                  return data.message;
+              });
+              break;
+            case 80:
+              elem.style.width = 80 + '%';
+              elem.innerHTML = width * 1  + '%';
+              $("#messages").html(function(i, val) { 
+                  return data.message;
+              });
+              break;
+            case 100:
+              elem.style.width = 100 + '%';
+              elem.innerHTML = width * 1  + '%';
+              $("#messages").html(function(i, val) { 
+                  return data.message;
+              });
+              break;
+            default:
+                alert("An default event was triggered");
+
+        }
+
+      
+    });
+   
+
+
+   });
+
+</script>
 
 
 	

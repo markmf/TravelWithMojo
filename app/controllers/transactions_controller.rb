@@ -2,10 +2,25 @@ class TransactionsController < ApplicationController
 
 
 
+
 	def create
+		pusher_client = Pusher::Client.new(
+	        app_id: '387204',
+	       	key: 'ee11638b413352bc6ebd',
+	      	secret: '8ae2992e5c1cafa72d1b',
+	      	cluster: 'mt1'
+   		)
+
+    	pusher_client.trigger('my-channel', 'payment', { message: "Processing payment, #{current_user.first_name}", progress: 10 })
+   
+    	
+
 		experience = Experience.find_by!(slug: params[:slug])
+		sched_id = params[:sched_id]
 		schedule = Schedule.where("id = ? AND experience_id = ?", params[:sched_id], experience.id).first
-		DEBUG
+		
+		pusher_client.trigger('my-channel', 'payment', { message: "Processing your credit card info, #{current_user.first_name}", progress: 30 })
+
 		booked_qty = params[:qty_booked].to_i
 		puts "***********Booked qty: #{booked_qty}*********"
 		sale = experience.sales.create( 
@@ -14,10 +29,15 @@ class TransactionsController < ApplicationController
 				seller_email: experience.user.email,
 				exp_id: experience.id,
 				booked_qty: booked_qty,
+				start_date: experience.start_date,
 				stripe_token: params[:stripeToken])
 		
 		sale.currency = "USD"
 		sale.process!
+
+		
+
+		pusher_client.trigger('my-channel', 'payment', { message: "Halfway to destination, #{current_user.first_name}", progress: 60 })
 
 		if sale.finished?
 			redirect_to pickup_url(uuid: sale.uuid)
@@ -29,13 +49,20 @@ class TransactionsController < ApplicationController
     		puts "Sending Confirmation Email Now"
     		setting = Setting.find_by(user_id: current_user.id)
 
+    		pusher_client.trigger('my-channel', 'payment', { message: "Almost done. Sending you a confirmation email, #{current_user.first_name}", progress: 80 })
+
 # Things to do - update no_guests in Schedule table
+			total_seats = schedule.no_guests + booked_qty
+			schedule.update(:no_guests => total_seats)
+			
     		
       		UserMailer.send_confirmation_email(experience, current_user.email, experience.user.email, current_user.first_name).deliver_now if setting.enable_email
       		UserMailer.send_host_email(experience, current_user.first_name + current_user.last_name, experience.user.email).deliver_now 
       	# Uncomment before launch
       	#	send_sms(experience, current_user) if setting.enable_sms
       	#	send_sms_host(experience, current_user)
+      		
+      		pusher_client.trigger('my-channel', 'payment', { message: "Thank you very much for your order, #{current_user.first_name}", progress: 100 })
       		
       		flash[:notice] = "Succesfully booked experience!"
 		else
@@ -47,6 +74,8 @@ class TransactionsController < ApplicationController
 	def pickup
 		@sale = Sale.find_by!(uuid: params[:uuid])
 		@experience = @sale.experience
+		@guest = Guest.new
+		
 	end
 
 	private

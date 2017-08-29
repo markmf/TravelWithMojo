@@ -53,23 +53,25 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
 
   config.action_cable.url = "ws://localhost:3000/cable"
  
   # Use for testing with mailcatcher
   #config.action_mailer.smtp_settings = {:address => 'localhost', :port => 1025}
 
- 
+
 # GMAIL
   config.action_mailer.smtp_settings = {
       address: "smtp.gmail.com", 
-      port: 587,
+     port: 587,
       domain: "smtp.gmail.com",
       authentication: "login",
-      user_name: ENV["GMAIL_USERNAME"],
+     user_name: ENV["GMAIL_USERNAME"],
       password: ENV["GMAIL_PASSWORD"],
       enable_starttls_auto: true
-   } 
+  } 
 
 # MANDRILL EMAIL
 #  config.action_mailer.smtp_settings = {
@@ -82,11 +84,11 @@ Rails.application.configure do
 #  }
 
 # SENDGRID
-#config.action_mailer.smtp_settings = {
+# config.action_mailer.smtp_settings = {
 #    address: 'smtp.sendgrid.net',
 #    port: 587,
 #    enable_starttls_auto: true,
-#    user_name: 'markmf',
+#    user_name: 'apikey',
 #    password: ENV["SENDGRID_API_KEY"],
 #    authentication: 'plain'
 #}

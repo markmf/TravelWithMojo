@@ -1,4 +1,7 @@
 class Guest < ApplicationRecord
-  belongs_to :user
-  belongs_to :experience
+	validates :first_name, :email, presence: true 
+
+  	belongs_to :user
+#	belongs_to :experience
+
 end

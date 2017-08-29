@@ -13,8 +13,9 @@ class Experience < ApplicationRecord
 	has_many :photos,  dependent: :destroy
 	has_many :reservations
 	has_many :schedules
-	has_many :guests
-	
+#	has_many :guests
+
+
 #	has_attached_file :image, styles: { medium: "500x500>", thumb: "200x200#" }
 
  
@@ -27,8 +28,12 @@ class Experience < ApplicationRecord
 	validates_numericality_of :exp_price,
 		greater_than: 10, message: "Price must be at least 10 dollars"
 
-	geocoded_by :exp_where_be
-    after_validation :geocode, if: ->(obj){ obj.exp_where_be.present? && obj.exp_where_be_changed? }
+#  Original working location
+#	geocoded_by :exp_where_be
+#   after_validation :geocode, if: ->(obj){ obj.exp_where_be.present? && obj.exp_where_be_changed? }
+
+    geocoded_by :exp_location
+    after_validation :geocode, if: ->(obj){ obj.exp_location.present? && obj.exp_location_changed? }
 	
 	def average_rating
     	reviews.count == 0 ? 0 : reviews.average(:rating).round(2)

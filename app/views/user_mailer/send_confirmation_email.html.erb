@@ -3,11 +3,27 @@
    <head>
       <meta content = 'text/html; charset = UTF-8' http-equiv = 'Content-Type' />
    </head>
-   
+   <h3>Get ready for your upcoming experience </h3>
    <body>
       Hi <%= @firstname %>,
       <p>Thank you for your purchase of  <%= @experience.exp_name %></p>
       
+
+      <p>Here's your itinerary for <%= @experience.exp_name %>, including the meeting time and location.
+      If you have questions on how to prepare, contact your host via the app.
+      </p>
+
+  
+      <%= image_tag attachments["file"].url -%>
+     
+      
+
+
+      <%= @experience.photos[0].image.url -%>
+
+
+     
+
       <p>
          Enjoy your experience! 😁
       </p>

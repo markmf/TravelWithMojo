@@ -14,7 +14,7 @@ class CreateExperiences < ActiveRecord::Migration[5.1]
       t.integer :max_guest
       t.integer :rsv_guest
       t.integer :min_guest
-      t.text :can_policy
+      t.integer :can_policy
       t.integer :ratings
       t.integer :exp_price
       t.datetime :start_time

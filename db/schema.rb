@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822061458) do
+ActiveRecord::Schema.define(version: 20170824123926) do
+
+  create_table "cancellations", force: :cascade do |t|
+    t.text "desc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "conversations", force: :cascade do |t|
     t.integer "sender_id"
@@ -31,7 +37,7 @@ ActiveRecord::Schema.define(version: 20170822061458) do
     t.integer "max_guest"
     t.integer "rsv_guest"
     t.integer "min_guest"
-    t.text "can_policy"
+    t.integer "can_policy"
     t.integer "ratings"
     t.integer "exp_price"
     t.datetime "start_time"
@@ -74,6 +80,8 @@ ActiveRecord::Schema.define(version: 20170822061458) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "experience_id"
+    t.index ["experience_id"], name: "index_guests_on_experience_id"
     t.index ["user_id"], name: "index_guests_on_user_id"
   end
 
@@ -189,6 +197,7 @@ ActiveRecord::Schema.define(version: 20170822061458) do
     t.text "error"
     t.string "stripe_id"
     t.integer "booked_qty"
+    t.date "start_date"
   end
 
   create_table "schedules", force: :cascade do |t|

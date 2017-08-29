@@ -1,10 +1,15 @@
 class BooksController < ApplicationController
-  
+  	# before_action :get_guests, only: [:show]
+
+
   	def index
   		@final_qty = params[:qty]
-		tot_amt = params[:tot_amt]
-
+	
   
+  	end
+
+  	def new
+  	
   	end
 
 	def create	
@@ -13,14 +18,18 @@ class BooksController < ApplicationController
 		@tot_amt = 0
 		@schedule = Schedule.find_by!(id: params[:sched_id])
 		@experience = Experience.find_by!(id: params[:exp_id])
-		
-		
-		
+    @cancellation = Cancellation.find_by!(id: @experience.can_policy)
+		@guest = Guest.new
 	end
 
   private
     def books_params
-      params.permit(:id, :exp_id, :qty, :tot_amt)
+      params.permit(:id, :exp_id, :qty)
+    end
+
+    def get_guests
+
+       @guests = @experience.guests
     end
    
 end

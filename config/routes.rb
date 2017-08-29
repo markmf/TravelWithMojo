@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :photos
   resources :payoffs
   resources :hosts
-  resources :guests, only: [:create, :new, :destroy, :show]
+  resources :guests
+ 
+
 
   #devise_for :users
   #get 'pages/home'
@@ -21,9 +23,11 @@ Rails.application.routes.draw do
    #  resources :reservations, only: [:create]
   #end
 
+
   resources :experiences do
-    resources :reviews, only: [:create, :new, :destroy]
+   resources :reviews, only: [:create, :new, :destroy]
   end
+
 
   resources :conversations do
     resources :messages
@@ -40,8 +44,11 @@ Rails.application.routes.draw do
   post 'buy/:/slug', to: 'transactions#create', as: :buy
   get '/pickup/:uuid', to: 'transactions#pickup', as: :pickup
   
-  get '/listing', to: 'listing#index', as: :index
-  get '/event', to: 'events#index', as: :event
+  get '/listing',   to: 'listing#index', as: :index
+  get '/event',     to: 'events#index',  as: :event
+  get '/history',   to: 'history#index', as: :history
+
+  get '/yourevent/:id(.:format)', to: 'events#show',   as: :yourevent
  # get '/payout', to: 'payout#welcome', as: :payout
 
 

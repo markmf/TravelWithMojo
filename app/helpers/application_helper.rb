@@ -19,7 +19,7 @@ module ApplicationHelper
 		else
   #   "https://www.gravatar.com/avatar/#{gravatar_id}.jpg?d=identical&s=100"
       gravatar_id = Digest::MD5::hexdigest(user.email).downcase 
-		  "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(current_user.email)}"
+		  "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email)}"
 		end
   end
   

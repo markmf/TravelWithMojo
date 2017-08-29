@@ -2,6 +2,11 @@ class ExperiencesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   before_action :set_experience, only: [:show, :edit, :update, :destroy]
   before_action :get_reviews, only: [:show]
+ 
+ 
+  require 'pusher'
+
+ 
 
     Rails.logger.debug :search
 
@@ -9,13 +14,17 @@ class ExperiencesController < ApplicationController
   # GET /experiences.json
   def index
 
-   
+   today = Date.today
+   active = true
+  #  reservations = @room.reservations.where("(start_date >= ? OR end_date >= ?) AND status = ?", today, today, 1)
 
     if params[:search].present? && params[:search].strip != ""
         session[:loc_search] = params[:search]
-        @experiences = Experience.where(active: true).near(session[:loc_search] , 15, order: 'distance')
+   #     @experiences = Experience.where(active: true).near(session[:loc_search] , 15, order: 'distance')
+         @experiences = Experience.where("start_date >= ? AND active = ?", today, active).near(session[:loc_search] , 30, order: 'distance')
     else
-        @experiences = Experience.where(active: true).all
+  #    @experiences = Experience.where(active: true).all
+      @experiences = Experience.where("start_date >= ? AND active = ?", today, active).all
     end
 
  
@@ -28,10 +37,10 @@ class ExperiencesController < ApplicationController
   #   puts "# of reviews: #{@reviews.count}, Average review is #{@rate} for experience #{@per_experience.id}, NAME: #{@per_experience.exp_name}" 
   # end
 
-    if current_user.present?
-     
-    else
+    if !current_user.present?
       redirect_to root_path(params[:search])
+    else
+     
     end
 
 #   Original search for all
@@ -46,6 +55,7 @@ class ExperiencesController < ApplicationController
     #Get available dates for this selected experience
     @schedules = Schedule.where(experience_id: @experience.id).all
     logger.debug "No of schedule #{@schedules.length}"
+
     
   end
 
@@ -83,9 +93,21 @@ class ExperiencesController < ApplicationController
       return redirect_to payoffs_path, alert: "Please Connect to Stripe Express first."
     end
 
+  pusher_client = Pusher::Client.new(
+        app_id: '387204',
+       key: 'ee11638b413352bc6ebd',
+      secret: '8ae2992e5c1cafa72d1b',
+      cluster: 'mt1'
+   )
+
+    pusher_client.trigger('my-channel', 'update', {message: "Creating your experience,  #{current_user.first_name}", progress: 10 })
+   
+
     @experience = current_user.experiences.new(experience_params)
 
 
+    pusher_client.trigger('my-channel', 'update', {message: "Please wait, #{current_user.first_name}", progress: 30 })
+     
      Rails.logger.debug experience_params.inspect
     
     #set default to true
@@ -93,17 +115,21 @@ class ExperiencesController < ApplicationController
 
     respond_to do |format|
 
+
+
       if @experience.save
 
 
 
         if params[:images] 
+           pusher_client.trigger('my-channel', 'update', {message: "Sorry #{current_user.first_name}, photos take a bit of time to save. Please wait...", progress: 60 })
           puts "***********CREATING Photo File********************************"
           params[:images].each do |image|
             @experience.photos.create(image: image)
           end
         end
         #create schedule file
+        pusher_client.trigger('my-channel', 'update', {message: "Almost done, #{current_user.first_name} - You're Great! ", progress: 80 })
         puts "***********CREATING Schedule File********************************"
         #@schedule = Schedule.new
         #@schedule.user_id    = @experience.user_id
@@ -111,7 +137,9 @@ class ExperiencesController < ApplicationController
         #@schedule.start_date = @experience.start_date
         #@schedule.max_guests  = @experience.max_guest
 
-        @experience.schedules.create(max_guests: @experience.max_guest, user_id: @experience.user_id, experience_id: @experience.id, start_date: @experience.start_date)
+        @experience.schedules.create(no_guests: 0, max_guests: @experience.max_guest, user_id: @experience.user_id, experience_id: @experience.id, start_date: @experience.start_date)
+
+        pusher_client.trigger('my-channel', 'update', {message: "Perfect. Done", progress: 100 })
 
         @photos = @experience.photos
         format.html { redirect_to edit_experience_path(@experience), notice: 'Experience was successfully created.' }
@@ -148,7 +176,7 @@ class ExperiencesController < ApplicationController
 
         #update schedule as well - to do 
         puts "***********Updating Schedule File********************************"
-        @experience.schedules.update(max_guests: @experience.max_guest, user_id: @experience.user_id, experience_id: @experience.id, start_date: @experience.start_date)
+        @experience.schedules.update(no_guests: 0, max_guests: @experience.max_guest, user_id: @experience.user_id, experience_id: @experience.id, start_date: @experience.start_date)
        
         format.html { redirect_to edit_experience_path(@experience), notice: 'Experience was successfully updated.' }
 
@@ -187,6 +215,9 @@ class ExperiencesController < ApplicationController
       @experience = Experience.friendly.find(params[:id])
     end
 
+
+   
+
     def get_reviews
         @booked = Sale.where("exp_id = ? AND buyer_email = ?", @experience.id, current_user.email).present? if current_user
         
@@ -200,6 +231,8 @@ class ExperiencesController < ApplicationController
     puts "***hasReview = #{@hasReview} "
     puts "**** current.userID is #{current_user.id}***" if current_user
     end
+
+    
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params

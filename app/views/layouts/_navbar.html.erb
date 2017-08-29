@@ -33,7 +33,7 @@
       <ul class="nav navbar-nav navbar-right">
       
           <% if current_user %>
-            <li><%= link_to 'Become a Host', new_experience_path %></li>
+            <li><%= link_to 'Create Event', new_experience_path %></li>
             <li><%= link_to 'Messages', conversations_path %></li>
             <li><%= link_to 'Dashboard', index_path %></li>
 <!-- root_path -->
@@ -58,7 +58,7 @@
                 <li role="separator" class="divider"></li>
                 <li><%= link_to "Dashboard", index_path %></li>
                 <li role="separator" class="divider"></li>
-                <li><%= link_to "Experiences", root_path %></li>
+                <li><%= link_to "Events", root_path %></li>
                 <!--
                 <li><a href="#">Experiences</a></li>
                  -->
@@ -68,7 +68,7 @@
             </li>
             <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
           <% else %>
-            <li><%= link_to 'Host an Experience', new_user_session_path %></li>
+            <li><%= link_to 'Host an Event', new_user_session_path %></li>
             <li><%= link_to 'Sign Up', new_user_registration_path %></li>
             <li><%= link_to '<i class="glyphicon glyphicon-user"></i>Login'.html_safe, new_user_session_path %></li>
           <% end %>

@@ -1,0 +1,33 @@
+
+<%= simple_form_for(@guest ) do |f| %>
+
+
+	<% unless @guest.errors.empty? %>
+      <script type="text/javascript">
+        <% guest.errors.full_messages.each do |msg| %>
+          toastr.error('<%= msg %>')
+        <% end %>
+      </script>
+    <% end %>
+
+   
+	   <%= f.input :first_name, autofocus: true, required: true, label: false,  placeholder: 'First Name', input_html: { maxlength: 10 } %>
+
+
+	
+		<%= f.input :last_name, label: false, placeholder: 'Last Name', size: 20, class: "form-control" %>
+	
+
+	
+		<%= f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email', class: "form-control" %>
+
+	<%= f.hidden_field :exp_id, value: @experience.id %>
+	<%= f.hidden_field :user_id, value: current_user.id %>
+
+	<div class="text-center">
+		<div class="form-actions" id: "submit-btn">
+		   	<%= f.submit "Email Itinerary", class: "btn btn-primary" %>
+		</div>
+	</div>
+
+<% end %>

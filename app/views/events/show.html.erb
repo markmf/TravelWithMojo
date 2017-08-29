@@ -78,9 +78,6 @@
 
                  
 
-                        <br/>
-                        <button id="myBtn" class="btn btn-primary text-center" >See Dates</button>
-
                    <% else %>
                         <!-- Redirect them to either Login or Sign up -->
 
@@ -135,7 +132,7 @@
                       <div class="center" ><p><%= @experience.exp_notes %></p> </div>
          
                       <br/>
-                      <div class="center" ><h3><strong>Where we'll be</strong></h3></div>
+                      <div class="center" ><h3><strong>Where we'll meet you</strong></h3></div>
                       <div class="center" ><p><%= @experience.exp_location %></p> </div>
            
                       <br/>
@@ -143,13 +140,8 @@
 
                   <div id="map">
                     <%= image_tag "http://maps.google.com/maps/api/staticmap?size=700x400&sensor=false&zoom=16&markers=color:purple|label:S|#{@experience.exp_where_be}&key=AIzaSyDJdjhDvDJoxvVdEVz3Nn8Ia_uas00M34Q", class: 'img-fluid img-rounded' %> 
-
                   </div>
-                  <br/> <br/>
-                  <div id="map">
-
-                    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=700x400&sensor=false&zoom=16&markers=color:purple|label:S|#{@experience.latitude},#{@experience.longitude}&key=AIzaSyDJdjhDvDJoxvVdEVz3Nn8Ia_uas00M34Q", class: 'img-fluid img-rounded' %> 
-                  </div>
+                 
 
                   <span><hr class="colorgraph"></span>
 
@@ -172,38 +164,8 @@
 
                   <span><hr class="colorgraph"></span>
 
-                  <!-- Show available dates for this experience -->
-                  <%= render 'schedules/show' %>
-                  
-
-                  <!-- Reviews -->
-                  <%= render 'experiences/reviews' %>
 
 
-
-                  <% if current_user %> 
-
-                   <!-- 
-                    <%= form_tag buy_path(slug: @experience.slug) do %>
-                      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-
-                          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                          data-description="<%= @experience.exp_name %>"
-                          data-name= "ZenZen"
-                          data-amount="<%= @experience.exp_price * 100 %>"
-                          data-email= "<%= current_user.email %>"
-                          data-locale="auto">
-                      </script>
-                     <% end %>
-                    -->
-
-                    <% else %>
-
-                      <p><h2><strong>Please Log in to book this experience</h2></strong> </p>
-
-                  <% end %>
-           
-               
                </div> <!-- panel-body -->
             </div> <!-- end of panel default -->
                    
@@ -234,42 +196,7 @@
 </script>
 
 
-<!-- Modal Dates-->
 
-  <div id="myModal" class="modal" role="dialog">
-     <!-- Modal content -->
-    <div class="modal-content animate"> 
-          <span class="close">&times;</span>   
-        <br/>
-        <div class="modal-body">
-           <!-- Show available dates for this experience -->
-          <%= render 'schedules/show' %>
-
-          <!--
-          <div class="panel panel-default">
-              <div class="panel-heading">
-              When do you want to go?
-              </div>
-              <div class="panel-body">    
-                  <div class="row">      
-                    <div class="col-md-6">
-                      <strong><%= @avail_seat %> spots left</strong> 
-                      
-                      <h4><%=@experience.exp_name %></h4>
-                      <%= @experience.go_time.strftime('%r') %>
-                    </div>    
-                    <div class="col-md-6">
-                      <%= link_to "Choose Date", "#", class: "btn btn-primary" %>
-                    </div>    
-                  </div>
-                   <span><hr class="colorgraph"></span>
-              </div>
-          </div>
-          -->
-
-        </div>
-    </div>
-  </div>
 
 <script>
 $('.carousel').carousel({ interval: 3000 });
@@ -282,43 +209,5 @@ $('#average_rating_<%= @experience.id %>').raty({
     targetKeep: false,
     score: <%= @experience.reviews.average(:rating) %>
   });
-</script>
-
-
-<script>
-// Get the modal
-
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-var agreebtn = document.getElementById("cancelbtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-agreebtn.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-
-}
 </script>
 

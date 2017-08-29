@@ -76,11 +76,12 @@ gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'jquery-rails'
 gem 'mini_magick'
+#gem 'mini_magick', '~> 4.1.0'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 #gem 'jquery-ui-rails'
 gem "gritter", "1.2.0"
-gem 'carrierwave', '~> 1.0'
-gem 'carrierwave-aws', '~> 1.1'
+#gem 'carrierwave', '~> 1.0'
+#gem 'carrierwave-aws', '~> 1.1'
 gem 'dropzonejs-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -106,5 +107,10 @@ gem 'rails-assets-card', source: 'https://rails-assets.org'
 gem 'chartkick', '~> 2.2.4'
 
 gem 'pusher'
+gem 'roadie', '~> 3.2'
 
+gem 'delayed_job_active_record'
 
+# gems fron instacart
+gem 'marginalia'
+#gem 'ahoy_email'
