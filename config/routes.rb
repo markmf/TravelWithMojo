@@ -52,6 +52,7 @@ Rails.application.routes.draw do
  # get '/payout', to: 'payout#welcome', as: :payout
 
 
+resources :revenues, only: [:index]
 
 devise_scope :user do
   post 'verify_phone_number'  => 'my_registrations#verify_phone_number'

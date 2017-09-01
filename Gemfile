@@ -11,7 +11,9 @@ gem 'rails', '~> 5.1.1'
 # use Webpack
 gem 'webpacker'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+#gem 'sqlite3'
+# Use postgres as the database for Active Record
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -114,3 +116,4 @@ gem 'delayed_job_active_record'
 # gems fron instacart
 gem 'marginalia'
 #gem 'ahoy_email'
+

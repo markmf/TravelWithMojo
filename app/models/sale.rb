@@ -4,6 +4,11 @@ class Sale < ApplicationRecord
 	belongs_to :experience
 	has_many   :reviews
 	
+	scope :current_week_revenue, -> (user) {
+	    joins(:experience)
+	    .where("experiences.user_id = ? AND sales.updated_at >= ? AND sales.state = ?", user.id, 1.week.ago, "finished")
+	    .order(updated_at: :asc)
+  	}
 
 	include AASM
 

@@ -7,7 +7,8 @@ class UserMailer < ApplicationMailer
 		puts "Entering user_mailer.rb file"
 		puts "User email => #{user.email}"
 		@user = user
-		@url  =  "www.zenzen.com" # generate confirmation url
+		@url  =  "www.zenzenbu.com" # generate confirmation url
+		
 		mail(to: @user.email, subject: "Thanks for signing up")
 	end
 
@@ -43,7 +44,8 @@ class UserMailer < ApplicationMailer
 	
 
 
-		@url  =  "www.zenzen.com" # generate confirmation url
+		@url  =  "www.zenzenbu.com" # generate confirmation url
+
 		mail(to: buyer_email, subject: "Your booking confirmation for #{@experience.exp_name}. Enjoy your experience! 😁")
 		#mail(to: seller_email, subject: "You guest confirmation.")
 	end
@@ -51,10 +53,23 @@ class UserMailer < ApplicationMailer
 	def send_guest_confirmation(experience, guest_email, guest_name, sender_email, sender_name )
 		@experience = experience
 		@firstname = guest_name
+		@url = "www.zenzenbu.com"
 
 		puts "Confirmation sent to #{guest_name}"
 		mail(to: guest_email, subject: "A copy of this confirmation has been emailed to you by #{sender_name}. Enjoy your experience! 😁")
 		
+	end
+
+
+
+	def send_event_notification(exp_name, buyer_email, guest_first )
+		@firstname = guest_first
+		@exp_name = exp_name
+		@url = "www.zenzenbu.com"
+
+		puts("*****SendEventNotification - email to #{@firstname}  #{buyer_email}")
+		mail(to: buyer_email, subject: "This is a reminder. You have an event coming up in 2 days. Details as follows. Enjoy your experience! 😁")
+
 	end
 
 
@@ -64,7 +79,7 @@ class UserMailer < ApplicationMailer
 
 		puts"Sending email to host #{seller_email}"
 
-		@url = "www.kaizen.com"
+		@url = "www.zenzenbu.com"
 		mail(to: seller_email, subject: "You guest confirmation")
 	end
 

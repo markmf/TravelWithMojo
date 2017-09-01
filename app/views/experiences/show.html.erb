@@ -23,7 +23,7 @@
                       <% @photos.each do |photo| %>
 
                         <div class="item <%= 'active' if photo.id == @photos[0].id %>">          
-                          <%= image_tag photo.image.url(:medium), class: "mydisplay img-rounded d-block img-fluid img-responsive" %>
+                          <%= image_tag photo.image.url, width: "400", height: "500", class: "mydisplay img-rounded d-block img-fluid img-responsive" %>
                           
                         </div>
                       <% end %> 
@@ -140,11 +140,13 @@
            
                       <br/>
           
-
+                  <!--      
                   <div id="map">
                     <%= image_tag "http://maps.google.com/maps/api/staticmap?size=700x400&sensor=false&zoom=16&markers=color:purple|label:S|#{@experience.exp_where_be}&key=AIzaSyDJdjhDvDJoxvVdEVz3Nn8Ia_uas00M34Q", class: 'img-fluid img-rounded' %> 
 
                   </div>
+                  -->
+                  
                   <br/> <br/>
                   <div id="map">
 

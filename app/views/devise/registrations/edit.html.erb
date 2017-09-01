@@ -11,9 +11,20 @@
             <% if current_user.confirmation_token %>
               <li>Email Address<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
             <% end %>
+            <% if current_user.social_provider %>
+               <% if current_user.social_provider == "google_oauth2" %>
+                  <li>Google<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+               <% else %>
+                  <% if current_user.social_provider == "facebook_oauth2" %>
+                    <li>Facebook<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+                  <% end %>
+              <% end %>
+            <% end %>
+            <!--
              <% if current_user.social_provider %>
               <li>Facebook<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
             <% end %>
+            -->
             <% if current_user.provider %>
               <li>Payout Account<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
             <% end %>

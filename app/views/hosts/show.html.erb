@@ -20,7 +20,16 @@
               <li>Email Address<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
             <% end %>
             <% if @host.provider %>
-              <li>Facebook<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+              <li>Payout Account<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+            <% end %>
+            <% if @host.social_provider %>
+               <% if @host.social_provider == "google_oauth2" %>
+                  <li>Google<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+               <% else %>
+                  <% if @host.social_provider == "facebook_oauth2" %>
+                    <li>Facebook<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
+                  <% end %>
+              <% end %>
             <% end %>
             <% if @host.phone_verified %>
               <li>Phone Number<span class="pull-right icon-babu"><i class="fa fa-check-circle-o"></i></span></li>
