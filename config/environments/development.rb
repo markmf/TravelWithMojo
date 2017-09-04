@@ -69,9 +69,20 @@ Rails.application.configure do
       domain: "smtp.gmail.com",
       authentication: "login",
       user_name: ENV["GMAIL_USERNAME"],
-      password: ENV["GMAIL_PASSWORD"],
+     password: ENV["GMAIL_PASSWORD"],
       enable_starttls_auto: true
   } 
+
+# EyeForWonder
+#  config.action_mailer.smtp_settings = {
+#    address: 'mail.eyeforwonder.com',
+#    port: 587,
+#   enable_starttls_auto: true,
+#    user_name: ENV["EYE_USERNAME"],
+#    password:  ENV["EYE_PASSWORD"],
+#    authentication: 'login'
+#  }
+
 
 # MANDRILL EMAIL
 #  config.action_mailer.smtp_settings = {

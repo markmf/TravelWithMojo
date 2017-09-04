@@ -23,7 +23,7 @@
                       <% @photos.each do |photo| %>
 
                         <div class="item <%= 'active' if photo.id == @photos[0].id %>">          
-                          <%= image_tag photo.image.url, width: "400", height: "500", class: "mydisplay img-rounded d-block img-fluid img-responsive" %>
+                          <%= image_tag photo.image.url, width: "450", height: "450", class: "mydisplay img-rounded d-block img-fluid img-responsive" %>
                           
                         </div>
                       <% end %> 
@@ -191,7 +191,7 @@
 
                           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                           data-description="<%= @experience.exp_name %>"
-                          data-name= "ZenZen"
+                          data-name= "EyeForWonder"
                           data-amount="<%= @experience.exp_price * 100 %>"
                           data-email= "<%= current_user.email %>"
                           data-locale="auto">

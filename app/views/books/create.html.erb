@@ -95,7 +95,7 @@
 
 	                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
 	                  data-description="<%= @experience.exp_name %>"
-	                  data-name= "ZenZen"
+	                  data-name= "EyeForWonder"
 	                  data-label= "$<%= @experience.exp_price * @qty %> - Confirm Payment"
 	                  data-amount="<%= @experience.exp_price * 100 %>"
 	                  data-email= "<%= current_user.email %>"
@@ -248,7 +248,7 @@
 	    document.body.style.cursor = 'wait';
 
 	    handler.open({
-	      name: "ZenZen",
+	      name: "EyeForWonder",
 	      description: "<%= @experience.exp_name %>",
 	      amount: qty * price,
 	      email: "<%= current_user.email %>"
