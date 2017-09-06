@@ -46,6 +46,6 @@ test:
 
 production:
   <<: *default
-  database: zenzendb_prod
+  database: eyeforwonder-db
   username: markmf
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>

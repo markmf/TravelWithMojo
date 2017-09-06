@@ -5,9 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-#source "https://rails-assets.org"
-#gem 'rails-assets-bootstrap', ">= 4.0.0.alpha.2"
-#gem 'rails-assets-tether'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
@@ -57,16 +54,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-
-group :development do
-    gem 'platform-api'
-    gem "better_errors"
-    gem "binding_of_caller"
-end
-
-
-
-
 group :production do
   gem 'redis', '~> 3.0'
 
@@ -93,10 +80,8 @@ gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.
 gem 'aasm'
 gem 'geocoder'
 gem 'namecase', '~> 2.0'
-
-gem 'bootstrap', '~> 4.0.0.alpha6'
-#gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
-gem 'sprockets', '~> 3.0'
+#gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'jquery-rails'
