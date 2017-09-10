@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :payoffs
   resources :hosts
   resources :guests
+
+ 
  
 
 
@@ -44,7 +46,9 @@ Rails.application.routes.draw do
   post 'buy/:/slug', to: 'transactions#create', as: :buy
   get '/pickup/:uuid', to: 'transactions#pickup', as: :pickup
   
-  get '/listing',   to: 'listing#index', as: :index
+  get '/listing',    to: 'listing#index', as: :index
+  get '/guestslist', to: 'listing#show',  as: :guestsindex
+
   get '/event',     to: 'events#index',  as: :event
   get '/history',   to: 'history#index', as: :history
 
