@@ -83,6 +83,7 @@ end
 
   get '/notifications' => 'notifications#index'
 
+
   mount ActionCable.server => '/cable'
    
 end
