@@ -65,7 +65,7 @@
 				  
 				  			<span><hr class="colorgraph"></span>
 
-				    		<%= f.button :submit,  "Get Started", class: 'btn btn-primary btn-block' %>
+				    		<%= f.button :submit,  "Get Started", class: 'btn btn-primary btn-block', id: 'submitBtn' %>
 			    					    	
 			    		<% end %>
 			    	</div>
@@ -141,5 +141,14 @@ $('[data-toggle="popover"]').popover({
 
 </script>
 
+<script>
+
+	var btn = document.getElementById("submitBtn");
+
+	btn.onclick = function() {
+    	document.body.style.cursor = 'wait';
+	}
+
+</script>
 
 
