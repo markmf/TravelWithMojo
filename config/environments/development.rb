@@ -58,6 +58,9 @@ Rails.application.configure do
   config.action_mailer.default :charset => "utf-8"
 
   config.action_cable.url = "ws://localhost:3000/cable"
+
+  # Production
+  # config.action_cable.url = "ws://www.eyeforwonder.com/cable"
  
   # Use for testing with mailcatcher
   #config.action_mailer.smtp_settings = {:address => 'localhost', :port => 1025}

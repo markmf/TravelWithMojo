@@ -65,7 +65,7 @@ class Sale < ApplicationRecord
 
 			self.finish!
 
-			#Create notification for Seller
+			#Create notification for Seller - TEMPORARY commented out
 			create_notification(buyer, seller)
 
 		rescue Stripe::StripeError => e

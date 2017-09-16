@@ -23,7 +23,7 @@
                       <% @photos.each do |photo| %>
 
                         <div class="item <%= 'active' if photo.id == @photos[0].id %>">          
-                          <%= image_tag photo.image.url(:medium), class: "mydisplay img-rounded d-block img-fluid img-responsive" %>
+                          <%= image_tag photo.image.url(:large), class: "mydisplay img-rounded d-block img-fluid img-responsive" %>
                           
                         </div>
                       <% end %> 
