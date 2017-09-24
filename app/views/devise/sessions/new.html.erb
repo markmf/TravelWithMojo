@@ -35,7 +35,7 @@
 				    </div>
 
 				    <br/>
-					<%= f.button :submit, "Get Started", class: 'btn btn-primary btn-block'%>
+					<%= f.button :submit, "Get Started", class: 'btn btn-primary btn-block', id: 'submitBtn' %>
 
 			  
 			</div>
@@ -72,7 +72,7 @@
 	        </div>	
         	<div class="col-xs-4 col-sm-2">
 		        
-		        <%= link_to "Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-lg btn-block omb_btn-google" %>
+		        <%= link_to "Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-lg btn-block omb_btn-google", id: "googleButton" %>
 			        <i class="fa fa-google-plus visible-xs"></i>
 			        <span class="hidden-xs"></span>
 		        </a>
@@ -111,6 +111,20 @@
 
 
 
+<script>
 
+	var btn = document.getElementById("submitBtn");
+	var googlebtn = document.getElementById("googleButton");
+
+	btn.onclick = function() {
+    	document.body.style.cursor = 'wait';
+	}
+
+	googlebtn.onclick = function() {
+    	document.body.style.cursor = 'wait';
+	}
+
+
+</script>
 
 

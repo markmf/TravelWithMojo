@@ -10,7 +10,6 @@ class EventsController < ApplicationController
     _status = "finished"
     _todays_d =  Time.now.strftime("%Y-%m-%d")
    
-
  
 # @experiences = Experience.find_by_sql("select * from sales s, experiences e where  '#{current_user.email}'  = s.buyer_email and e.id = s.exp_id and s.state = '#{_status}' ")
  @experiences = Experience.find_by_sql("select * from sales s, experiences e where  '#{current_user.email}'  = s.buyer_email and e.id = s.exp_id and s.state = '#{_status}' and e.start_date >= '#{_todays_d}' order by e.start_date asc")

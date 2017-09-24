@@ -46,7 +46,8 @@ class User < ApplicationRecord
           user.last_name  = user.name.partition(" ").last
           user.social_provider = auth.provider 
     # Used for Stripe
-          user.provider   = auth.provider 
+    #     user.provider   = auth.provider
+          user.provider   = auth.provider == "stripe_connect" ? auth.provider :
           user.uid        = auth.uid
   # Need to update Twitters' settings so  I can retrieve guest's email
           user.email      = auth.info.email

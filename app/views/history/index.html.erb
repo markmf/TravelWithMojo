@@ -12,7 +12,7 @@
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				All Your Trips (<%= @experiences.length %>)
+				All Your Transactions (<%= @experiences.length %>)
 			</div>
 			<div class="panel-body">
 				
@@ -30,6 +30,8 @@
 							<h4>$<%= experience.exp_price %></h4>
 							<h4><%= experience.start_date.strftime('%A, %v') %></h4>
 							<h4><%= experience.go_time.strftime('%r') %></h4>
+							<br/>
+							<h4>Booked on: <%= experience.created_at.strftime('%A, %v') %></h4>
 						</div>		
 						<div class="col-md-2 right">
 							<%= link_to "View", experience_path(experience), class: "btn btn-primary" %>

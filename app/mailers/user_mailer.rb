@@ -9,7 +9,7 @@ class UserMailer < ApplicationMailer
 		@user = user
 		@url  =  "www.eyeforwonder.com" # generate confirmation url
 		
-		mail(to: @user.email, subject: "Thanks for signing up")
+		mail(to: @user.email, subject: "Thanks for signing up ")
 	end
 
 

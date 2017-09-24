@@ -93,16 +93,16 @@ class ExperiencesController < ApplicationController
       return redirect_to payoffs_path, alert: "Please Connect to Stripe Express first."
     end
 
-  pusher_client = Pusher::Client.new(
-        app_id: '387204',
-       key: 'ee11638b413352bc6ebd',
-      secret: '8ae2992e5c1cafa72d1b',
-      cluster: 'mt1'
-   )
 
     pusher_client.trigger('my-channel', 'update', {message: "Creating your experience,  #{current_user.first_name}", progress: 10 })
-   
 
+    pusher_client = Pusher::Client.new(
+          app_id: '387204',
+         key: 'ee11638b413352bc6ebd',
+        secret: '8ae2992e5c1cafa72d1b',
+        cluster: 'mt1'
+     )
+  
     @experience = current_user.experiences.new(experience_params)
 
 
