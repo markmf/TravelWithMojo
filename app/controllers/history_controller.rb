@@ -9,8 +9,8 @@ class HistoryController < ApplicationController
     _status = "finished"
 #    _todays_d =  Time.now.strftime("%Y-%m-%d")
 
- 
- @experiences = Experience.find_by_sql("select * from sales s, experiences e where  '#{current_user.email}'  = s.buyer_email and e.id = s.exp_id and s.state = '#{_status}' order by e.start_date desc")
+ #select  s.created_at, *
+ @experiences = Experience.find_by_sql("select s.created_at as booked_date, *  from sales s, experiences e where  '#{current_user.email}'  = s.buyer_email and e.id = s.exp_id and s.state = '#{_status}' order by e.start_date desc")
 # @experiences = Experience.find_by_sql("select * from sales s, experiences e where  '#{current_user.email}'  = s.buyer_email and e.id = s.exp_id and s.state = '#{_status}' and e.start_date >= '#{_todays_d}' ")
 
  

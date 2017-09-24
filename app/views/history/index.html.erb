@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-3">
 		<ul class="sidebar-list">
-			<li class="sidebar-item"><%= link_to "Manage Your Events", index_path, class: "sidebar-link" %></li>
+			<li class="sidebar-item"><%= link_to "Manage Your Events as a Host", index_path, class: "sidebar-link" %></li>
 			<li class="sidebar-item"><%= link_to "Your Upcoming Activities", event_path, class: "sidebar-link " %></li>
 			<li class="sidebar-item"><%= link_to "Payout Preferences", payoffs_path, class: "sidebar-link" %></li>
 			<li class="sidebar-item"><%= link_to "Notification Settings", notification_settings_path, class: "sidebar-link" %></li>
@@ -31,7 +31,13 @@
 							<h4><%= experience.start_date.strftime('%A, %v') %></h4>
 							<h4><%= experience.go_time.strftime('%r') %></h4>
 							<br/>
+							
+							<h4>Booked on: <%= experience.booked_date.to_date %></h4>
+							<!--
+							<%= experience.attributes.keys %>
+							
 							<h4>Booked on: <%= experience.created_at.strftime('%A, %v') %></h4>
+							-->
 						</div>		
 						<div class="col-md-2 right">
 							<%= link_to "View", experience_path(experience), class: "btn btn-primary" %>
