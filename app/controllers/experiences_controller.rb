@@ -94,7 +94,7 @@ class ExperiencesController < ApplicationController
     end
 
 
-    pusher_client.trigger('my-channel', 'update', {message: "Creating your experience,  #{current_user.first_name}", progress: 10 })
+
 
     pusher_client = Pusher::Client.new(
           app_id: '387204',
@@ -102,6 +102,8 @@ class ExperiencesController < ApplicationController
         secret: '8ae2992e5c1cafa72d1b',
         cluster: 'mt1'
      )
+
+    pusher_client.trigger('my-channel', 'update', {message: "Creating your experience,  #{current_user.first_name}", progress: 10 })
   
     @experience = current_user.experiences.new(experience_params)
 

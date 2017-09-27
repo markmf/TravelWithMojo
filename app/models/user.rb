@@ -81,7 +81,8 @@ class User < ApplicationRecord
   end
 
   def is_active_host
-    !self.uid.blank?  #check if user has crated a merchant stripe id
+     self.provider == "stripe_connect" 
+ #   !self.uid.blank?  #check if user has crated a merchant stripe id
   end
 
   #after_create :send_welcome_mail
