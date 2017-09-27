@@ -78,10 +78,10 @@ Rails.application.configure do
   } 
 
 # EyeForWonder
-#  config.action_mailer.smtp_settings = {
-#    address: 'mail.eyeforwonder.com',
-#    port: 587,
-#   enable_starttls_auto: true,
+ # config.action_mailer.smtp_settings = {
+#    address: 'server.eyeforwonder.com',
+ #   port: 587,
+#  enable_starttls_auto: true,
 #    user_name: ENV["EYE_USERNAME"],
 #    password:  ENV["EYE_PASSWORD"],
 #    authentication: 'login'

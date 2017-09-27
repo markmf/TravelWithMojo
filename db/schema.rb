@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20170830082428) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "cancellations", force: :cascade do |t|
     t.text "desc"
     t.datetime "created_at", null: false
@@ -95,18 +92,18 @@ ActiveRecord::Schema.define(version: 20170830082428) do
     t.string "last_name"
     t.string "email"
     t.integer "exp_id"
-    t.bigint "user_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "experience_id"
+    t.integer "experience_id"
     t.index ["experience_id"], name: "index_guests_on_experience_id"
     t.index ["user_id"], name: "index_guests_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
     t.text "context"
-    t.bigint "user_id"
-    t.bigint "conversation_id"
+    t.integer "user_id"
+    t.integer "conversation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "read", default: false
@@ -116,14 +113,14 @@ ActiveRecord::Schema.define(version: 20170830082428) do
 
   create_table "notifications", force: :cascade do |t|
     t.string "content"
-    t.bigint "user_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "payoffs", force: :cascade do |t|
-    t.bigint "user_id"
+    t.integer "user_id"
     t.string "custom_stripe_id"
     t.string "country"
     t.string "type"
@@ -164,7 +161,7 @@ ActiveRecord::Schema.define(version: 20170830082428) do
   end
 
   create_table "photos", force: :cascade do |t|
-    t.bigint "experience_id"
+    t.integer "experience_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
@@ -175,8 +172,8 @@ ActiveRecord::Schema.define(version: 20170830082428) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "experience_id"
+    t.integer "user_id"
+    t.integer "experience_id"
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer "price"
@@ -194,8 +191,8 @@ ActiveRecord::Schema.define(version: 20170830082428) do
     t.datetime "review_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "experience_id"
-    t.bigint "user_id"
+    t.integer "experience_id"
+    t.integer "user_id"
     t.index ["experience_id"], name: "index_reviews_on_experience_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -219,8 +216,8 @@ ActiveRecord::Schema.define(version: 20170830082428) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "experience_id"
+    t.integer "user_id"
+    t.integer "experience_id"
     t.datetime "start_date"
     t.integer "no_guests", default: 0
     t.integer "max_guests"
@@ -233,7 +230,7 @@ ActiveRecord::Schema.define(version: 20170830082428) do
   create_table "settings", force: :cascade do |t|
     t.boolean "enable_sms", default: true
     t.boolean "enable_email", default: true
-    t.bigint "user_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_settings_on_user_id"
@@ -279,18 +276,4 @@ ActiveRecord::Schema.define(version: 20170830082428) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "guests", "experiences"
-  add_foreign_key "guests", "users"
-  add_foreign_key "messages", "conversations"
-  add_foreign_key "messages", "users"
-  add_foreign_key "notifications", "users"
-  add_foreign_key "payoffs", "users"
-  add_foreign_key "photos", "experiences"
-  add_foreign_key "reservations", "experiences"
-  add_foreign_key "reservations", "users"
-  add_foreign_key "reviews", "experiences"
-  add_foreign_key "reviews", "users"
-  add_foreign_key "schedules", "experiences"
-  add_foreign_key "schedules", "users"
-  add_foreign_key "settings", "users"
 end
