@@ -129,6 +129,9 @@ GEM
     delayed_job_active_record (4.1.2)
       activerecord (>= 3.0, < 5.2)
       delayed_job (>= 3.0, < 5)
+    delayed_paperclip (3.0.1)
+      activejob (>= 4.2)
+      paperclip (>= 3.3)
     devise (4.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -414,6 +417,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   country_select
   delayed_job_active_record
+  delayed_paperclip
   devise
   dotenv-rails
   dropzonejs-rails

@@ -45,17 +45,18 @@
           </div>
         </div>
 
+
         <div class=row>
           <div class="form-group">
-            <label>Where we'll be</label>
-            <%= f.text_area :exp_where_be, rows: 3, required: true, label: false, placeholder: "Where the event will be held (ie exact address of the location)", class: "form-control" %>
+            <label>Meeting location</label>
+            <%= f.text_field :exp_location, rows: 3, required: true, label: false, placeholder: "Meeting location where you will initially meet your guests", class: "form-control",  id: "autoaddress" %>
           </div>
         </div>
 
         <div class=row>
           <div class="form-group">
-            <label>Meeting location</label>
-            <%= f.text_area :exp_location, rows: 3, required: true, label: false, placeholder: "Meeting location where you will initially meet your guests", class: "form-control" %>
+            <label>Where we'll be</label>
+            <%= f.text_field :exp_where_be, rows: 3, required: true, label: false, placeholder: "Where the event will be held (ie exact address of the location)", class: "form-control", id: "exactaddress" %>
           </div>
         </div>
 
@@ -324,6 +325,17 @@ $(function() {
 
 </script>
 
+<script>
+  $(function() {
+    $("#autoaddress").geocomplete();
+  })
+</script>
+
+<script>
+  $(function() {
+    $("#exactaddress").geocomplete();
+  })
+</script>
 
 <script>
 // Get the submit button

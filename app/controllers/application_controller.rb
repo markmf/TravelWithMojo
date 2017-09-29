@@ -30,6 +30,7 @@ class ApplicationController < ActionController::Base
 
   # Uncomment this
   # Enqueue a job to be performed today at noon.
+  puts "************RUNNING run_cronjob*************"
    EventNotificationJob.set(wait_until: Date.today.noon).perform_later
 
 

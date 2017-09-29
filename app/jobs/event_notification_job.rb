@@ -21,7 +21,7 @@ class EventNotificationJob < ApplicationJob
 
  	@events_tomail = Experience.find_by_sql("select s.id, s.exp_id, s.buyer_email, u.first_name, u.last_name, e.exp_name, e.start_date, e.exp_location, e.go_time  from users u, sales s, experiences e where  u.email = s.buyer_email and e.id = s.exp_id and s.state = '#{_status}' and e.start_date = '#{_days}' order by e.start_date asc")
 
-
+    puts "**********Email to be sent today count: #{@events_tomail.count}*******"
 # loop through the results and send an email to each user
 # @events_tomail.each { |e| NewsletterMailer.deliver_text_to_email(text, e) }
  @events_tomail.each { |e| UserMailer.send_event_notification(e.exp_name, e.buyer_email, e.first_name).deliver_now }
