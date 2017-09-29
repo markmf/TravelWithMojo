@@ -89,7 +89,7 @@
           <div class="col-md-6">    
             <div class="form-group">
               <label>Maximum Number of Guests</label>
-              <%= f.input :max_guest, label:false, selected: 1,  collection: 1..20, prompt: "Select...", class: "form-control", required: true %>
+              <%= f.input :max_guest, label:false,  required: true, collection: 1..30, prompt: "Select...", class: "form-control" %>
             </div>     
           </div>
      
@@ -150,9 +150,10 @@
                          <%= f.text_field :go_time,  id: 'start-time',  value:  Time.now.to_s(:time), label: false, class: 'form-control timepicker' %>     
                       <% else %>
                     
-                    <!--
+                    
                        <%= @experience.go_time = @experience.go_time.strftime("%H:%M") %>
-                    -->
+                    
+                    
 
                          <%= f.text_field :go_time,  id: 'start-time', value: @experience.go_time, label: false, class: 'form-control timepicker' %>   
                       <% end %>     
@@ -166,9 +167,13 @@
                       <%= f.text_field :exp_duration,  id: 'duration',  class: 'form-control timepicker', label: false, placeholder: "(HH:MM)" %>    
                     <% else  %> 
                     
-                      <% @experience.exp_duration = @experience.exp_duration.strftime('%H %M') %>
                   
-                      <%= f.text_field :exp_duration,  id: 'duration',  class: 'form-control timepicker', label: false, placeholder: "(HH:MM)" %>  
+                      <%= @experience.exp_duration = @experience.exp_duration.strftime('%H:%M') %>
+                
+
+                     
+                  
+                      <%= f.text_field :exp_duration,  id: 'duration', value: @experience.exp_duration,  class: 'form-control timepicker', label: false, placeholder: "(HH:MM)" %>  
                     <% end %>   
           
           </div>
@@ -202,18 +207,22 @@
 
 <script>
 
+
+
+
+
 $(function() {
-    var startTimeTextBox = $('#start-time');
-    var endTimeTextBox = $('#duration');
-      
-   
+    var startTimeTextBox = $("#start-time");
+
+  //  var startTimeTextBox = document.getElementById("start-time");
+    var endTimeTextBox =  $("#duration");
+    
+//  alert(startTime);
 
     $.timepicker.timeRange(
     startTimeTextBox,
     endTimeTextBox,
     { 
-    
-
       minInterval: (1000*60*60), // 1hr
       timeFormat: 'HH:mm',
       dateFormat: 'yy-mm-dd',
