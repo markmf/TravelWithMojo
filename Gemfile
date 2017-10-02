@@ -143,3 +143,18 @@ gem 'delayed_job_active_record'
 gem 'marginalia'
 #gem 'ahoy_email'
 
+# rack-mini-profiler is a powerful Swiss army knife for Rack app performance. 
+# Measure SQL queries, memory allocation and CPU time. 
+gem 'rack-mini-profiler'
+gem 'flamegraph'
+gem 'stackprof' # ruby 2.1+ only
+gem 'memory_profiler'
+
+# add admin user gems
+
+#gem 'remotipart', github: 'mshibuya/remotipart', ref: '88d9a7'
+#gem 'rails_admin', '~> 1.2'
+
+gem 'newrelic_rpm'
+
+

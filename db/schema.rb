@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830082428) do
+ActiveRecord::Schema.define(version: 20171001135234) do
 
   create_table "cancellations", force: :cascade do |t|
     t.text "desc"
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(version: 20170830082428) do
     t.string "stripe_id"
     t.integer "booked_qty"
     t.date "start_date"
+    t.boolean "notified", default: false
   end
 
   create_table "schedules", force: :cascade do |t|
