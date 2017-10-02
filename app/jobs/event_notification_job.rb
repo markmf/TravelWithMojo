@@ -19,7 +19,7 @@ class EventNotificationJob < ApplicationJob
   
  # select s.id, s.exp_id, s.buyer_email, u.first_name, u.last_name, e.exp_name, e.start_date, e.exp_location, e.go_time  from users u, sales s, experiences e where  u.email = s.buyer_email  and e.id = s.exp_id and s.state = 'finished' and e.start_date = "2017-09-01"  order by e.start_date asc;
 
- 	@events_tomail = Experience.find_by_sql("select s.id, s.exp_id, s.buyer_email, u.first_name, u.last_name, e.exp_name, e.start_date, e.exp_location, e.go_time  from users u, sales s, experiences e where  u.email = s.buyer_email and e.id = s.exp_id and s.state = '#{_status}' and e.start_date = '#{_days}' and s.notified = 'f' order by e.start_date asc")
+ 	@events_tomail = Experience.find_by_sql("select s.id, s.exp_id, s.buyer_email, u.first_name, u.last_name, e.exp_name, e.start_date, e.exp_location, e.go_time  from users u, sales s, experiences e where  u.email = s.buyer_email and e.id = s.exp_id and s.state = '#{_status}' and e.start_date <= '#{_days}' and s.notified = 'f' order by e.start_date asc")
 
     puts "**********Email to be sent today count: #{@events_tomail.count}*******"
 # loop through the results and send an email to each user
