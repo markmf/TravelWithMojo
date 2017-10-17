@@ -157,4 +157,7 @@ gem 'memory_profiler'
 
 gem 'newrelic_rpm'
 
+# postgres monitoring
+#gem 'pghero'
+
 

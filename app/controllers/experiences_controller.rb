@@ -24,6 +24,7 @@ class ExperiencesController < ApplicationController
          @experiences = Experience.where("start_date >= ? AND active = ?", today, active).near(session[:loc_search] , 30, order: 'distance')
     else
   #    @experiences = Experience.where(active: true).all
+      puts "**********executing BLANK Search**********"
       @experiences = Experience.where("start_date >= ? AND active = ?", today, active).all
     end
 
