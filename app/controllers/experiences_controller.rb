@@ -26,6 +26,7 @@ class ExperiencesController < ApplicationController
   #    @experiences = Experience.where(active: true).all
       puts "**********executing BLANK Search**********"
       @experiences = Experience.where("start_date >= ? AND active = ?", today, active).all
+    
     end
 
  

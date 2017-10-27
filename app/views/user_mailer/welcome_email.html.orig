@@ -6,7 +6,8 @@
    </head>
    
    <body>
-      Hi, <%= @user.first_name %>,
+      Hi, <%= @user.first_name %> - thank you so much for signing up with us@
+      <h1>Welcome to <%= @url %> </h1>
       
       <p>
          <h2>Awesome! We're pysched you joined EyeForWonder.</h2>
@@ -16,15 +17,11 @@
       </p>
       
       <p>
-         Start learning a new skill and connect with locals to do amazing stuff, just click this link: 
+         To login to the site, just follow this link: 
          <%= @url %>.
       </p>
       
-      <p>Again, thanks for joining and have a great day!</p>
-
-      <h3>Welcome to the EyeForWonder community!</h3>
-
-      EyeForWonder Team
+      <p>Thanks for joining and have a great day!</p>
       
    </body>
 </html>
