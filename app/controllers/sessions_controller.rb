@@ -8,7 +8,8 @@ class SessionsController < Devise::SessionsController
 #	   # User.find(session[:user_id]).destroy   # delete user record in DB  
  		puts "****Entering Sessions/destroy - logging out"  
 
-
+ 		flash[:info] = "#{current_user.first_name}, thanks for using EyeForWonder. Have a great day!"
+ 		#flash[:alert] = "Have a great day!"
  		if !current_user.uid.nil? #connected to stripe
  			puts "**********Deauthorizing Stripe***************"
  			puts "UID: #{current_user.uid}"
@@ -21,7 +22,7 @@ class SessionsController < Devise::SessionsController
 		end
 
 	    session[:user_id] = nil    #  session.delete :user_id
-		sign_out(current_user)    
+		sign_out(current_user)  
 	   	redirect_to root_path 
   	end
 

@@ -3,7 +3,12 @@
 <br/>
   <% if current_user %>
   	
+  	
+  	<%= t('welcome_html', firstname: @current_user.first_name) %>
+  
+
   	<%= render @experiences %>
+  
 
   	<!--
 	<%= link_to 'New Experience', new_experience_path %>
