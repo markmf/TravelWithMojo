@@ -9,8 +9,8 @@ class MyRegistrationsController < Devise::RegistrationsController
     if @user.persisted?
     	puts "Entered MyREgistratonsController***************************************"
     	puts "User email => #{@user.email}"
-      flash[:notice] = "Welcome #{current_user.first_name}"
-      flash[:notice] = "You have succesfully signed in."
+      flash[:notice] = "Welcome,  #{current_user.first_name}! You have succefully signed in."
+      
       UserMailer.welcome_email(@user).deliver_now
     end
    

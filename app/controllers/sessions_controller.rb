@@ -4,6 +4,17 @@ class SessionsController < Devise::SessionsController
 
     respond_to :json
 
+    def create
+
+    	super
+    	if current_user 
+      		flash[:info] = "Welcome, #{current_user.first_name}!"
+    	end
+
+    end
+
+
+
 	def destroy
 #	   # User.find(session[:user_id]).destroy   # delete user record in DB  
  		puts "****Entering Sessions/destroy - logging out"  

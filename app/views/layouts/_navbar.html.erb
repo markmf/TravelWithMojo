@@ -20,7 +20,9 @@
         
         <%= text_field_tag :search, params[:search], placeholder: "Where are you going?  ", class: "form-control" %> 
      
+         <!-- this is the reset x button -->
          <button class="close-icon" type="reset"></button>
+         
          <!--
          <%= button_tag "", class: "close-icon", type: :reset %>
           -->
@@ -42,7 +44,7 @@
       <ul class="nav navbar-nav navbar-right">
       
           <% if current_user %>
-            <li><%= link_to 'Create Activity', new_experience_path %></li>
+            <li><%= link_to 'Host Activity', new_experience_path %></li>
             <li><%= link_to 'Messages', conversations_path %></li>
             <li><%= link_to 'Dashboard', index_path %></li>
 <!-- root_path -->

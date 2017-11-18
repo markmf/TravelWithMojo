@@ -16,7 +16,7 @@
           <div class="container text-center">
             <% if @sales.blank? %>
                 <h3>You don't have any events</h3><br/>
-                <%= link_to "Become a Host to earn income",  new_user_session_path, class: "btn btn-normal" %>
+                <%= link_to "BECOME A HOST TO EARN INCOME",  new_experience_path, class: "btn btn-primary" %>
             <% else %>
                 <%= column_chart @this_week_revenue, colors: ["#00A699"] %>
             <% end %>
